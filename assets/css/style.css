@@ -400,11 +400,10 @@ section .container {
 }
 
 .circle-frame {
-  width: 250px; /* Adjust the size as needed */
-  height: 250px; /* Adjust the size as needed */
+  width: 280px; /* Adjust the size as needed */
+  height: 280px; /* Adjust the size as needed */
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #fff; /* Optional: Add a border around the image */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better appearance */
 }
 /*--------------------------------------------------------------
