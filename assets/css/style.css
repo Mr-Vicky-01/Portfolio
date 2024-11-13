@@ -26,6 +26,24 @@ body::before {
   height: 100vh;
 }
 
+.blurred-box {
+  display: inline-block;
+  padding: 8px 14px !important; /* Adjust padding to increase space */
+  width: auto; /* Set width to auto if you want it to fit the text */
+  background: rgba(255, 255, 255, 0.15); /* Light transparent white */
+  border-radius: 30px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Blur effect for frosted glass */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  color: #fff; /* Text color */
+  font-weight: bold;
+  text-align: center; /* Center text */
+}
+
+
+
+
 @media (min-width: 1024px) {
   body::before {
     background-attachment: fixed;
