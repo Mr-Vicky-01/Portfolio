@@ -39,6 +39,9 @@ body::before {
   color: #fff; /* Text color */
   font-weight: bold;
   text-align: center; /* Center text */
+  /* Add green shadow effect */
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3), /* Light green glow */
+               0px 0px 10px rgba(0, 0, 0, 0.2); /* Softer and darker green */
 }
 
 
