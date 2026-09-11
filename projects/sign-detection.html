@@ -1,83 +1,180 @@
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hand Sign Detection — Pachaiappan</title>
+    <meta
+      name="description"
+      content="A real-time hand sign recognition system built with OpenCV, MediaPipe, and a convolutional neural network. It identifies left and right hands and updates recognized signs as the camera feed changes."
+    />
+    <meta name="theme-color" content="#0b1020" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hand Sign Detection — Pachaiappan" />
+    <meta
+      property="og:description"
+      content="A real-time hand sign recognition system built with OpenCV, MediaPipe, and a convolutional neural network. It identifies left and right hands and updates recognized signs as the camera feed changes."
+    />
+    <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 
-  <title>Hand Sign Detection</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="../assets/css/style.css" rel="stylesheet">
-
-</head>
-
-<body data-gr-c-s-loaded="true">
-
-<!-- ======= Portfolio Details ======= -->
-  <main id="main">
-    <div id="portfolio-details" class="portfolio-details">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-12 portfolio-info">
-            <br>
-            <h2 style="color:#12d640">Hand Sign Detection</h2>
-
-            <ul>
-              <li><strong>Tech Stack</strong>: Python, scikit-learn, numpy, pandas, open-cv, keras, tensorflow, MediaPipe</li>
-              <li><strong>Github URL</strong>: <a href="https://github.com/Mr-Vicky-01/hand-sign-detection" target="_blank">Project Link</a></li>
-            </ul>
-
-            <p>
-              This project focuses on real-time hand sign detection and recognition using computer vision techniques. The system accurately identifies left or right hand signs and dynamically updates the displayed signs.           
-            </p>
-
-            <h4>Features</h4>
-            <ul>
-              <li><b>Real-Time Detection:</b> Utilizes computer vision with MediaPipe for precise hand tracking and dynamic sign recognition.</li>
-              <li><b>Python Libraries:</b>Implements OpenCV for image processing, MediaPipe for hand tracking, and a Convolutional Neural Network (CNN) for sign recognition.</li>
-              <li><b>Dynamic Visualization:</b>Provides live updates of detected hand signs with a user-friendly interface.</li>
-            </ul>
-          </div>
-
-        </div>
-
+    <script src="../assets/js/main.js" defer></script>
+    <script>
+      if (window.self == window.top) {
+        (function (i, s, o, g, r, a, m) {
+          i["GoogleAnalyticsObject"] = r;
+          ((i[r] =
+            i[r] ||
+            function () {
+              (i[r].q = i[r].q || []).push(arguments);
+            }),
+            (i[r].l = 1 * new Date()));
+          ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
+          a.async = 1;
+          a.src = g;
+          m.parentNode.insertBefore(a, m);
+        })(
+          window,
+          document,
+          "script",
+          "//www.google-analytics.com/analytics.js",
+          "ga",
+        );
+        ga("create", "UA-55234356-4", "auto");
+        ga("send", "pageview");
+      }
+    </script>
+  </head>
+  <body class="detail-page" id="header">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="nav-shell">
+        <a
+          class="wordmark"
+          href="../index.html#header"
+          aria-label="Pachaiappan home"
+          ><span>Pachaiappan<span class="brand-period">.</span></span
+          ><span class="brand-role">AI Engineer &amp; Developer</span></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          hidden
+        >
+          Menu <span aria-hidden="true">☰</span>
+        </button>
+        <nav id="main-nav" aria-label="Main navigation">
+          <a href="../index.html#portfolio">Work</a
+          ><a href="../index.html#experience">Experience</a
+          ><a href="../index.html#about">About</a
+          ><a
+            href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Resume <span aria-hidden="true">↗</span></a
+          ><a class="nav-contact" href="../index.html#contacts"
+            >Let’s talk <span aria-hidden="true">↗</span></a
+          >
+        </nav>
       </div>
-    </div><!-- End Portfolio Details -->
-  </main><!-- End #main -->
+    </header>
+    <main id="main" class="container detail-main">
+      <a class="back-link" href="../index.html#portfolio"
+        >← Back to selected work</a
+      >
+      <div class="detail-heading">
+        <div>
+          <p class="eyebrow">PROJECT 05 / Computer vision</p>
+          <h1>Hand Sign Detection<span class="cyan">.</span></h1>
+          <p class="detail-tagline">
+            Turning hand movements into meaningful signals.
+          </p>
+        </div>
+        <div class="detail-actions">
+          <a
+            href="https://github.com/Mr-Vicky-01/hand-sign-detection"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-primary"
+            >View source<span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </div>
+      <figure class="project-visual visual-sign-detection">
+        <picture
+          ><source
+            media="(max-width: 760px)"
+            srcset="../assets/img/projects/sign-detection-mobile.svg" />
+          <img
+            src="../assets/img/projects/sign-detection.svg"
+            width="1000"
+            height="800"
+            loading="lazy"
+            alt="sign detection — conceptual project illustration"
+        /></picture>
+        <figcaption>
+          CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+        </figcaption>
+      </figure>
+      <div class="detail-body">
+        <article class="project-overview">
+          <p class="eyebrow">THE IDEA</p>
+          <h2>Project overview</h2>
+          <p>
+            A real-time hand sign recognition system built with OpenCV,
+            MediaPipe, and a convolutional neural network. It identifies left
+            and right hands and updates recognized signs as the camera feed
+            changes.
+          </p>
+          <h3>What it does</h3>
+          <ul class="feature-list">
+            <li>Track hand landmarks with MediaPipe.</li>
+            <li>Process camera frames with OpenCV.</li>
+            <li>Recognize signs and display live visual feedback.</li>
+          </ul>
+        </article>
+        <aside class="project-stack">
+          <p class="eyebrow">UNDER THE HOOD</p>
+          <h2>Technology stack</h2>
+          <div class="tags">
+            <span>Python</span><span>scikit-learn</span><span>numpy</span
+            ><span>pandas</span><span>OpenCV</span><span>keras</span
+            ><span>tensorflow</span><span>MediaPipe</span>
+          </div>
+          <p>Explore the implementation and the original project resources.</p>
+          <a
+            href="https://github.com/Mr-Vicky-01/hand-sign-detection"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="resource-link"
+            >View source<span aria-hidden="true">↗</span></a
+          >
+        </aside>
+      </div>
+      <a class="next-project" href="story-teller.html"
+        ><div>
+          <span class="eyebrow">NEXT PROJECT</span>
+          <h2>Story Teller</h2>
+        </div>
+        <span aria-hidden="true">↗</span></a
+      >
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="footer-name" href="../index.html#header">Pachaiappan.</a>
+        <p>Thoughtful code. Useful intelligence.</p>
+        <a href="#header">Back to top ↑</a>
+      </div>
+    </footer>
 
- <!-- Vendor JS Files -->
-  <script async="" src="//www.google-analytics.com/analytics.js"></script><script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../assets/vendor/counterup/counterup.min.js"></script>
-  <script src="../assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../assets/vendor/venobox/venobox.min.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="../assets/js/main.js"></script>
-
-  <script>if( window.self == window.top ) { (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-55234356-4', 'auto'); ga('send', 'pageview'); } </script>
-
-</body>
+    <script type="module" src="../assets/js/scene-loader.js"></script>
+  </body>
 </html>
-

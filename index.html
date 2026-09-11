@@ -1,651 +1,903 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pachaiappan — AI Engineer &amp; Developer</title>
+    <meta
+      name="description"
+      content="AI engineer and developer building intelligent applications, from generative AI and computer vision to production software."
+    />
+    <meta name="theme-color" content="#0b1020" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Pachaiappan — AI Engineer &amp; Developer"
+    />
+    <meta
+      property="og:description"
+      content="AI engineer and developer building intelligent applications, from generative AI and computer vision to production software."
+    />
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js"
+        }
+      }
+    </script>
+    <script src="assets/js/main.js" defer></script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-5BB8W2X");
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-169007209-3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5BB8W2X');</script>
-  <!-- End Google Tag Manager -->
-  <link rel="icon" type="image/png" href="/favicon.png"/>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Pachaiappan Portfolio</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169007209-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-169007209-3');
-  </script>
-
-</head>
-
-<body>
-  
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BB8W2X"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <!-- ======= Header ======= -->
-  <header id="header" class="header-tops" style="background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url('website_images/IMG20211210075542-02.jpeg'); background-size: cover; background-position: center;">
-
-    <div class="container">
-
-      <h1 class="blurred-box"><a href="index.html">Pachaiappan</a></h1>
-      <h2 style="color:#fff">I'm <span class="typing" style="color:#12D640"></span></h2>
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="#header"> <span>Home</span></a></li>
-          <li><a href="#about"><span>About</span></a></li>
-          <li><a href="#education"> <span>Education</span></a></li>
-          <li><a href="#experience"> <span>Experience</span></a></li>
-          <!-- <li><a href="#projects"> <span>Projects</span></a></li> -->
-          <li><a href="#portfolio"> <span>Projects</span></a></li>
-          <li><a href="#skills"> <span>Skills</span></a></li>
-          <li><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank"> <span>Resume</span></a></li>
-          <!-- <li><a href="#links"> <span>Resume & Links</span></a></li> -->
-          <li><a href="#contacts"> <span>Contact</span></a></li>
-
-        </ul>
-      </nav><!-- .nav-menu -->
-
-      <div class="social-links">
-          <a href="https://www.linkedin.com/in/pachaiappan" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://github.com/Mr-Vicky-01" target="_blank" class="github"><i class="bx bxl-github"></i></a>
-          <a href="mailto:pachaiappan1102@gmail.com@gmail.com" target="_blank" class="google"><i class="bx bxl-google"></i></a>
-          <a href="https://huggingface.co/Mr-Vicky-01" target="_blank" class="huggingface">
-            <img src="assets\img\hugging-face-svgrepo-com.svg" alt="Hugging Face" width="24" height="24">
-          </a>
-          <a href="https://leetcode.com/u/vicky_1102/" target="_blank" class="huggingface">
-            <img src="assets\img\leetcode-svgrepo-com.svg" alt="Hugging Face" width="24" height="24">
-          </a>
+      gtag("config", "UA-169007209-3");
+    </script>
+  </head>
+  <body>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5BB8W2X"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe></noscript
+    ><a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="wordmark" href="#header" aria-label="Pachaiappan home"
+          ><span>Pachaiappan<span class="brand-period">.</span></span
+          ><span class="brand-role">AI Engineer &amp; Developer</span></a
+        ><button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="main-nav"
+          hidden
+        >
+          Menu <span aria-hidden="true">☰</span>
+        </button>
+        <nav id="main-nav" aria-label="Main navigation">
+          <a href="#portfolio">Work</a><a href="#experience">Experience</a
+          ><a href="#about">About</a
+          ><a
+            href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Resume <span aria-hidden="true">↗</span></a
+          ><a class="nav-contact" href="#contacts"
+            >Let’s talk <span aria-hidden="true">↗</span></a
+          >
+        </nav>
       </div>
-
-    </div>
-
-  </header><!-- End Header -->
-
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-
-    <!-- ======= About Me ======= -->
-    <div class="about-me container">
-
-      <div class="section-title">
-        <h2>About</h2>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets\img\profile-pic.png" class="img-fluid circle-frame" alt="">
+    </header>
+    <main id="main">
+      <section class="hero" id="header" aria-labelledby="hero-title">
+        <div class="container">
+          <div class="hero-topline">
+            <p class="eyebrow">
+              <span class="status-dot"></span> PACHAIAPPAN / AI ENGINEER &amp;
+              DEVELOPER
+            </p>
+            <span class="eyebrow hero-edition"
+              >INDEPENDENT THINKING. PRACTICAL AI.</span
+            >
+          </div>
+          <div class="hero-layout">
+            <div class="hero-copy">
+              <h1 id="hero-title">
+                Human ideas.<br /><span>Intelligent</span><br />possibilities.
+              </h1>
+              <p class="hero-description">
+                I’m Pachaiappan. I turn complex AI into thoughtful software —
+                from the first experiment to real-world applications.
+              </p>
+              <div class="hero-actions">
+                <a class="button button-primary" href="#portfolio"
+                  >View projects <span aria-hidden="true">↗</span></a
+                ><a class="button button-outline" href="#contacts"
+                  >Contact me</a
+                >
+              </div>
+            </div>
+            <div class="workspace-wrap">
+              <div
+                class="workspace"
+                id="workspace"
+                role="img"
+                aria-label="An interactive 3D developer workspace with a monitor, code panels, and desk"
+              >
+                <img
+                  class="workspace-fallback"
+                  src="assets/img/workspace.svg"
+                  width="900"
+                  height="780"
+                  alt=""
+                /><span class="workspace-coordinate" aria-hidden="true"
+                  >THE SPACE BETWEEN<br />AN IDEA AND REALITY.</span
+                >
+              </div>
+              <div class="workspace-controls">
+                <span class="eyebrow" id="scene-status"
+                  >A DIFFERENT PERSPECTIVE</span
+                ><span aria-hidden="true">↙ ↗</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-bottom">
+            <a class="scroll-cue" href="#portfolio"
+              ><span aria-hidden="true">↓</span> Scroll to explore</a
+            >
+            <p>
+              Machine learning. Software engineering.<br />A curiosity that
+              connects the two.
+            </p>
+            <span class="eyebrow"
+              >BASED IN INDIA<br />BUILDING FOR THE WEB</span
+            >
+          </div>
         </div>
-        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <p style="text-align: justify;">I am a dedicated AI Engineer with a strong foundation in machine learning and software development. With a passion for creating innovative solutions, I excel in building and optimizing AI-driven applications that address complex challenges. My experience spans various aspects of the AI lifecycle, from model development to deployment, always aiming to deliver high-impact results. I thrive in dynamic environments where I can continuously learn and contribute to cutting-edge projects that push the boundaries of technology.
+      </section>
+      <div class="expertise-strip">
+        <div class="container">
+          <span>GENERATIVE AI</span><i aria-hidden="true">✳</i
+          ><span>COMPUTER VISION</span><i aria-hidden="true">✳</i
+          ><span>FULL-STACK DEVELOPMENT</span><i aria-hidden="true">✳</i
+          ><span>MACHINE LEARNING</span>
+        </div>
+      </div>
+      <section
+        class="section container work-section"
+        id="portfolio"
+        aria-labelledby="work-title"
+      >
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">01 / SELECTED WORK</p>
+            <h2 id="work-title">
+              Less theory.<br /><span class="accent">More possibility.</span>
+            </h2>
+          </div>
+          <p>
+            A selection of AI applications<br />built to make complex things<br />a
+            little more useful.
           </p>
-          <div class="row">
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="icofont-rounded-right"></i> <strong>Birthday:</strong> 11 February 2003</li>
-                <li><i class="icofont-rounded-right"></i> <strong>Phone:</strong> +91 6380344040</li>
-              </ul>
-            </div>
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="icofont-rounded-right"></i> <strong>City:</strong> Puducherry</li>
-                <li><i class="icofont-rounded-right"></i> <strong>Email:</strong> pachaiappan1102@gmail.com</li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-
-    </div><!-- End About Me -->
-
-    <!-- ======= Interests ======= -->
-    <div class="interests container">
-
-      <div class="section-title">
-        <h2>Interests</h2>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-3 col-md-4">
-          <div class="icon-box">
-            <i class="ri-global-line" style="color: #ffbb2c;"></i>
-            <h3>Software Development</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
-            <i class="ri-database-2-line" style="color: #5578ff;"></i>
-            <h3>Machine Learning</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
-            <i class="ri-camera-3-line" style="color: #e80368;"></i>
-            <h3>Computer Vision</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-          <div class="icon-box">
-            <i class="ri-english-input" style="color: #1c7d32;"></i>
-            <h3>Natural Language Processing</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
-            <i class="ri-code-s-slash-fill" style="color: #28a745;"></i>
-            <h3>Software Engineering</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line" style="color: #f1081f;"></i>
-            <h3>Visualization</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
-            <i class="ri-file-list-3-line" style="color: #47aeff;"></i>
-            <h3>Algorithms</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <div class="icon-box">
-            <i class="ri-image-line" style="color: #ffc107;"></i>
-            <h3>Image Processing</h3>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- End Interests -->
-  </section><!-- End About Section -->
-
-
-
-  <!-- ======= Education Section ======= -->
-  <section id="education" class="services">
-    <div class="container">
-      <div class="section-title">
-        <h2>Education</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12" data-aos="fade-up" style="display: inline-block;">
-
-          
-
-          <div class="col-md-4 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100" style="padding:0px 0px;padding-bottom: 5px;display: inline-block;">
-            <a href="https://www.esasc.in/">
-              <img src="assets/img/education/logo.png" class="img-fluid" alt="">
-            </a><br/>
-            <p style="text-align:left;color:rgb(25, 14, 66);padding: 5px 40px;"><em><strong>Bachelor of Commerce with Computer Applications</strong></em></p>
-            <h6 style="text-align:left;color:black; padding: 0px 40px;">September 2020 - May 2023</h6>
-            <h6 style="text-align:left;color:black;padding: 0px 40px;">Relevant Coursework</h6>
-            <ul style="text-align:left;color:black;padding: 0px 60px;">
-              <li>Tally Software</li>
-              <li>Advance Excel</li>
-            </ul>
-          </div>
-            
-          </div>
-        </div>
-      </div>
-
-    <div class="portfolio">
-    <div class="container">
-      <div class="section-title">
-        <h2>Online Certification</h2>
-      </div>
-
-      <div class="row portfolio-container" style="position: relative; height: 437.75px;">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/google.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Data Analytics Capstone</h4>
-              <div class="portfolio-links">
-                <a href="https://www.coursera.org/account/accomplishments/verify/LDRT9CFGTRYP" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
+        <div class="project-sequence">
+          <div class="project-stage" aria-hidden="true">
+            <div class="stage-art">
+              <div class="stage-slide is-active" data-slide="creta">
+                <figure class="project-visual visual-creta">
+                  <picture
+                    ><source
+                      media="(max-width: 760px)"
+                      srcset="assets/img/projects/creta-mobile.svg" />
+                    <img
+                      src="assets/img/projects/creta.svg"
+                      width="1000"
+                      height="800"
+                      loading="lazy"
+                      alt="CRETA — conceptual project illustration"
+                  /></picture>
+                  <figcaption>
+                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="stage-slide" data-slide="genxai">
+                <figure class="project-visual visual-genxai">
+                  <picture
+                    ><source
+                      media="(max-width: 760px)"
+                      srcset="assets/img/projects/genxai-mobile.svg" />
+                    <img
+                      src="assets/img/projects/genxai.svg"
+                      width="1000"
+                      height="800"
+                      loading="lazy"
+                      alt="GenXAi — conceptual project illustration"
+                  /></picture>
+                  <figcaption>
+                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                  </figcaption>
+                </figure>
+              </div>
+              <div class="stage-slide" data-slide="rag">
+                <figure class="project-visual visual-rag">
+                  <picture
+                    ><source
+                      media="(max-width: 760px)"
+                      srcset="assets/img/projects/rag-mobile.svg" />
+                    <img
+                      src="assets/img/projects/rag.svg"
+                      width="1000"
+                      height="800"
+                      loading="lazy"
+                      alt="Chat With PDF — conceptual project illustration"
+                  /></picture>
+                  <figcaption>
+                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                  </figcaption>
+                </figure>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/udemy.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Data Structures + Algorithms</h4>
-              <div class="portfolio-links">
-                <a href="https://drive.google.com/file/d/14KhoCqIarPNyjIYKRozhf_Ws38c34AlS/view" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
-              </div>
+            <div class="stage-index">
+              <span>CONCEPT VISUAL</span
+              ><span class="stage-dots"
+                ><i class="is-active"></i><i></i><i></i></span
+              ><span id="stage-counter">01 / 03</span>
             </div>
           </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/ibm.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Python for Data Science, AI and Development</h4>
-              <div class="portfolio-links">
-                <a href="https://www.coursera.org/account/accomplishments/verify/6W47N9ACATXP" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/udemy.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>ML & DS Bootcamp </h4>
-              <div class="portfolio-links">
-                <a href="https://drive.google.com/file/d/1mphhV2-AQ6MeMkzsp-nhM6TRNhPjoZYc/view" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/google.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Data Pre-Processing</h4>
-              <div class="portfolio-links">
-                <a href="https://www.coursera.org/account/accomplishments/verify/LPTKJFDBZR3L" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project" style="position: absolute; left: 370px; top: 218.875px;">
-          <div class="portfolio-wrap">
-            <img src="assets/img/certification/udemy.png" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Python pro Bootcamp </h4>
-              <div class="portfolio-links">
-                <a href="https://drive.google.com/file/d/1TtLs982mgDkxNnhuK6Nkl6msq03p1yFx/view?usp=sharing" target="_blank" title="Certificate"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    </div>
-
-  </section>
-  <!-- End Education Section -->
-
-
-
-  <!-- Start Experience Section -->
-
-  <section id="experience" class="services">
-    <div class="container">
-      <div class="section-title">
-        <h2>Experience</h2>
-      </div>
-      <div class="row">
-          <div class="col-lg-12" data-aos="fade-up">
-              <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
-                <h4 style="text-align:left;">
-                  <a href="https://drive.google.com/file/d/1mebdAqG88EftkpfQyxbEJRnmyYRwOo-B/view?usp=sharing"
-                   style="color:#12d640">Code Clause Intenship</a><br> </h4>
-                <h5 style="text-align:left;">March 2024</h5>
-                <p style="text-align: justify;"><em>DATA SCIENCE INTERN </em></p>
-                <ul style="text-align:justify;">
-                  <li>During my internship, I focused on developing the Crop Disease Classifier project,
-                    aimed at classifying diseases affecting major crops in Bangladesh.</li>
-                  <li>This involved
-                    leveraging datasets from PlantVillage, Rice Disease, and Wheat Disease to train and
-                    evaluate the model.</li>
-                  <li>The ultimate goal was to provide farmers with a tool for early
-                    disease detection, thereby contributing to the advancement of agricultural
-                    technology and empowering farming communities.</li>
-                </ul>
-              </div>
-
-              <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
-                <h4 style="text-align:left;">
-                  <a href="https://www.linkedin.com/company/aquilax-ai/"
-                   style="color:#12d640">AquilaX.AI based on London</a><br> </h4>
-                <h5 style="text-align:left;">July 2024 - Present</h5>
-                <p style="text-align: justify;"><em>AI/ML ENGINEER </em></p>
-                <ul style="text-align:left;">
-                    <li>Engineered and launched SecuriTron AI, our flagship AI-driven AppSec assistant trained on 300 M+ open-source projects integrating eight industry-standard SAST scanners with bespoke Qwen3 and LLaMA models to produce structured JSON vulnerability reports at 96% accuracy and reduce false positives by 20%.</li>
-                    <li>Designed, optimized, and released under Apache 2.0 a high-performance ML model that powers a core AquilaX portal UI feature achieving sub-100 ms inference latency, enabling real-time vulnerability triage, and driving community engagement through open-source contributions.</li>
-                    <li>Architected and maintained the FastAPI backend and Streamlit/React frontend to orchestrate scan workflows, enable real-time result visualization, and support 100+ concurrent users with high availability.</li>
-                    <li>Implemented end-to-end CI/CD pipelines using GitHub Actions and Docker Compose, and integrated MLflow with Weights & Biases for automated testing, deployment, and experiment tracking accelerating release cycles by 30%.</li>
-
-                </ul>
-              </div>
-          </div>
-        </div>
-    </div>
-  </section>
-
-  <!-- End Experience Section -->
-
-
-
-  <!-- Start Project Section -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Projects</h2>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Web-App</li>
-            <li data-filter=".filter-project">Project</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="row portfolio-container">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>CRETA</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/twitteranalysis.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/creta.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>Deep Learning Web-App</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/iras.jpeg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/web-app.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>GenXAi</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/musicplayer.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/genxai.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>Chat With PDF</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/recommender.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              
-              <div class="portfolio-links">
-                <a href="projects/rag.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project">
-          <!-- <br> -->
-          <center><h4>Hand Sign Detection</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/resume.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/sign-detection.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project">
-          <center><h4>Story Teller</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/vdg.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/story-teller.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>ScreenShot-HTML</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/ml.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/screenshot_html.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project">
-          <!-- <br> -->
-          <center><h4>English Teacher</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/gan.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/english_teacher.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project">
-          <!-- <br> -->
-          <center><h4>Rock Paper Scissor</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/blog.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <!-- <h4>Rock Paper Scissor</h4> -->
-              <div class="portfolio-links">
-                <a href="projects/rps.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- End Project Section -->
-
-
-
-  <!-- Start Skills Section -->
-
-  <section id="skills" class="services">
-    <div class="container">
-      <div class="section-title">
-        <h2>Skills</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12" data-aos="fade-up">
-          <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100" style="background:#fff">
-            <h4 style="text-align:left;color:#09203a">Languages and Databases</h4>
-                <p style="text-align:left;">
-                  <img src="https://www.vectorlogo.zone/logos/python/python-horizontal.svg" alt="vectorlogo.zone" height="50" width="150">
-                  <img src="https://www.vectorlogo.zone/logos/java/java-horizontal.svg" alt="vectorlogo.zone" height="50" width="120">
-                  <img src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="upload.wikimedia.org" height="60" width="90">
-                  <img src="https://www.vectorlogo.zone/logos/mysql/mysql-horizontal.svg" alt="vectorlogo.zone" height="70" width="130">
-
+          <div class="project-stories">
+            <article
+              class="featured-project"
+              id="work-creta"
+              data-project="creta"
+            >
+              <figure class="project-visual visual-creta">
+                <picture
+                  ><source
+                    media="(max-width: 760px)"
+                    srcset="assets/img/projects/creta-mobile.svg" />
+                  <img
+                    src="assets/img/projects/creta.svg"
+                    width="1000"
+                    height="800"
+                    loading="lazy"
+                    alt="CRETA — conceptual project illustration"
+                /></picture>
+                <figcaption>
+                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                </figcaption>
+              </figure>
+              <div class="project-story reveal">
+                <p class="eyebrow"><span>01 /</span> Conversational AI</p>
+                <h3>CRETA</h3>
+                <h4>A little curiosity. A whole conversation.</h4>
+                <p>
+                  An approachable AI assistant for questions, information, and
+                  everyday exploration. Built with generative models and a
+                  simple Streamlit interface.
                 </p>
+                <div class="tags">
+                  <span>Python</span><span>Google GenAI</span
+                  ><span>LangChain</span>
+                </div>
+                <a class="case-link" href="projects/creta.html"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article
+              class="featured-project"
+              id="work-genxai"
+              data-project="genxai"
+            >
+              <figure class="project-visual visual-genxai">
+                <picture
+                  ><source
+                    media="(max-width: 760px)"
+                    srcset="assets/img/projects/genxai-mobile.svg" />
+                  <img
+                    src="assets/img/projects/genxai.svg"
+                    width="1000"
+                    height="800"
+                    loading="lazy"
+                    alt="GenXAi — conceptual project illustration"
+                /></picture>
+                <figcaption>
+                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                </figcaption>
+              </figure>
+              <div class="project-story reveal">
+                <p class="eyebrow"><span>02 /</span> Developer tools</p>
+                <h3>GenXAi</h3>
+                <h4>From a coding question to a clearer direction.</h4>
+                <p>
+                  A generative AI coding companion that brings Gemini and
+                  LangChain together to help developers explore programming
+                  problems.
+                </p>
+                <div class="tags">
+                  <span>Gemini</span><span>LangChain</span
+                  ><span>Streamlit</span>
+                </div>
+                <a class="case-link" href="projects/genxai.html"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article class="featured-project" id="work-rag" data-project="rag">
+              <figure class="project-visual visual-rag">
+                <picture
+                  ><source
+                    media="(max-width: 760px)"
+                    srcset="assets/img/projects/rag-mobile.svg" />
+                  <img
+                    src="assets/img/projects/rag.svg"
+                    width="1000"
+                    height="800"
+                    loading="lazy"
+                    alt="Chat With PDF — conceptual project illustration"
+                /></picture>
+                <figcaption>
+                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
+                </figcaption>
+              </figure>
+              <div class="project-story reveal">
+                <p class="eyebrow"><span>03 /</span> Document intelligence</p>
+                <h3>Chat With PDF</h3>
+                <h4>Your documents have answers. Ask them.</h4>
+                <p>
+                  Upload multiple PDFs and explore their contents through
+                  conversation. Document retrieval, embeddings, and Llama
+                  connect questions to relevant information.
+                </p>
+                <div class="tags">
+                  <span>LlamaIndex</span><span>FAISS</span><span>Python</span>
+                </div>
+                <a class="case-link" href="projects/rag.html"
+                  >Explore project <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="more-work-heading reveal">
+          <h3>More to explore<span class="accent">.</span></h3>
+          <span class="eyebrow">EXPERIMENTS &amp; EXPLORATIONS / 06</span>
+        </div>
+        <div class="more-work-grid">
+          <a class="compact-project reveal" href="projects/web-app.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/web-app-mobile.svg" />
+                <img
+                  src="assets/img/projects/web-app.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
             </div>
-            <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="lefade-up" data-aos-delay="100" style="background:#fff">
-              <h4 style="text-align:left;color:#09203a">Frameworks</h4>
-                <p style="text-align:left;">
-                  <img src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/djangoproject/djangoproject-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-horizontal.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/opencv/opencv-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="upload.wikimedia.org" width="90" height="70">
+            <div>
+              <span class="eyebrow">Computer vision</span>
+              <h3>Deep Learning Web-App</h3>
+              <p>From image upload to intelligent classification.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          ><a class="compact-project reveal" href="projects/sign-detection.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/sign-detection-mobile.svg" />
+                <img
+                  src="assets/img/projects/sign-detection.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
+            </div>
+            <div>
+              <span class="eyebrow">Computer vision</span>
+              <h3>Hand Sign Detection</h3>
+              <p>Turning hand movements into meaningful signals.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          ><a class="compact-project reveal" href="projects/story-teller.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/story-teller-mobile.svg" />
+                <img
+                  src="assets/img/projects/story-teller.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
+            </div>
+            <div>
+              <span class="eyebrow">Multimodal AI</span>
+              <h3>Story Teller</h3>
+              <p>Every image has a story to tell.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          ><a
+            class="compact-project reveal"
+            href="projects/screenshot_html.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/screenshot_html-mobile.svg" />
+                <img
+                  src="assets/img/projects/screenshot_html.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
+            </div>
+            <div>
+              <span class="eyebrow">Developer tools</span>
+              <h3>ScreenShot-HTML</h3>
+              <p>From visual reference to working markup.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          ><a
+            class="compact-project reveal"
+            href="projects/english_teacher.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/english_teacher-mobile.svg" />
+                <img
+                  src="assets/img/projects/english_teacher.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
+            </div>
+            <div>
+              <span class="eyebrow">Language AI</span>
+              <h3>English Teacher</h3>
+              <p>A bridge from Tamil to confident English.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          ><a class="compact-project reveal" href="projects/rps.html"
+            ><div class="compact-preview">
+              <picture
+                ><source
+                  media="(max-width: 760px)"
+                  srcset="assets/img/projects/rps-mobile.svg" />
+                <img
+                  src="assets/img/projects/rps.svg"
+                  width="1000"
+                  height="800"
+                  loading="lazy"
+                  alt=""
+              /></picture>
+            </div>
+            <div>
+              <span class="eyebrow">Computer vision</span>
+              <h3>Rock Paper Scissor</h3>
+              <p>A familiar game. A computer vision twist.</p>
+            </div>
+            <span class="compact-arrow" aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section
+        class="section experience-section"
+        id="experience"
+        aria-labelledby="experience-title"
+      >
+        <div class="container experience-layout">
+          <div class="section-heading reveal">
+            <div>
+              <p class="eyebrow">
+                <span class="section-index">02</span> THE JOURNEY
               </p>
-          </div>
-          <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="lefade-up" data-aos-delay="100" style="background:#fff">
-              <h4 style="text-align:left;color:#09203a">Tools</h4>
-                <p style="text-align:left;">
-                  <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/heroku/heroku-ar21.svg" alt="vectorlogo.zone">
-                  <img src="https://www.vectorlogo.zone/logos/jupyter/jupyter-ar21.svg" alt="vectorlogo.zone">
+              <h2 id="experience-title">
+                Ideas meet<br /><span class="accent">the real world.</span>
+              </h2>
+              <p>
+                Building, learning, and bringing<br />intelligent systems into
+                the real world.
               </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- End Skills Section -->
-
-
-
-
-  <!-- Start Links section -->
-  <section id="links" class="services">
-    <div class="container">
-      <div class="section-title">
-        <h2>Resume & Links</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-3 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
-          <a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank"><div class="icon"><i class="icofont-page"></i></div></a>
-          <h4 class="title"><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank">Resume</a></h4>
-          <p class="description" style="color:#fff;">The link contains downloadable resume</p>
-        </div>
-      </div>
-    </div>
-  </section> <!--End Links Section -->
-
-
-  <!-- Start Contact Section -->
-
-  <section id="contacts" class="contact">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Contact</h2>
-      </div>
-
-      <div class="row mt-2">
-
-        <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            <p>Thirubhuvanai,</p>
-            <p>Puducherry India.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-share-alt"></i>
-            <h3>Social Profiles</h3>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/pachaiappan" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              <a href="https://github.com/Mr-Vicky-01" target="_blank" class="github"><i class="bx bxl-github"></i></a>
-              <a href="mailto:pachaiappan1102@gmail.com" target="_blank" class="google"><i class="bx bxl-google"></i></a>
-
             </div>
           </div>
-        </div>
-
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-envelope"></i>
-            <h3>Email</h3>
-            <p>pachaiappan1102@gmail.com</p>
+          <div class="timeline">
+            <article class="experience-item reveal">
+              <div class="job-topline">
+                <span class="eyebrow">JUL 2024 — PRESENT</span
+                ><span class="job-status">CURRENT</span>
+              </div>
+              <h3>AI / ML Engineer</h3>
+              <a
+                href="https://www.linkedin.com/company/aquilax-ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="company-link"
+                >AquilaX.AI · London<span aria-hidden="true">↗</span></a
+              >
+              <p>
+                Building AI-powered application security tools, from model
+                development to production delivery.
+              </p>
+              <ul>
+                <li>
+                  Engineered SecuriTron AI using 300M+ open-source projects,
+                  eight SAST scanners, and custom Qwen3 and LLaMA models: 96%
+                  report accuracy and 20% fewer false positives.
+                </li>
+                <li>
+                  Released an Apache 2.0 ML model with sub-100 ms inference for
+                  real-time vulnerability triage.
+                </li>
+                <li>
+                  Built FastAPI services and Streamlit/React interfaces
+                  supporting 100+ concurrent users.
+                </li>
+                <li>
+                  Integrated GitHub Actions, Docker Compose, MLflow, and Weights
+                  &amp; Biases, accelerating release cycles by 30%.
+                </li>
+              </ul>
+              <div class="tags">
+                <span>LLMs</span><span>FastAPI</span><span>React</span
+                ><span>MLOps</span>
+              </div>
+            </article>
+            <article class="experience-item reveal">
+              <div class="job-topline">
+                <span class="eyebrow">MAR 2024</span
+                ><span class="muted eyebrow">INTERNSHIP</span>
+              </div>
+              <h3>Data Science Intern</h3>
+              <a
+                href="https://drive.google.com/file/d/1mebdAqG88EftkpfQyxbEJRnmyYRwOo-B/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="company-link"
+                >Code Clause<span aria-hidden="true">↗</span></a
+              >
+              <p>
+                Developed a crop disease classifier for major crops in
+                Bangladesh, using PlantVillage, Rice Disease, and Wheat Disease
+                datasets to support early disease detection.
+              </p>
+              <div class="tags">
+                <span>Python</span><span>Image classification</span
+                ><span>Deep learning</span>
+              </div>
+            </article>
           </div>
         </div>
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-phone-call"></i>
-            <h3>Contact</h3>
-            <p>+91 6380344040</p>
+      </section>
+      <section
+        class="section container"
+        id="skills"
+        aria-labelledby="skills-title"
+      >
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">
+              <span class="section-index">03</span> MY TOOLKIT
+            </p>
+            <h2 id="skills-title">
+              From model<br />to <span class="accent">production.</span>
+            </h2>
+          </div>
+          <p>
+            From the first line of Python<br />to a model running in production.
+          </p>
+        </div>
+        <div class="skill-grid">
+          <article class="skill-group reveal">
+            <span class="skill-icon" aria-hidden="true">✳</span>
+            <h3>AI & machine learning</h3>
+            <div class="skill-list">
+              <span>Python</span><span>TensorFlow</span><span>PyTorch</span
+              ><span>Scikit-learn</span><span>OpenCV</span><span>LangChain</span
+              ><span>LLMs</span>
+            </div>
+          </article>
+          <article class="skill-group reveal">
+            <span class="skill-icon" aria-hidden="true">〈/〉</span>
+            <h3>Application development</h3>
+            <div class="skill-list">
+              <span>FastAPI</span><span>Flask</span><span>Django</span
+              ><span>React</span><span>Node.js</span><span>Java</span
+              ><span>HTML / CSS</span><span>Bootstrap</span>
+            </div>
+          </article>
+          <article class="skill-group reveal">
+            <span class="skill-icon" aria-hidden="true">⌘</span>
+            <h3>Data & delivery</h3>
+            <div class="skill-list">
+              <span>MySQL</span><span>Git</span><span>Docker</span
+              ><span>GitHub Actions</span><span>Google Cloud</span
+              ><span>Heroku</span><span>MLflow</span
+              ><span>Weights & Biases</span><span>Jupyter</span>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section
+        class="section about-section"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="container">
+          <div class="about-studio reveal">
+            <div class="studio-copy">
+              <p class="eyebrow">04 / THE PERSON BEHIND THE CODE</p>
+              <h2 id="about-title">
+                A curious mind.<br />A <span>builder</span><br />at heart.
+              </h2>
+              <p>
+                I’m Pachaiappan, an AI engineer and developer. I connect machine
+                learning with software engineering to turn complex problems into
+                things people can actually use.
+              </p>
+              <div class="studio-actions" id="links">
+                <a
+                  class="button button-primary"
+                  href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Explore my resume <span aria-hidden="true">↗</span></a
+                ><a class="studio-work-link" href="#portfolio"
+                  >See what I build <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </div>
+            <div class="portrait-studio">
+              <div class="portrait-orbits" aria-hidden="true">
+                <i></i><i></i><i></i><span>✳</span>
+              </div>
+              <img
+                src="assets/img/portrait-balanced.png"
+                width="1122"
+                height="1402"
+                loading="lazy"
+                alt="Pachaiappan, AI engineer and developer"
+              />
+              <a
+                class="portrait-link"
+                href="https://github.com/Mr-Vicky-01"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span>Find me on GitHub</span
+                ><span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <div class="studio-identity">
+              <div>
+                <span class="eyebrow">CURRENTLY BUILDING AT</span
+                ><a
+                  href="https://www.linkedin.com/company/aquilax-ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >AquilaX.AI <span aria-hidden="true">↗</span></a
+                ><span>AI / ML Engineer</span>
+              </div>
+              <div>
+                <span class="eyebrow">CALLING HOME</span
+                ><strong>Puducherry, India</strong
+                ><span>Born 11 February 2003</span>
+              </div>
+              <div class="studio-signature">
+                <span>Pachaiappan<span>.</span></span
+                ><span>Always a learner.</span>
+              </div>
+            </div>
+          </div>
+          <div class="approach-heading reveal">
+            <h3>Behind every build<span class="accent">.</span></h3>
+            <p>A problem to understand. An idea to explore.</p>
+          </div>
+          <div class="approach-grid">
+            <details class="approach-item reveal" name="approach" open>
+              <summary>
+                <span class="approach-number">01</span
+                ><span>Understand first.</span
+                ><span class="approach-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="approach-content">
+                <p>
+                  I start by understanding the problem and what would make a
+                  solution useful. The goal is software that solves practical
+                  problems.
+                </p>
+              </div>
+            </details>
+            <details class="approach-item reveal" name="approach">
+              <summary>
+                <span class="approach-number">02</span><span>Stay curious.</span
+                ><span class="approach-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="approach-content">
+                <p>
+                  My interests span generative AI, computer vision, natural
+                  language processing, algorithms, and visualization.
+                  Experimenting with a model is part of the process.
+                </p>
+              </div>
+            </details>
+            <details class="approach-item reveal" name="approach">
+              <summary>
+                <span class="approach-number">03</span
+                ><span>Make it useful.</span
+                ><span class="approach-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="approach-content">
+                <p>
+                  I enjoy shaping experiments into something people can use —
+                  connecting machine learning, application development, and
+                  production delivery.
+                </p>
+              </div>
+            </details>
           </div>
         </div>
+        <div class="container education-layout" id="education">
+          <article class="education-card reveal">
+            <p class="eyebrow">FOUNDATIONS</p>
+            <div class="education-title">
+              <img
+                src="assets/img/education/logo.png"
+                width="60"
+                height="60"
+                loading="lazy"
+                alt="College emblem"
+              />
+              <h3>
+                Bachelor of Commerce<br /><span class="muted"
+                  >with Computer Applications</span
+                >
+              </h3>
+            </div>
+            <p class="eyebrow">SEPT 2020 — MAY 2023</p>
+            <p>Relevant coursework: Tally Software and Advanced Excel.</p>
+            <a
+              href="https://www.esasc.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-link"
+              >Visit institution<span aria-hidden="true">↗</span></a
+            >
+          </article>
+          <div class="certifications reveal">
+            <p class="eyebrow">CONTINUOUS LEARNING</p>
+            <h3>Certifications &amp; courses</h3>
+            <a
+              href="https://www.coursera.org/account/accomplishments/verify/LDRT9CFGTRYP"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >Data Analytics Capstone<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://drive.google.com/file/d/14KhoCqIarPNyjIYKRozhf_Ws38c34AlS/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >Data Structures + Algorithms<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://www.coursera.org/account/accomplishments/verify/6W47N9ACATXP"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >Python for Data Science, AI and Development<span
+                aria-hidden="true"
+                >↗</span
+              ></a
+            ><a
+              href="https://drive.google.com/file/d/1mphhV2-AQ6MeMkzsp-nhM6TRNhPjoZYc/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >ML &amp; DS Bootcamp<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://www.coursera.org/account/accomplishments/verify/LPTKJFDBZR3L"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >Data Pre-Processing<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://drive.google.com/file/d/1TtLs982mgDkxNnhuK6Nkl6msq03p1yFx/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="certification-link"
+              >Python pro Bootcamp<span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+      <section
+        class="contact-section"
+        id="contacts"
+        aria-labelledby="contact-title"
+      >
+        <div class="container">
+          <div class="contact-topline reveal">
+            <p class="eyebrow">05 / NEXT, TOGETHER</p>
+            <span class="contact-star" aria-hidden="true">✳</span>
+          </div>
+          <h2 id="contact-title" class="reveal">
+            Good things start<br />with <span>a conversation.</span>
+          </h2>
+          <div class="contact-bottom reveal">
+            <div>
+              <p>
+                Have an idea, a challenge, or a hello?<br />I’d love to hear
+                from you.
+              </p>
+              <a class="contact-email" href="mailto:pachaiappan.dev@gmail.com"
+                >pachaiappan.dev@gmail.com <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <div class="contact-details">
+              <a href="tel:+916380344040"
+                >+91 63803 44040 <span aria-hidden="true">↗</span></a
+              >
+              <p>Thirubhuvanai, Puducherry<br />India</p>
+            </div>
+          </div>
+          <div class="contact-socials">
+            <a
+              href="https://github.com/Mr-Vicky-01"
+              target="_blank"
+              rel="noopener noreferrer"
+              class=""
+              >GitHub<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://www.linkedin.com/in/pachaiappan"
+              target="_blank"
+              rel="noopener noreferrer"
+              class=""
+              >LinkedIn<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://huggingface.co/Mr-Vicky-01"
+              target="_blank"
+              rel="noopener noreferrer"
+              class=""
+              >Hugging Face<span aria-hidden="true">↗</span></a
+            ><a
+              href="https://leetcode.com/u/vicky_1102/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class=""
+              >LeetCode<span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="footer-name" href="#header">Pachaiappan.</a>
+        <p>Thoughtful code. Useful intelligence.</p>
+        <a href="#header">Back to top ↑</a>
       </div>
-      <!-- <div id="sfczmlqxr5caww28rswrt8849ghbekgnh3j" ></div><script type="text/javascript" src="https://counter1.stat.ovh/private/counter.js?c=zmlqxr5caww28rswrt8849ghbekgnh3j&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="free web counter"><img src="https://counter1.stat.ovh/private/freecounterstat.php?c=zmlqxr5caww28rswrt8849ghbekgnh3j" border="0" title="free web counter" alt="free web counter" style="visibility: none;"></a></noscript> -->
-    </div>
-  </section>
+    </footer>
 
-  <!-- End Contact Section -->
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script type="text/javascript">
-    var typed = new Typed('.typing',{
-      strings: ["Coder", "Developer", "AI Enthusiast", "Problem Solver"],
-      loop: true,
-      typeSpeed: 75,
-      backSpeed: 65
-    });
-  </script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
+    <script type="module" src="assets/js/scene-loader.js"></script>
+  </body>
 </html>

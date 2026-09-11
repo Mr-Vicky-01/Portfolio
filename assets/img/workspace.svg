@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 780" fill="none">
+  <defs>
+    <linearGradient
+      id="desk"
+      x1="230"
+      y1="400"
+      x2="690"
+      y2="650"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#272c3a" />
+      <stop offset="1" stop-color="#11141d" />
+    </linearGradient>
+    <linearGradient
+      id="screen"
+      x1="280"
+      y1="190"
+      x2="580"
+      y2="400"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#1b2239" />
+      <stop offset="1" stop-color="#0b0e17" />
+    </linearGradient>
+    <linearGradient id="edge">
+      <stop stop-color="#718ad4" />
+      <stop offset="1" stop-color="#242e4c" />
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#5877d3" stop-opacity=".12" />
+      <stop offset="1" stop-color="#5877d3" stop-opacity="0" />
+    </radialGradient>
+    <filter id="shadow"><feGaussianBlur stdDeviation="16" /></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="3" /></filter>
+  </defs>
+  <ellipse cx="480" cy="430" rx="350" ry="300" fill="url(#glow)" />
+  <g opacity=".3" stroke="#495063" stroke-width=".6">
+    <path d="m85 519 365-202 365 200-365 211Z" />
+    <path
+      d="m85 558 365-202 365 200M85 480l365-202 365 200M175 470l360 208M265 420l360 208M355 370l360 208M725 470 365 678M635 420 275 628M545 370 185 578"
+    />
+  </g>
+  <ellipse
+    cx="472"
+    cy="619"
+    rx="255"
+    ry="55"
+    fill="#000"
+    opacity=".6"
+    filter="url(#shadow)"
+  />
+  <path
+    d="m275 527 8 106 24 13 7-103m313-67-10 107 22-12 14-111"
+    fill="#161a26"
+    stroke="#3e4458"
+  />
+  <path
+    d="m166 478 332-155 268 151-340 174-260-155Z"
+    fill="#151925"
+    stroke="#525a74"
+  />
+  <path
+    d="m166 478 332-155 268 151-340 159Z"
+    fill="url(#desk)"
+    stroke="url(#edge)"
+  />
+  <path d="m169 487 257 154 337-159" stroke="#657dc5" stroke-opacity=".5" />
+  <path d="m391 436 87-43 55 31-85 46Z" fill="#343a4c" stroke="#6b7289" />
+  <path d="m440 359 22 10v68l-22-12Z" fill="#242a3c" stroke="#585f74" />
+  <path
+    d="m285 198 292 74v213l-292-83Z"
+    fill="#0b0d14"
+    stroke="#7e8aac"
+    stroke-width="2"
+  />
+  <path d="m294 210 273 71v187l-273-77Z" fill="url(#screen)" stroke="#2f3751" />
+  <path d="m307 227 248 65" stroke="#47506b" />
+  <circle cx="310" cy="219" r="2" fill="#c3ad7b" />
+  <circle cx="319" cy="222" r="2" fill="#62709b" />
+  <g
+    transform="matrix(1 .27 0 1 310 246)"
+    font-family="monospace"
+    font-size="9"
+  >
+    <text fill="#717992">~/pachaiappan/workspace</text>
+    <text y="27" fill="#b89bc4">
+      class
+      <tspan fill="#8197da">Developer</tspan>
+      <tspan fill="#b3b9ca">:</tspan>
+    </text>
+    <text y="46" x="14" fill="#b3b9ca">
+      name =
+      <tspan fill="#d8bc82">"Pachaiappan"</tspan>
+    </text>
+    <text y="65" x="14" fill="#b3b9ca">
+      focus =
+      <tspan fill="#d8bc82">"AI + engineering"</tspan>
+    </text>
+    <text y="96" x="14" fill="#b89bc4">
+      def
+      <tspan fill="#8197da">build</tspan>
+      <tspan fill="#b3b9ca">(idea):</tspan>
+    </text>
+    <text y="115" x="27" fill="#b89bc4">
+      return
+      <tspan fill="#b3b9ca">something_useful</tspan>
+    </text>
+    <text y="142" fill="#7284b8">&gt; ready to create_</text>
+  </g>
+  <path d="m344 489 117-54 106 59-120 58Z" fill="#0f121d" stroke="#4f5770" />
+  <g stroke="#727d9e" stroke-opacity=".6" stroke-width="4">
+    <path
+      d="m359 488 89 50m-73-59 90 49m-75-57 89 50m-75-57 89 50m-74-57 89 50m-74-57 89 50"
+    />
+    <path d="m367 503 83-39m-58 53 85-39m-61 53 84-39" />
+  </g>
+  <path d="m575 486 35-15 29 17-35 17Z" fill="#0c0f19" stroke="#5a637d" />
+  <ellipse
+    cx="606"
+    cy="484"
+    rx="12"
+    ry="8"
+    transform="rotate(28 606 484)"
+    fill="#2c3243"
+    stroke="#77809d"
+  />
+  <path
+    d="m657 390-23 13v48c0 17 47 17 47 0v-48Z"
+    fill="#393c47"
+    stroke="#a9a084"
+  />
+  <ellipse cx="657" cy="403" rx="24" ry="10" fill="#12151d" stroke="#a9a084" />
+  <path d="M681 414c29-8 27 29 0 26" stroke="#a9a084" stroke-width="5" />
+  <g transform="translate(582 164) rotate(12)">
+    <rect
+      width="165"
+      height="126"
+      rx="5"
+      fill="#141927"
+      fill-opacity=".9"
+      stroke="#596484"
+    />
+    <path d="M0 24h165" stroke="#3d445a" />
+    <circle cx="13" cy="12" r="3" fill="#c1a77a" />
+    <text x="26" y="15" font-family="monospace" font-size="7" fill="#a5abbf">
+      MODEL.PIPELINE
+    </text>
+    <path
+      d="M17 45h91M17 58h55M17 71h113M17 84h77"
+      stroke="#8c98be"
+      stroke-opacity=".55"
+      stroke-width="3"
+    />
+    <path d="M17 102h45" stroke="#dbb978" stroke-width="3" />
+  </g>
+  <g transform="translate(165 338) rotate(-9)">
+    <rect width="129" height="72" rx="5" fill="#161a25" stroke="#7e8661" />
+    <text x="14" y="22" font-family="monospace" font-size="7" fill="#c5b68b">
+      BUILD / EXPERIMENT / REPEAT
+    </text>
+    <path
+      d="m15 51 12-9 11 5 13-20 12 13 11-8 14 7 15-16"
+      stroke="#8095d4"
+      stroke-width="2"
+    />
+  </g>
+  <g fill="#a2afd6">
+    <circle cx="260" cy="159" r="2" />
+    <circle cx="730" cy="334" r="2" />
+    <circle cx="346" cy="620" r="2" />
+    <circle cx="610" cy="615" r="2" />
+  </g>
+</svg>
