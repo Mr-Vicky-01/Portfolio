@@ -1,0 +1,20 @@
+{
+  "count": 192,
+  "fps": 24,
+  "sourceDuration": 10.0,
+  "requestedDuration": 8,
+  "endExclusive": 8,
+  "lastFrameTime": 7.958333333333333,
+  "sourceWidth": 1280,
+  "sourceHeight": 720,
+  "variants": {
+    "desktop": {
+      "width": 1920,
+      "quality": 86
+    },
+    "mobile": {
+      "width": 960,
+      "quality": 86
+    }
+  }
+}

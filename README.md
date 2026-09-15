@@ -19,15 +19,15 @@
 
 ## Overview
 
-My personal portfolio brings together projects, engineering experience, and interests across generative AI, computer vision, and application development. It pairs an editorial layout with an interactive 3D workspace and a scroll-driven presentation of selected work.
+My personal portfolio brings together projects, engineering experience, and interests across generative AI, computer vision, and application development. It pairs a three-chapter, scroll-driven hero with the original light editorial sections for projects, experience, skills, and about.
 
 The site runs directly from static HTML, CSS, and JavaScript. There is no application build step or backend to configure.
 
 ## Experience
 
-- **Interactive 3D workspace** - a procedural desk, monitor, keyboard, and floating panels built with Three.js. Pointer movement and scrolling change the view.
+- **Scroll-driven workspace** - 192 local WebP frames from the first eight seconds of a supplied video. Scroll position moves the hero scene forward and backward through three cards; the final two seconds containing generated text are excluded.
 - **Cinematic project showcase** - sticky artwork transitions between featured projects on desktop; mobile visitors see stacked image-and-text sections.
-- **Responsive visual system** - warm-white content, a dark hero, cobalt accents, and a shared design across the homepage and eleven project pages.
+- **Responsive visual system** - a navy cinematic hero, warm-white content sections, cobalt accents, and eleven editorial project pages.
 - **A closer look at the developer** - an integrated portrait, career timeline, grouped skills, education, certifications, and expandable approach panels.
 - **Progressive enhancement** - native scrolling, keyboard navigation, and reduced-motion support. Static artwork remains available when the 3D scene cannot load.
 
@@ -49,15 +49,15 @@ Project pages provide an overview, technology stack, and available source or dem
 | --------------------- | ----------------------------------------------------------------------------- |
 | Content and layout    | HTML5 and responsive CSS                                                      |
 | Navigation and motion | Vanilla JavaScript, ES modules, Intersection Observer, and Resize Observer    |
-| 3D rendering          | Three.js **0.183.2**, loaded through an import map                            |
+| Background animation | Local WebP image sequence drawn on Canvas 2D; no external rendering library |
 | Visual assets         | Local SVG illustrations, responsive image variants, and an AI-edited portrait |
 | Hosting               | GitHub Pages or any static HTTP server                                        |
 
-The 3D workspace uses geometric primitives and generated screen textures. It does not require downloaded models or a model-hosting service. Project illustrations are conceptual visuals, not application screenshots.
+The workspace background is prerendered footage, not a live 3D model. The original procedural Three.js implementation remains in the repository as an unused legacy asset. Project illustrations are conceptual visuals, not application screenshots.
 
 ## Getting started
 
-You need **Python 3** for the preview server and a modern browser. Internet access loads the existing Three.js CDN dependency and Google Fonts; the page provides static artwork and system-font fallbacks.
+You need **Python 3** for the preview server and a modern browser. Internet access loads Google Fonts; system-font fallbacks remain available. The homepage background uses local images and does not download Three.js.
 
 ```sh
 git clone https://github.com/Mr-Vicky-01/Portfolio.git
@@ -103,16 +103,32 @@ The ignored `.preview/` directory contains local review tools and artifacts. It 
 | Project descriptions, technology, and resources         | `projects/*.html`                                   |
 | Colors, typography, spacing, and responsive layouts     | `assets/css/style.css`                              |
 | Scroll transitions and pointer interactions             | `assets/js/motion.js`                               |
-| Workspace geometry, materials, lighting, and camera     | `assets/js/workspace.js`                            |
+| Background framing, contrast, and scroll mapping       | `assets/css/scroll-background.css`, `assets/js/scroll-background.js` |
 | Portrait and project artwork                            | `assets/img/` and the corresponding HTML references |
 
 Keep asset paths relative to support hosting under a repository subdirectory. When changing the portrait, preserve natural color and the navy background treatment; its display does not use desaturation or screen blending.
 
 ## Motion and performance
 
-The scene loads after initial page content. Rendering pauses when the workspace is offscreen or the browser tab is hidden. Pixel density is capped at **1.75** on desktop and **1.25** on narrow screens, with narrow-screen rendering limited to approximately **30 fps**.
+A responsive first-frame poster loads first (about 19 KB desktop / 10 KB mobile). After page load, idle time begins prefetching compressed frames, prioritizing the current position. The higher-quality 192-frame sets are approximately 6.88 MB desktop and 3.30 MB mobile. Downloads have at most four requests in flight on desktop and three on mobile, and stop queuing while the hero is offscreen. Compressed frames remain in memory for replay; decoded image caches are bounded to 28 frames on desktop and 20 on mobile. `createImageBitmap` decodes ahead of the visible frame when supported, with an image fallback.
 
-The site honors the operating system’s reduced-motion preference. In that mode, project compositions remain static and the initial Three.js download is skipped. About disclosure panels also work without JavaScript.
+Desktop exports preserve the source's 1280px width at WebP quality 92; mobile exports are 960px wide at quality 86. The canvas supports up to 2 device pixels on desktop (1.5 on mobile), capped at 2560 pixels wide. This avoids an extra low-resolution canvas scaling pass, but cannot add detail absent from the original 720p video. Images contain the full source frame and align to the right edge. The hero uses its actual container width instead of viewport-width offsets, avoiding scrollbar-induced horizontal overflow.
+
+Time-based easing and blending only between adjacent source frames smooth the scroll response. At rest, rendering settles onto a single sharp source frame. Drawing stops while the hero is offscreen, the page is hidden, or motion is paused.
+
+On screens at least 700px tall, the hero contains three nearly screen-length scroll chapters: The Idea, The System, and The Work. The complete 192-frame sequence spans only this hero. The first two chapters stay pinned, and the third hands off to Selected Work as the pin releases. Each card has a readable hold and a brief crossfade. A Next chapter button advances one stage; the third press reaches Selected Work. Native wheel and touch scrolling remain proportional to scroll distance rather than counting device-dependent wheel events.
+
+The poster and canvas both contain the complete source frame, with no scroll-driven scale or translation. The background is physically inside the hero and stops drawing when offscreen. Camera movement already in the source video remains visible. Subsequent sections use the original styles without glass overlays. Native scrolling and direct section links remain available. Short viewports use a normal unpinned hero.
+
+Reduced-motion and Save-Data visitors receive the static poster and an unpinned hero by default. The background motion button allows visitors to pause or enable the sequence. Content and the poster remain usable without JavaScript. Project pages retain their existing editorial styling.
+
+To regenerate the assets with Python, install `opencv-python` and `Pillow`, then run:
+
+```sh
+python scripts/extract_scroll_frames.py "path/to/source.mp4" --trim-end 2
+```
+
+The source used here is 10 seconds, 1280 by 720, at 24 fps. Extraction samples at 24 fps and excludes all frames at or after 8.0 seconds; the final retained frame is at 7.9583 seconds. The output manifest records these boundaries. If you change the duration or frame count, update the frame count in `assets/js/scroll-background.js` as well.
 
 Before publishing changes, check the layouts at **360, 768, 1440, and 1920px**, including mobile landscape. Verify keyboard focus, the mobile menu, project transitions in both scroll directions, direct section links, and the static experience with reduced motion or unavailable WebGL.
 
@@ -128,7 +144,7 @@ python scripts/check_site.py
 
 This checks for unresolved merge markers, duplicate page sections and IDs, broken local HTML references, and filename capitalization mismatches. Resolve any reported errors before publishing, then preview the page again. GitHub Pages serves the committed files, so a merge containing both an old and a new layout will also appear broken online.
 
-Google Fonts, the pinned Three.js dependency, and the existing analytics integrations are external. Contact actions use email, phone, and profile links rather than a server-backed form.
+Google Fonts and the existing analytics integrations are external. Contact actions use email, phone, and profile links rather than a server-backed form.
 
 ## Connect
 

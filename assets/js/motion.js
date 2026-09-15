@@ -183,6 +183,34 @@ portrait?.addEventListener("pointermove", (event) => {
   );
 });
 portrait?.addEventListener("pointerleave", resetDepth);
+// Only the illustration tilts, keeping text and link targets steady.
+const exploreCards = [...document.querySelectorAll('.more-work-grid .compact-project')];
+const resetExplore = (card) => {
+  ['--explore-x', '--explore-y', '--light-x', '--light-y'].forEach(name => card.style.removeProperty(name));
+};
+exploreCards.forEach(card => {
+  let pending = 0;
+  const reset = () => { cancelAnimationFrame(pending); pending = 0; resetExplore(card); };
+  card.addEventListener('pointermove', event => {
+    if (stopped() || !pointer.matches || event.pointerType === 'touch') return;
+    const { clientX, clientY } = event;
+    cancelAnimationFrame(pending);
+    pending = requestAnimationFrame(() => {
+      pending = 0;
+      const rect = card.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+      card.style.setProperty('--explore-x', `${(0.5 - y) * 12}deg`);
+      card.style.setProperty('--explore-y', `${(x - 0.5) * 16}deg`);
+      card.style.setProperty('--light-x', `${x * 100}%`);
+      card.style.setProperty('--light-y', `${y * 100}%`);
+    });
+  });
+  card.addEventListener('pointerleave', reset);
+  card.addEventListener('pointercancel', reset);
+  reduced.addEventListener('change', reset);
+  pointer.addEventListener('change', reset);
+});
 window.addEventListener("scroll", schedule, { passive: true });
 window.addEventListener("resize", schedule, { passive: true });
 window.addEventListener("hashchange", () => {

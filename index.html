@@ -28,14 +28,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdn.jsdelivr.net/npm/three@0.183.2/build/three.module.js"
-        }
-      }
-    </script>
+    <link rel="stylesheet" href="assets/css/scroll-background.css" />
+    <link rel="stylesheet" href="assets/css/explore.css" />
+    <link rel="stylesheet" href="assets/css/interactions.css" />
+    <link rel="stylesheet" href="assets/css/mobile.css" />
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/interactions.js" defer></script>
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -62,7 +60,7 @@
       gtag("config", "UA-169007209-3");
     </script>
   </head>
-  <body>
+  <body class="film-site">
     <noscript
       ><iframe
         title="Google Tag Manager"
@@ -101,68 +99,64 @@
     </header>
     <main id="main">
       <section class="hero" id="header" aria-labelledby="hero-title">
-        <div class="container">
+        <div class="container hero-pin">
+    <div class="film-backdrop" aria-hidden="true">
+      <div class="film-media">
+        <picture><source media="(max-width: 760px)" srcset="assets/img/sequence/mobile/000.webp?v=3" />
+          <img src="assets/img/sequence/desktop/000.webp?v=3" width="1920" height="1080" alt="" fetchpriority="high" />
+        </picture>
+        <canvas id="scroll-scene"></canvas>
+      </div>
+    </div>
+
           <div class="hero-topline">
             <p class="eyebrow">
               <span class="status-dot"></span> PACHAIAPPAN / AI ENGINEER &amp;
               DEVELOPER
             </p>
             <span class="eyebrow hero-edition"
-              >INDEPENDENT THINKING. PRACTICAL AI.</span
+              >BASED IN PUDUCHERRY, INDIA</span
             >
           </div>
           <div class="hero-layout">
-            <div class="hero-copy">
+            <div class="hero-copy" data-hero-card="0">
               <h1 id="hero-title">
-                Human ideas.<br /><span>Intelligent</span><br />possibilities.
+                Hi, I’m<br /><span>Pachaiappan.</span><br />AI engineer.
               </h1>
               <p class="hero-description">
-                I’m Pachaiappan. I turn complex AI into thoughtful software -
-                from the first experiment to real-world applications.
+                I build AI systems people can actually use. Currently an
+                AI&nbsp;/&nbsp;ML Engineer at AquilaX.AI, working on AI-powered
+                application security from model to production.
               </p>
               <div class="hero-actions">
-                <a class="button button-primary" href="#portfolio"
-                  >View projects <span aria-hidden="true">↗</span></a
-                ><a class="button button-outline" href="#contacts"
-                  >Contact me</a
+                <a class="button button-primary" href="#about"
+                  >About me <span aria-hidden="true">↗</span></a
+                ><a class="button button-outline" href="#portfolio"
+                  >View my work</a
                 >
               </div>
             </div>
-            <div class="workspace-wrap">
-              <div
-                class="workspace"
-                id="workspace"
-                role="img"
-                aria-label="An interactive 3D developer workspace with a monitor, code panels, and desk"
-              >
-                <img
-                  class="workspace-fallback"
-                  src="assets/img/workspace.svg"
-                  width="900"
-                  height="780"
-                  alt=""
-                /><span class="workspace-coordinate" aria-hidden="true"
-                  >THE SPACE BETWEEN<br />AN IDEA AND REALITY.</span
-                >
-              </div>
-              <div class="workspace-controls">
-                <span class="eyebrow" id="scene-status"
-                  >A DIFFERENT PERSPECTIVE</span
-                ><span aria-hidden="true">↙ ↗</span>
-              </div>
+            <div class="hero-unfold" data-hero-card="1" aria-hidden="true" inert>
+              <span class="eyebrow">WHAT I DO</span>
+              <h2>From research<br /><span>to real products.</span></h2>
+              <p>Machine learning, generative AI, and full-stack engineering.<br />I take ideas from the first experiment all the way to production.</p>
+            </div>
+            <div class="hero-finish" data-hero-card="2" aria-hidden="true" inert>
+              <span class="eyebrow">HOW I WORK</span>
+              <h2>Curious by nature.<br /><span>Reliable by habit.</span></h2>
+              <p>I understand the problem before I build, ship work that holds up in the real world, and keep learning along the way.</p>
+              <a class="button button-primary" href="#portfolio">See what I’ve built <span aria-hidden="true">&#8599;</span></a>
             </div>
           </div>
           <div class="hero-bottom">
-            <a class="scroll-cue" href="#portfolio"
-              ><span aria-hidden="true">↓</span> Scroll to explore</a
-            >
-            <p>
-              Machine learning. Software engineering.<br />A curiosity that
-              connects the two.
-            </p>
-            <span class="eyebrow"
-              >BASED IN INDIA<br />BUILDING FOR THE WEB</span
-            >
+            <a class="scroll-cue" href="#portfolio"><span aria-hidden="true">&#8595;</span> Skip to work</a>
+            <button class="hero-next" id="hero-next" type="button" hidden>Next chapter <span aria-hidden="true">&#8595;</span></button>
+            <div class="hero-chapter" aria-hidden="true">
+              <span id="hero-chapter-label">01 / WHO I AM</span>
+              <span class="hero-chapter-track"><i></i></span>
+              <span class="hero-chapter-next">THREE CHAPTERS. ONE PERSON.</span>
+            </div>
+            <button class="film-motion" id="background-motion" type="button" aria-pressed="false" hidden>Enable background motion</button>
           </div>
         </div>
       </section>
@@ -183,11 +177,11 @@
           <div>
             <p class="eyebrow">01 / SELECTED WORK</p>
             <h2 id="work-title">
-              Less theory.<br /><span class="accent">More possibility.</span>
+              Less theory. <br /><span class="accent">More possibility.</span>
             </h2>
           </div>
           <p>
-            A selection of AI applications<br />built to make complex things<br />a
+            A selection of AI applications <br />built to make complex things <br />a
             little more useful.
           </p>
         </div>
@@ -378,17 +372,7 @@
         <div class="more-work-grid">
           <a class="compact-project reveal" href="projects/web-app.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/web-app-mobile.svg" />
-                <img
-                  src="assets/img/projects/web-app.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/web-app.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Computer vision</span>
@@ -398,17 +382,7 @@
             <span class="compact-arrow" aria-hidden="true">↗</span></a
           ><a class="compact-project reveal" href="projects/sign-detection.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/sign-detection-mobile.svg" />
-                <img
-                  src="assets/img/projects/sign-detection.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/sign-detection.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Computer vision</span>
@@ -418,17 +392,7 @@
             <span class="compact-arrow" aria-hidden="true">↗</span></a
           ><a class="compact-project reveal" href="projects/story-teller.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/story-teller-mobile.svg" />
-                <img
-                  src="assets/img/projects/story-teller.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/story-teller.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Multimodal AI</span>
@@ -440,17 +404,7 @@
             class="compact-project reveal"
             href="projects/screenshot_html.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/screenshot_html-mobile.svg" />
-                <img
-                  src="assets/img/projects/screenshot_html.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/screenshot_html.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Developer tools</span>
@@ -462,17 +416,7 @@
             class="compact-project reveal"
             href="projects/english_teacher.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/english_teacher-mobile.svg" />
-                <img
-                  src="assets/img/projects/english_teacher.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/english_teacher.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Language AI</span>
@@ -482,17 +426,7 @@
             <span class="compact-arrow" aria-hidden="true">↗</span></a
           ><a class="compact-project reveal" href="projects/rps.html"
             ><div class="compact-preview">
-              <picture
-                ><source
-                  media="(max-width: 760px)"
-                  srcset="assets/img/projects/rps-mobile.svg" />
-                <img
-                  src="assets/img/projects/rps.svg"
-                  width="1000"
-                  height="800"
-                  loading="lazy"
-                  alt=""
-              /></picture>
+              <img src="assets/img/projects/explore/rps.svg" width="600" height="360" loading="lazy" alt="" />
             </div>
             <div>
               <span class="eyebrow">Computer vision</span>
@@ -515,10 +449,10 @@
                 <span class="section-index">02</span> THE JOURNEY
               </p>
               <h2 id="experience-title">
-                Ideas meet<br /><span class="accent">the real world.</span>
+                Ideas meet <br /><span class="accent">the real world.</span>
               </h2>
               <p>
-                Building, learning, and bringing<br />intelligent systems into
+                Building, learning, and bringing <br />intelligent systems into
                 the real world.
               </p>
             </div>
@@ -602,11 +536,11 @@
               <span class="section-index">03</span> MY TOOLKIT
             </p>
             <h2 id="skills-title">
-              From model<br />to <span class="accent">production.</span>
+              From model <br />to <span class="accent">production.</span>
             </h2>
           </div>
           <p>
-            From the first line of Python<br />to a model running in production.
+            From the first line of Python <br />to a model running in production.
           </p>
         </div>
         <div class="skill-grid">
@@ -650,7 +584,7 @@
             <div class="studio-copy">
               <p class="eyebrow">04 / THE PERSON BEHIND THE CODE</p>
               <h2 id="about-title">
-                A curious mind.<br />A <span>builder</span><br />at heart.
+                A curious mind. <br />A <span>builder</span> <br />at heart.
               </h2>
               <p>
                 I’m Pachaiappan, an AI engineer and developer. I connect machine
@@ -715,7 +649,7 @@
             <p>A problem to understand. An idea to explore.</p>
           </div>
           <div class="approach-grid">
-            <details class="approach-item reveal" name="approach" open>
+            <details class="approach-item reveal" name="approach">
               <summary>
                 <span class="approach-number">01</span
                 ><span>Understand first.</span
@@ -770,7 +704,7 @@
                 alt="College emblem"
               />
               <h3>
-                Bachelor of Commerce<br /><span class="muted"
+                Bachelor of Commerce <br /><span class="muted"
                   >with Computer Applications</span
                 >
               </h3>
@@ -842,12 +776,12 @@
             <span class="contact-star" aria-hidden="true">✳</span>
           </div>
           <h2 id="contact-title" class="reveal">
-            Good things start<br />with <span>a conversation.</span>
+            Good things start <br />with <span>a conversation.</span>
           </h2>
           <div class="contact-bottom reveal">
             <div>
               <p>
-                Have an idea, a challenge, or a hello?<br />I’d love to hear
+                Have an idea, a challenge, or a hello? <br />I’d love to hear
                 from you.
               </p>
               <a class="contact-email" href="mailto:pachaiappan.dev@gmail.com"
@@ -858,7 +792,7 @@
               <a href="tel:+916380344040"
                 >+91 63803 44040 <span aria-hidden="true">↗</span></a
               >
-              <p>Thirubhuvanai, Puducherry<br />India</p>
+              <p>Thirubhuvanai, Puducherry <br />India</p>
             </div>
           </div>
           <div class="contact-socials">
@@ -899,6 +833,6 @@
       </div>
     </footer>
 
-    <script type="module" src="assets/js/scene-loader.js"></script>
+    <script type="module" src="assets/js/scroll-background.js"></script>
   </body>
 </html>

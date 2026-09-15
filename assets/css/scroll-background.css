@@ -1,0 +1,101 @@
+﻿/* The film belongs to the hero. Later sections use style.css unchanged. */
+/* --nav-blend runs 0 (navy, merged with the hero) to 1 (paper) as the work section arrives. */
+.film-site .site-header {
+  --nav-blend: 1;
+  /* Text flips inside a narrow band so it never sits mid-grey on the mid-grey background. */
+  --nav-text: clamp(0, calc((var(--nav-blend) - 0.46) / 0.08), 1);
+  --nav-ink: color-mix(in srgb, var(--ink) calc(var(--nav-text) * 100%), #eef2fb);
+  --nav-muted: color-mix(in srgb, var(--muted) calc(var(--nav-text) * 100%), #a9b6d1);
+  --nav-line: color-mix(in srgb, var(--line) calc(var(--nav-blend) * 100%), #0b1220);
+  color: var(--nav-ink);
+  background: color-mix(in srgb, rgba(247, 246, 242, 0.97) calc(var(--nav-blend) * 100%), #0b1220);
+  border-bottom-color: var(--nav-line);
+}
+.film-site .brand-role { color: var(--nav-muted); }
+.film-site .menu-toggle { color: inherit; border-color: color-mix(in srgb, var(--line) calc(var(--nav-blend) * 100%), #4a5b7c); }
+.film-site .hero { background: #0b1220; }
+.film-site .hero::before { display: none; }
+.hero .hero-pin { position: relative; isolation: isolate; width: 100%; padding-inline: max(40px, calc((100% - 1240px) / 2)); }
+.film-backdrop { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: #0b1220; overflow: hidden; }
+.film-media { position: absolute; inset: 0 0 0 14%; }
+.film-media picture, .film-media img, .film-media canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right center; }
+.film-media canvas { opacity: 0; }
+.film-media canvas.is-ready { opacity: 1; }
+.film-backdrop::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #0b1220 2%, #0b1220ed 23%, #0b122066 46%, transparent 68%), linear-gradient(0deg, #0b1220c9, transparent 28%); }
+.hero-copy { text-shadow: 0 2px 24px #0b1220; }
+.film-site .hero-description { color: #d1d9e8; }
+.hero-unfold, .hero-finish { display: none; }
+.film-scene-note { align-self: end; justify-self: end; margin-bottom: 36px; font: 11px/1.8 var(--mono); letter-spacing: .12em; color: #d0dcf5; text-align: right; }
+.hero-chapter { display: grid; grid-template-columns: auto 90px; align-items: center; gap: 7px 18px; color: #c7d6ef; font: 10px/1.6 var(--mono); letter-spacing: .08em; }
+.hero-chapter-track { height: 2px; background: #809ac33d; overflow: hidden; }
+.hero-chapter-track i { display: block; height: 100%; background: #b0c6ff; transform: scaleX(var(--chapter-progress, 0)); transform-origin: left; }
+.hero-chapter-next { grid-column: 1/-1; color: #94a8c8; font-size: 9px; }
+.film-motion, .hero-next { font: 11px/1.5 var(--mono); border: 1px solid #778bad; border-radius: 30px; color: #e4ebfa; background: #101b2de6; min-height: 44px; padding: 10px 16px; cursor: pointer; }
+.hero-next { background: #d8e4ff; border-color: #d8e4ff; color: #11203c; }
+.hero-next:hover { background: #fff; }
+.hero-next[hidden], .film-motion[hidden] { display: none; }
+.film-site .hero-bottom { gap: 18px; border-color: #69789266; }
+.film-site .hero .button:focus-visible, .film-motion:focus-visible, .hero-next:focus-visible { outline-color: #b8ceff; }
+/* One screen is the pin itself; the other three are the scroll run for the three chapters. */
+.scroll-story .film-site .hero { height: calc(400svh - var(--header)); min-height: 0; overflow: visible; }
+.scroll-story .hero-pin { position: sticky; top: var(--hero-header, var(--header)); height: calc(100svh - var(--hero-header, var(--header))); display: flex; flex-direction: column; }
+.scroll-story .film-site .hero-layout { position: relative; flex: 1; min-height: 0; padding-block: 24px; }
+.scroll-story .hero-topline { padding-top: 24px; }
+.scroll-story [data-hero-card] { opacity: var(--card-opacity, 0); transform: translateY(var(--card-y, 0px)); will-change: transform, opacity; animation: none; }
+.scroll-story .hero-copy { --card-opacity: 1; }
+.scroll-story [data-hero-card][inert] { pointer-events: none; }
+.scroll-story .hero-unfold, .scroll-story .hero-finish { display: block; position: absolute; top: 50%; left: 0; width: min(490px, 46%); transform: translateY(calc(-50% + var(--card-y, 24px))); text-shadow: 0 2px 24px #040b16; }
+.hero-unfold .eyebrow, .hero-finish .eyebrow { font-size: 10px; letter-spacing: .12em; }
+.hero-unfold h2, .hero-finish h2 { font-size: clamp(36px, 3.7vw, 54px); line-height: 1.1; letter-spacing: -.05em; margin-top: 22px; }
+.hero-unfold h2 span, .hero-finish h2 span { color: #a8beff; }
+.hero-unfold p, .hero-finish p { color: #c8d5e9; font-size: 16px; line-height: 1.8; margin-top: 22px; }
+.hero-finish .button { margin-top: 28px; }
+.scroll-story .hero-bottom { flex-shrink: 0; padding-block: 20px; }
+.scroll-story .film-scene-note { opacity: var(--intro-opacity, 1); }
+.scroll-story .hero-bottom .scroll-cue { font-size: 12px; }
+.scroll-story .hero-bottom .scroll-cue > span { width: 36px; height: 36px; }
+@media (min-width: 761px) and (max-height: 820px) {
+  .scroll-story .hero h1 { font-size: clamp(48px, 8vh, 65px); }
+  .scroll-story .hero-description { margin-top: 20px; font-size: 16px; }
+  .scroll-story .hero-actions { margin-top: 22px; }
+}
+@media (max-width: 760px) {
+  .hero .hero-pin { padding-inline: 18px; }
+  .film-media { inset: 38% -8% 6%; }
+  .film-backdrop::after { background: linear-gradient(180deg, #0b1220 12%, #0b1220c9 40%, #0b12204d 70%, #0b1220 100%); }
+  .film-site .hero-layout { display: block; min-height: 0; padding-block: 28px 100px; }
+  .film-site .hero-copy { max-width: 520px; width: 100%; min-width: 0; }
+  .film-site .hero h1 { font-size: clamp(32px, 10vw, 58px); line-height: 1.08; }
+  .film-site .hero-description { font-size: 15px; line-height: 1.65; margin-top: 18px; max-width: 440px; }
+  .film-site .hero-actions { margin-top: 20px; gap: 10px; }
+  .film-site .hero-actions .button { min-height: 48px; padding: 12px 16px; gap: 16px; font-size: 14px; }
+  .film-site .hero-topline .eyebrow { font-size: 9px; letter-spacing: .04em; }
+  .film-site .hero-topline { padding-top: 20px; }
+  .film-scene-note { display: none; }
+  .film-site .hero-bottom { gap: 12px; padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+  .film-site .hero-chapter { display: none; }
+  .film-site .film-motion { font-size: 10px; padding-inline: 12px; }
+  .film-site .hero-bottom .scroll-cue { font-size: 12px; }
+  .scroll-story .film-site .hero { height: calc(340svh - var(--header)); }
+  .scroll-story .film-site .hero-layout { min-height: 0; padding-top: 30px; display: flex; align-items: flex-start; }
+  .scroll-story .hero-description { font-size: 15px; line-height: 1.7; margin-top: 18px; }
+  .scroll-story .hero-actions { margin-top: 18px; }
+  .scroll-story .film-scene-note { display: none; }
+  .scroll-story .hero-unfold, .scroll-story .hero-finish { top: 30px; width: 100%; max-width: 520px; transform: translateY(var(--card-y, 24px)); }
+  .scroll-story .hero-unfold h2, .scroll-story .hero-finish h2 { font-size: clamp(28px, 8.6vw, 42px); margin-top: 16px; }
+  .scroll-story .hero-unfold p, .scroll-story .hero-finish p { font-size: 14px; margin-top: 16px; }
+  .scroll-story .hero-finish .button { margin-top: 20px; }
+  .scroll-story .hero-topline { padding-top: 18px; }
+  .scroll-story .hero-topline .eyebrow { font-size: 9px; }
+  .scroll-story .hero-bottom { gap: 10px; padding-block: 14px; }
+  .scroll-story .hero-chapter { display: grid; order: -1; width: 100%; grid-template-columns: 1fr 90px; gap: 4px 12px; }
+  .scroll-story .hero-chapter-next { display: none; }
+  .scroll-story .film-motion { font-size: 9px; padding-inline: 9px; }
+  .scroll-story .hero-next { font-size: 10px; padding-inline: 12px; }
+  .scroll-story .hero-bottom .scroll-cue { display: inline-flex; }
+  .scroll-story .hero-bottom .scroll-cue > span { display: none; }
+  .scroll-story .film-motion { margin-left: auto; }
+}
+@media (min-width: 761px) and (max-width: 999px) {
+  .hero .hero-pin { padding-inline: 24px; }
+}

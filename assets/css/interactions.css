@@ -1,0 +1,122 @@
+/* A shared, restrained motion language for interactive elements. */
+.approach-item {
+  border-radius: 8px;
+  transition: background .3s, border-color .3s, box-shadow .3s;
+}
+.approach-item.is-resizing { overflow: hidden; }
+.hover-details .approach-content { animation: none; }
+.hover-details .approach-toggle { flex-shrink: 0; }
+.hover-details[open]:not(.is-expanded) .approach-toggle { transform: none; background: #e8ecf9; }
+.approach-item.is-expanded {
+  border-top-color: var(--blue);
+  background: #fbfaf7;
+  box-shadow: 0 12px 28px #19203508;
+}
+.hover-details.is-expanded .approach-toggle { transform: rotate(135deg); background: var(--blue); color: #fff; }
+.approach-item summary > span:nth-child(2) { transition: color .25s; }
+.approach-item:focus-within summary > span:nth-child(2) { color: var(--blue); }
+.button > span[aria-hidden],
+.text-link > span,
+.case-link > span,
+.certification-link > span,
+.contact-socials a > span,
+.studio-work-link > span { display: inline-block; transition: transform .3s; }
+.certification-link { transition: color .25s, background .25s, padding .3s; }
+.contact-socials a { transition: color .25s, transform .3s; }
+.contact-email { transition: color .25s, border-color .25s; }
+.text-link, .case-link, .studio-work-link { transition: color .25s; }
+/* Skill labels are informational: visual feedback without button cursors or tab stops. */
+.skill-group {
+  --skill-accent: #2851e8;
+  --skill-tint: #edf1ff;
+  position: relative;
+  transition: border-color .18s, background .18s;
+}
+.skill-group:nth-child(2) { --skill-accent: #6844b4; --skill-tint: #f1ecfa; }
+.skill-group:nth-child(3) { --skill-accent: #087f3f; --skill-tint: #dcfce7; }
+.skill-group::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--skill-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .24s ease-out;
+  pointer-events: none;
+}
+.skill-icon {
+  width: fit-content;
+  transform-origin: center;
+  transition: transform .26s cubic-bezier(.2,.8,.25,1), color .18s, text-shadow .18s;
+}
+.skill-group h3 { transition: color .18s; }
+.skill-list span, .tags span {
+  position: relative;
+  cursor: default;
+  transition: transform .16s ease-out, background .16s, border-color .16s, color .16s, box-shadow .16s;
+}
+.company-link > span, .portrait-link > span, .brand-period,
+.hero-next > span { display: inline-block; transition: transform .2s ease-out; }
+.scroll-cue > span { transition: transform .2s ease-out; }
+.experience-item::before { transition: background .2s, box-shadow .2s; }
+.expertise-strip i { display: inline-block; transition: transform .3s ease-out; }
+.hero-next, .film-motion { transition: background .16s, border-color .16s, box-shadow .16s, transform .16s; }
+.nav-contact { transition: background .16s, box-shadow .16s; }
+.button, .text-link, .case-link { transition-duration: .18s; }
+.company-link:focus-visible, .studio-work-link:focus-visible { text-decoration: underline; }
+.button:focus-visible > span[aria-hidden],
+.text-link:focus-visible > span,
+.case-link:focus-visible > span { color: inherit; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .skill-group:hover::before { transform: scaleX(1); }
+  .skill-group:hover h3, .skill-group:hover .skill-icon { color: var(--skill-accent); }
+  .skill-group:hover .skill-icon { transform: rotate(45deg) scale(1.12); text-shadow: 0 5px 18px #2851e822; }
+  .skill-group:nth-child(2):hover .skill-icon { transform: translateY(-3px) scale(1.1); }
+  .skill-group:nth-child(3):hover .skill-icon { transform: rotate(-12deg) scale(1.12); }
+  .skill-list span:hover {
+    z-index: 1;
+    transform: translateY(-3px) scale(1.035);
+    color: var(--skill-accent);
+    border-color: var(--skill-accent);
+    background: var(--skill-tint);
+    box-shadow: 0 5px 12px #1920350d;
+  }
+  .tags span:hover { transform: translateY(-2px); background: #edf1ff; color: #2447c0; border-color: #9cafe6; }
+  .experience-item:hover::before { background: var(--blue); box-shadow: 0 0 0 5px #2851e811; }
+  .expertise-strip:hover i { transform: rotate(90deg); }
+  .wordmark:hover .brand-period { transform: translateY(-4px) scale(1.2); }
+  .company-link:hover > span, .portrait-link:hover > span { transform: translate(3px, -3px); }
+  .hero-next:hover { transform: translateY(-2px); box-shadow: 0 5px 16px #0002; }
+  .hero-next:hover > span, .scroll-cue:hover > span { transform: translateY(3px); }
+  .film-motion:hover { background: #223453; border-color: #b8ceff; box-shadow: 0 0 0 3px #b8ceff14; }
+  .nav-contact:hover { box-shadow: 0 5px 14px #2851e825; }
+  .approach-item:hover { border-top-color: var(--blue); box-shadow: 0 12px 28px #1920350d; }
+  .approach-item:hover summary > span:nth-child(2) { color: var(--blue); }
+  .button:hover > span[aria-hidden],
+  .text-link:hover > span,
+  .case-link:hover > span,
+  .studio-work-link:hover > span { transform: translate(3px, -3px); }
+  .certification-link:hover { padding-left: 10px; background: #2851e807; }
+  .certification-link:hover > span { transform: translate(-3px, -3px); }
+  .contact-socials a:hover { transform: translateY(-3px); }
+  .contact-socials a:hover > span { transform: translate(2px, -2px); }
+}
+/* Taps get immediate feedback without leaving a sticky hover state. */
+.button:active, .hero-next:active { transform: scale(.98); box-shadow: none; }
+.film-motion:active { background: #2b4064; }
+@media (prefers-reduced-motion: reduce) {
+  .skill-group, .skill-group::before, .skill-group h3, .skill-icon,
+  .skill-list span, .tags span, .company-link > span, .portrait-link > span,
+  .brand-period, .hero-next, .hero-next > span, .film-motion,
+  .scroll-cue > span, .experience-item::before, .expertise-strip i, .nav-contact { transition: none; }
+  .skill-list span:hover { color: var(--skill-accent); border-color: var(--skill-accent); background: var(--skill-tint); }
+  .button:active, .hero-next:active { transform: none; }
+  .approach-item, .approach-item *,
+  .button > span, .text-link > span, .case-link > span,
+  .certification-link, .certification-link > span,
+  .contact-socials a, .contact-socials a > span,
+  .contact-email, .studio-work-link > span { transition: none; animation: none; }
+}
