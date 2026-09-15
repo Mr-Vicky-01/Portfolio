@@ -1,5 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <title>Pachaiappan</title>
-  <rect width="64" height="64" rx="14" fill="#2851e8"/>
-  <path fill="#fff" fill-rule="evenodd" d="M17 14h16c9 0 15 5.5 15 14s-6 14-15 14h-7v9h-9V14zm9 8v12h7c4 0 6-2 6-6s-2-6-6-6h-7z"/>
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <title>Pachaiappan — Orbit Core</title>
+  <defs>
+    <radialGradient id="tile" cx="25%" cy="12%" r="110%"><stop stop-color="#273c79"/><stop offset=".53" stop-color="#111b39"/><stop offset="1" stop-color="#080e20"/></radialGradient>
+    <linearGradient id="back" x1="14" y1="40" x2="114" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#a4b7ff"/><stop offset=".4" stop-color="#5979ee"/><stop offset="1" stop-color="#3446a0"/></linearGradient>
+    <linearGradient id="ribbon" x1="14" y1="68" x2="114" y2="80" gradientUnits="userSpaceOnUse"><stop stop-color="#506bdd"/><stop offset=".36" stop-color="#9fb5ff"/><stop offset=".68" stop-color="#f1f7ff"/><stop offset="1" stop-color="#89f4df"/></linearGradient>
+    <linearGradient id="crown" x1="43" y1="40" x2="83" y2="65" gradientUnits="userSpaceOnUse"><stop stop-color="#f4fffd"/><stop offset=".5" stop-color="#9bf6e6"/><stop offset="1" stop-color="#59b8ee"/></linearGradient>
+    <linearGradient id="left" x1="39" y1="51" x2="65" y2="93" gradientUnits="userSpaceOnUse"><stop stop-color="#728bfa"/><stop offset="1" stop-color="#3045b4"/></linearGradient>
+    <linearGradient id="right" x1="87" y1="51" x2="65" y2="93" gradientUnits="userSpaceOnUse"><stop stop-color="#73e0e2"/><stop offset="1" stop-color="#4585d6"/></linearGradient>
+    <radialGradient id="node" cx="30%" cy="25%"><stop stop-color="#fff"/><stop offset=".42" stop-color="#c2fff1"/><stop offset="1" stop-color="#60d7c6"/></radialGradient>
+  </defs>
+  <rect width="128" height="128" rx="32" fill="url(#tile)"/>
+  <rect x="1" y="1" width="126" height="126" rx="31" fill="none" stroke="#829bdd" stroke-opacity=".18"/>
+  <ellipse cx="65" cy="100" rx="30" ry="7" fill="#080e20" opacity=".45"/>
+  <g transform="rotate(-35 64 64)" fill="none">
+    <path d="M14 64a50 23 0 0 1 100 0" stroke="#0a1029" stroke-width="13"/>
+    <path d="M14 64a50 23 0 0 1 100 0" stroke="url(#back)" stroke-width="9"/>
+    <path d="M16 61C23 37 103 37 112 61" stroke="#c0d2ff" stroke-opacity=".35" stroke-width="1.5"/>
+  </g>
+  <path d="M64 33 91 49v32L64 97 37 81V49Z" fill="#0b163a"/>
+  <path d="m64 33 27 16-27 17-27-17Z" fill="url(#crown)"/>
+  <path d="m37 49 27 17v31L37 81Z" fill="url(#left)"/>
+  <path d="m91 49-27 17v31l27-16Z" fill="url(#right)"/>
+  <path d="m38 49 26 17 26-17M64 66v29" fill="none" stroke="#d6f9ff" stroke-opacity=".52" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="m64 42 12 7-12 8-12-8Z" fill="#f1fffc" opacity=".7"/>
+  <g transform="rotate(-35 64 64)" fill="none">
+    <path d="M114 66a50 23 0 0 1-100 0" stroke="#08102b" stroke-width="13"/>
+    <path d="M114 64a50 23 0 0 1-100 0" stroke="url(#ribbon)" stroke-width="10"/>
+    <path d="M113 64c0 27-97 27-98 0" stroke="#e7f6ff" stroke-opacity=".65" stroke-width="1.3"/>
+    <circle cx="111" cy="71" r="7" fill="url(#node)" stroke="#d9fff7" stroke-width="1"/>
+  </g>
 </svg>
