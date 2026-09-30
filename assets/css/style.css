@@ -322,53 +322,6 @@ li + li {
   flex-wrap: wrap;
   margin-top: 32px;
 }
-.workspace-wrap {
-  position: relative;
-  align-self: stretch;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  min-width: 0;
-}
-.workspace {
-  position: relative;
-  width: calc(100% + 72px);
-  margin-left: -40px;
-  height: 490px;
-  isolation: isolate;
-}
-.workspace canvas,
-.workspace-fallback {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain;
-}
-.workspace[data-state="ready"] .workspace-fallback {
-  visibility: hidden;
-}
-.workspace-coordinate {
-  position: absolute;
-  right: 0;
-  top: 0;
-  font: 12px/1.7 var(--mono);
-  letter-spacing: 0.08em;
-  color: #a2aecb;
-}
-.workspace-controls {
-  margin-top: -18px;
-  border-top: 1px solid #303953;
-  padding-top: 16px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  color: #94adff;
-}
-.workspace-controls .eyebrow {
-  font-size: 12px;
-  letter-spacing: 0.04em;
-}
 .hero-bottom {
   display: flex;
   align-items: center;
@@ -1032,9 +985,6 @@ li + li {
 .hero-intro .hero-actions {
   animation-delay: 260ms;
 }
-.hero-intro .workspace-wrap {
-  animation: image-enter 1.4s cubic-bezier(0.16, 1, 0.3, 1) 280ms both;
-}
 .reveal-pending {
   opacity: 0;
   transform: translateY(55px);
@@ -1147,9 +1097,6 @@ li + li {
   .hero-layout {
     min-height: 680px;
   }
-  .workspace {
-    height: 530px;
-  }
   .hero h1 {
     font-size: 86px;
   }
@@ -1163,10 +1110,6 @@ li + li {
   }
   .hero-layout {
     min-height: 570px;
-  }
-  .workspace {
-    width: calc(100% + 50px);
-    height: 420px;
   }
   .hero-edition {
     display: none;
@@ -1218,22 +1161,6 @@ li + li {
     padding: 12px 17px;
     font-size: 14px;
     min-height: 50px;
-  }
-  .workspace {
-    height: 365px;
-    margin-left: -12px;
-    width: calc(100% + 24px);
-  }
-  .workspace-coordinate {
-    font-size: 12px;
-    top: 0;
-  }
-  .workspace-controls {
-    margin-top: 0;
-  }
-  .workspace-controls .eyebrow {
-    font-size: 12px;
-    max-width: 220px;
   }
   .expertise-strip .container {
     gap: 12px;
@@ -1383,22 +1310,6 @@ li + li {
     font-size: 17px;
     max-width: 490px;
     margin-top: 24px;
-  }
-  .workspace-wrap {
-    margin-top: 24px;
-  }
-  .workspace {
-    width: 100%;
-    margin: 0;
-    height: 400px;
-  }
-  .workspace-coordinate {
-    right: 5%;
-    top: 8%;
-    font-size: 12px;
-  }
-  .workspace-controls {
-    margin-top: -10px;
   }
   .hero-bottom {
     flex-wrap: wrap;
@@ -1611,13 +1522,6 @@ li + li {
   }
   .hero h1 {
     font-size: 49px;
-  }
-  .workspace {
-    height: 320px;
-  }
-  .workspace-coordinate {
-    top: 2%;
-    right: 0;
   }
   .hero-bottom {
     gap: 12px;

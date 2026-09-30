@@ -29,7 +29,7 @@ The site runs directly from static HTML, CSS, and JavaScript. There is no applic
 - **Cinematic project showcase** - sticky artwork transitions between featured projects on desktop; mobile visitors see stacked image-and-text sections.
 - **Responsive visual system** - a navy cinematic hero, warm-white content sections, cobalt accents, and eleven editorial project pages.
 - **A closer look at the developer** - an integrated portrait, career timeline, grouped skills, education, certifications, and expandable approach panels.
-- **Progressive enhancement** - native scrolling, keyboard navigation, and reduced-motion support. Static artwork remains available when the 3D scene cannot load.
+- **Progressive enhancement** - native scrolling, keyboard navigation, and reduced-motion support. The first frame remains as a static poster when the image sequence cannot load.
 
 ## Featured projects
 
@@ -74,19 +74,26 @@ If you already have the repository, run only the Python command from its root di
 ```text
 Portfolio/
 ├── index.html                  # Homepage and portfolio content
-├── projects/                   # Eleven project detail pages
+├── 404.html                    # Not-found page served by GitHub Pages
+├── sitemap.xml                 # Published pages, for search engines
+├── projects/                   # Project detail pages
 ├── assets/
 │   ├── css/
-│   │   └── style.css           # Shared design system and responsive layouts
+│   │   ├── style.css           # Shared design system and responsive layouts
+│   │   ├── scroll-background.css  # Hero sequence framing and chapters
+│   │   ├── explore.css         # "More to explore" cards
+│   │   ├── interactions.css    # Hover states for panels, skills, and buttons
+│   │   └── mobile.css          # Small-screen refinements
 │   ├── js/
 │   │   ├── main.js            # Navigation and optional motion loading
 │   │   ├── motion.js          # Scroll effects and portrait interaction
-│   │   ├── scene-loader.js    # Deferred 3D loading and fallback handling
-│   │   └── workspace.js       # Procedural Three.js scene
+│   │   ├── scroll-background.js  # Scroll-driven hero sequence
+│   │   └── interactions.js    # Approach panel expansion
 │   └── img/
 │       ├── projects/          # Desktop and mobile concept illustrations
-│       ├── portrait-balanced.png
-│       └── workspace.svg      # Static workspace fallback
+│       ├── sequence/          # Scroll-driven hero frames (desktop and mobile)
+│       ├── og-card.jpg        # 1200×630 link-preview image
+│       └── portrait-balanced.webp
 ├── favicon.svg                # Monogram, with PNG and ICO fallbacks
 ├── apple-touch-icon.png
 ├── LICENSE
@@ -110,9 +117,9 @@ Keep asset paths relative to support hosting under a repository subdirectory. Wh
 
 ## Motion and performance
 
-A responsive first-frame poster loads first (about 19 KB desktop / 10 KB mobile). After page load, idle time begins prefetching compressed frames, prioritizing the current position. The higher-quality 192-frame sets are approximately 6.88 MB desktop and 3.30 MB mobile. Downloads have at most four requests in flight on desktop and three on mobile, and stop queuing while the hero is offscreen. Compressed frames remain in memory for replay; decoded image caches are bounded to 28 frames on desktop and 20 on mobile. `createImageBitmap` decodes ahead of the visible frame when supported, with an image fallback.
+A responsive first-frame poster loads first (about 25 KB desktop / 10 KB mobile). After page load, idle time begins prefetching compressed frames, prioritizing the current position. The 192-frame sets are approximately 9.5 MB desktop and 3.9 MB mobile. Downloads have at most four requests in flight on desktop and three on mobile, and stop queuing while the hero is offscreen. Compressed frames remain in memory for replay; decoded image caches are bounded to 20 frames on desktop and 12 on mobile. `createImageBitmap` decodes ahead of the visible frame when supported, with an image fallback.
 
-Desktop exports preserve the source's 1280px width at WebP quality 92; mobile exports are 960px wide at quality 86. The canvas supports up to 2 device pixels on desktop (1.5 on mobile), capped at 2560 pixels wide. This avoids an extra low-resolution canvas scaling pass, but cannot add detail absent from the original 720p video. Images contain the full source frame and align to the right edge. The hero uses its actual container width instead of viewport-width offsets, avoiding scrollbar-induced horizontal overflow.
+Desktop exports are upscaled from the 1280px source to 1920px wide; mobile exports are 960px wide. Both use WebP quality 86, as recorded in `assets/img/sequence/manifest.json`. The canvas supports up to 2 device pixels on desktop (1.5 on mobile), capped at 2560 pixels wide. This avoids an extra low-resolution canvas scaling pass, but cannot add detail absent from the original 720p video. Images contain the full source frame and align to the right edge. The hero uses its actual container width instead of viewport-width offsets, avoiding scrollbar-induced horizontal overflow.
 
 Time-based easing and blending only between adjacent source frames smooth the scroll response. At rest, rendering settles onto a single sharp source frame. Drawing stops while the hero is offscreen, the page is hidden, or motion is paused.
 
@@ -130,7 +137,7 @@ python scripts/extract_scroll_frames.py "path/to/source.mp4" --trim-end 2
 
 The source used here is 10 seconds, 1280 by 720, at 24 fps. Extraction samples at 24 fps and excludes all frames at or after 8.0 seconds; the final retained frame is at 7.9583 seconds. The output manifest records these boundaries. If you change the duration or frame count, update the frame count in `assets/js/scroll-background.js` as well.
 
-Before publishing changes, check the layouts at **360, 768, 1440, and 1920px**, including mobile landscape. Verify keyboard focus, the mobile menu, project transitions in both scroll directions, direct section links, and the static experience with reduced motion or unavailable WebGL.
+Before publishing changes, check the layouts at **360, 768, 1440, and 1920px**, including mobile landscape. Verify keyboard focus, the mobile menu, project transitions in both scroll directions, direct section links, and the static experience with reduced motion or when the image sequence cannot load.
 
 ## Hosting
 
@@ -144,7 +151,17 @@ python scripts/check_site.py
 
 This checks for unresolved merge markers, duplicate page sections and IDs, broken local HTML references, and filename capitalization mismatches. Resolve any reported errors before publishing, then preview the page again. GitHub Pages serves the committed files, so a merge containing both an old and a new layout will also appear broken online.
 
-Google Fonts and the existing analytics integrations are external. Contact actions use email, phone, and profile links rather than a server-backed form.
+Google Fonts and Google Tag Manager (homepage only) are external. Contact actions use email and profile links rather than a server-backed form.
+
+## Sharing and search
+
+Every linked page carries Open Graph and Twitter card tags that point to `assets/img/og-card.jpg` (1200×630), so links shared on LinkedIn, WhatsApp, or X show a preview. The homepage also includes schema.org `Person` data.
+
+`sitemap.xml` lists the published pages. Submit it in Google Search Console: crawlers read `robots.txt` only from the domain root, not from `/Portfolio/`, so a robots file in this repository would be ignored.
+
+`404.html` uses `/Portfolio/`-prefixed paths because GitHub Pages serves it at any missing address. To preview it locally, start the server from the directory that contains `Portfolio/` and open `/Portfolio/404.html`.
+
+If the site moves to a custom domain, update the absolute URLs in the page heads, `sitemap.xml`, and `404.html`.
 
 ## Connect
 
