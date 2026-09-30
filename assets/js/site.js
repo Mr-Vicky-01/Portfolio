@@ -327,8 +327,8 @@
     // Skills ticker speeds up with scroll velocity.
     const mqRow = $(".marquee .mq-row");
     if (mqRow) {
-      const mq = gsap.to(mqRow, { xPercent: -50, duration: 38, ease: "none", repeat: -1 });
-      ScrollTrigger.create({ onUpdate: (st) => { const v = st.getVelocity() / 400; gsap.to(mq, { timeScale: gsap.utils.clamp(-6, 6, 1 + Math.abs(v)) * (v < -0.5 ? -1 : 1), duration: 0.3, overwrite: true }); } });
+      const mq = gsap.to(mqRow, { xPercent: -50, duration: 80, ease: "none", repeat: -1 });
+      ScrollTrigger.create({ onUpdate: (st) => { const v = st.getVelocity() / 1500; gsap.to(mq, { timeScale: gsap.utils.clamp(1, 2, 1 + Math.abs(v)) * (v < -0.3 ? -1 : 1), duration: 0.6, overwrite: true }); } });
     }
 
     // Portrait: hover swaps the particles for the photograph.
