@@ -188,6 +188,7 @@ def footer(prefix, top_href):
     <script src="{prefix}assets/js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="{prefix}assets/js/vendor/lenis.min.js" defer></script>
     <script src="{prefix}assets/js/field.js" defer></script>
+    <script src="{prefix}assets/js/emblems.js" defer></script>
     <script src="{prefix}assets/js/site.js" defer></script>"""
 
 
@@ -261,8 +262,11 @@ def project_page(p, index, prev, nxt):
         </dl>
       </section>
 
-      <section class="p-section" data-shape="dust" aria-labelledby="overview-title">
-        <h2 class="mono muted" id="overview-title">Overview</h2>
+      <section class="p-section" data-shape="emblem" aria-labelledby="overview-title">
+        <div class="p-side">
+          <h2 class="mono muted" id="overview-title">Overview</h2>
+          <div class="emblem-slot" data-particles="emblem" data-emblem="{p["slug"]}" aria-hidden="true"></div>
+        </div>
         <p class="lead" data-reveal>{desc}</p>
       </section>
 
@@ -306,7 +310,7 @@ def gallery_panel(p, index):
     external = "".join(
         f'<a href="{escape(href)}" target="_blank" rel="noopener noreferrer" data-scramble>{escape(label)} ↗</a>' for label, href in p["links"]
     )
-    return f"""          <article class="panel" data-glyph="{n}" data-href="{page}" data-cursor="Open">
+    return f"""          <article class="panel" data-glyph="{n}" data-emblem="{p["slug"]}" data-href="{page}" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
             <div class="mono muted">{n} / {total} · {escape(p["type"])}</div>
             <div>

@@ -28,8 +28,10 @@ It is plain HTML, CSS, and JavaScript with no build step or backend.
 - **Hero** - particles assemble the name after a short "loading weights" counter; they scatter from the cursor and shake loose when you scroll fast.
 - **Statement** - words light up as you read, over a moving signal wave.
 - **SecuriTron AI** - a pinned section where findings flow through the pipeline and false positives drop out before the report.
-- **Selected work** - a horizontal gallery driven by vertical scroll; hovering a project gathers the particles into its number.
+- **Selected work** - a horizontal gallery driven by vertical scroll. The particles travel with it and draw an emblem for the project in the middle of the screen: chat bubbles, `</>`, a searched document, hand landmarks, an open book, a network. Each case study shows its emblem again beside the overview.
 - **About** - the particles form my portrait; hovering "denoises" it into the photograph.
+- **Light and depth** - the particles add up as light, with a soft glow where they gather. Each one sits at its own depth, so the field tilts in 3D as the mouse moves, a warm light follows the cursor, and a few out-of-focus motes drift in front of the noise.
+- **The pointer** - particles near the cursor link up like a small network. Press and hold anywhere to pull the field into a swirling well, then let go to throw it back; a click or tap sends a ripple.
 - **Throughout** - smooth scrolling, page transitions between the homepage and case studies, a custom cursor, magnetic buttons, scrambled hover labels, a live Puducherry clock, and a footer name whose letters widen under the cursor.
 
 ## Projects
@@ -82,6 +84,7 @@ Portfolio/
 │   ├── css/site.css            # All styles
 │   ├── js/
 │   │   ├── field.js            # Particle engine (WebGL)
+│   │   ├── emblems.js          # Project emblems the particles draw, keyed by project slug
 │   │   ├── site.js             # Scrolling, sections, cursor, transitions
 │   │   └── vendor/             # GSAP, ScrollTrigger, Lenis
 │   ├── fonts/                  # Anek Latin, Anek Tamil (subset), Martian Mono
@@ -101,6 +104,7 @@ Portfolio/
 | Projects (text, stack, links, order) | `PROJECTS` in `scripts/build_projects.py`, then run `python scripts/build_projects.py` |
 | Colours, type and layout | `assets/css/site.css` |
 | Particle shapes | `data-particles` slots in the HTML; the engine is `assets/js/field.js` |
+| Project emblems | `assets/js/emblems.js`; a new project needs a drawing under its slug (without one, the gallery simply skips it) |
 
 The project pages and the homepage gallery (between the `projects:start` and `projects:end` markers) are generated. Edit the list in the script rather than the output.
 

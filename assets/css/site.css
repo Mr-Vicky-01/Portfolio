@@ -144,6 +144,12 @@ html:not(.js) .clock, html:not(.js) [data-clock] { visibility: hidden; }
 .hero-foot { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: end; border-top: 1px solid var(--line); padding-top: 22px; }
 .hero-meta { display: grid; gap: 4px; }
 .hero-meta b { color: var(--fg); font-weight: 500; }
+/* Shown to mouse users until they have tried holding once. */
+.hold-hint { display: none; align-items: center; gap: 10px; margin-top: 14px; color: var(--soft); }
+.has-cursor:not(.no-gl) .hold-hint:not(.done) { display: flex; }
+.hold-hint i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 0 rgba(255, 181, 71, 0.5); animation: hold-ping 2.4s var(--ease-out) infinite; }
+@keyframes hold-ping { 0% { box-shadow: 0 0 0 0 rgba(255, 181, 71, 0.5); } 70%, 100% { box-shadow: 0 0 0 12px rgba(255, 181, 71, 0); } }
+.holding, .holding * { user-select: none; -webkit-user-select: none; }
 .tagline { font: 500 clamp(30px, 4vw, 64px)/1 var(--display); font-stretch: 87.5%; letter-spacing: -0.025em; text-wrap: balance; }
 .tagline em { color: var(--amber); }
 .hero .actions { margin-top: 26px; }
@@ -158,6 +164,8 @@ html:not(.js) .clock, html:not(.js) [data-clock] { visibility: hidden; }
 .motion .statement { height: 200vh; }
 .motion .statement .sticky { position: sticky; top: 0; height: 100svh; padding-block: 0; }
 .statement p { font: 500 clamp(32px, 5vw, 84px)/1.02 var(--display); font-stretch: 87.5%; letter-spacing: -0.03em; max-width: 21ch; }
+/* A soft shadow in the page colour keeps the words readable where the glowing wave passes behind them. */
+.motion .statement p { text-shadow: 0 0 22px var(--bg), 0 0 6px var(--bg); }
 .statement .w { opacity: 0.2; }
 .statement .w.hl { color: var(--amber); }
 
@@ -197,7 +205,7 @@ html:not(.motion) .pipe-note { opacity: 1; }
 .panel.intro { border-top: 0; }
 .panel .glyph { position: absolute; right: 6%; top: 12%; width: 44%; height: 34%; pointer-events: none; }
 .panel h3 { font: 700 clamp(48px, 6.2vw, 112px)/0.86 var(--display); font-stretch: 75%; letter-spacing: -0.02em; transition: font-stretch 0.7s var(--ease-out), color 0.3s; }
-.panel:hover h3, .panel:focus-within h3 { font-stretch: 96%; color: var(--amber); }
+.panel:hover h3, .panel:focus-within h3, .panel.is-live h3 { font-stretch: 96%; color: var(--amber); }
 .panel p { max-width: 38ch; color: var(--soft); margin-top: 18px; }
 .panel .links { display: flex; flex-wrap: wrap; gap: 24px; }
 .panel .links a { border-bottom: 1px solid var(--line); padding-bottom: 4px; transition: border-color 0.3s, color 0.3s; }
@@ -264,7 +272,10 @@ html:not(.motion) .portrait-slot .hint, .no-gl .portrait-slot .hint { display: n
 .p-foot { display: grid; grid-template-columns: 1fr 1.3fr auto; gap: 40px; align-items: end; border-top: 1px solid var(--line); padding-top: 22px; }
 .p-foot .tagline { font-size: clamp(26px, 3vw, 46px); }
 .p-section { display: grid; grid-template-columns: 1fr 2.2fr; gap: 48px; padding: 16vh var(--gutter); border-top: 1px solid var(--line); }
-.p-section > .mono { padding-top: 10px; }
+.p-section > .mono, .p-side > .mono { padding-top: 10px; }
+.p-side { display: grid; align-content: start; gap: 44px; }
+.emblem-slot { width: min(100%, 280px); aspect-ratio: 1; }
+html:not(.motion) .emblem-slot, .no-gl .emblem-slot { display: none; }
 .lead { font: 500 clamp(28px, 3.6vw, 60px)/1.06 var(--display); font-stretch: 87.5%; letter-spacing: -0.025em; max-width: 26ch; }
 .steps { position: relative; display: grid; grid-template-rows: 90px auto; }
 .steps .stages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3vw; }
@@ -308,6 +319,7 @@ footer { border-top: 1px solid var(--line); margin-top: 10vh; overflow: hidden; 
 .ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1px solid #fff; mix-blend-mode: difference; place-items: center; font: 500 9px/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-on-amber); transition: width 0.35s, height 0.35s, margin 0.35s, background 0.35s, border-color 0.35s; }
 .ring.link { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
 .ring.view { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: var(--amber); border-color: var(--amber); mix-blend-mode: normal; }
+.ring.hold { width: 12px; height: 12px; margin: -6px 0 0 -6px; background: var(--amber); border-color: var(--amber); mix-blend-mode: normal; }
 
 @media (max-width: 760px) {
   body { font-size: 17px; }
@@ -331,7 +343,10 @@ footer { border-top: 1px solid var(--line); margin-top: 10vh; overflow: hidden; 
   .stages, .steps .stages { grid-template-columns: 1fr; gap: 12px; }
   .lane, .dot, .pipe-note, .stage::before { display: none; }
   .stage { min-height: 0; }
-  .panel .glyph { display: none; }
+  .panel .glyph { position: relative; right: auto; top: auto; width: 100%; height: 150px; margin-bottom: -8px; }
+  html:not(.motion) .panel .glyph, .no-gl .panel .glyph { display: none; }
+  .emblem-slot { width: 150px; }
+  .p-side { gap: 28px; }
   .row { grid-template-columns: 1fr; gap: 8px; }
   .about { grid-template-columns: 1fr; }
   .portrait-slot { justify-self: stretch; }

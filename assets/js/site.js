@@ -67,17 +67,22 @@
   /* ---------- Particle field ---------- */
   const cores = navigator.hardwareConcurrency || 8;
   let field = null;
-  try { field = window.PField && PField.create($("#field"), { count: small ? 6500 : cores <= 4 ? 9000 : 14000, small }); } catch { field = null; }
+  try { field = window.PField && PField.create($("#field"), { count: small ? 6500 : cores <= 4 ? 9000 : 14000, small, links: finePointer }); } catch { field = null; }
   if (!field) root.classList.add("no-gl");
   const ids = {};
   let activeShape = null, glyphActive = false, introDone = false;
 
   function buildShapes() {
     const { textShape, imageShape, scatter, tint, FG, AMBER } = PField, N = field.N;
-    ids.dust = field.add({ kind: "dust", ...scatter(N, (c, j, i) => (i % 31 === 0 ? tint(c, j, AMBER, 0.55) : tint(c, j, FG, 0.16))) });
-    ids.wave = field.add({ kind: "wave", ...scatter(N, (c, j) => { const a = Math.random(); tint(c, j, a < 0.6 ? AMBER : FG, 0.25 + a * 0.5); }) });
+    ids.dust = field.add({ kind: "dust", motes: 1, ...scatter(N, (c, j, i) => (i % 31 === 0 ? tint(c, j, AMBER, 0.55) : tint(c, j, FG, 0.16))) });
+    ids.wave = field.add({ kind: "wave", motes: 1, ...scatter(N, (c, j) => { const a = Math.random(); tint(c, j, a < 0.6 ? AMBER : FG, 0.25 + a * 0.5); }) });
     $$("[data-particles]").forEach((slot) => {
       const name = slot.dataset.particles;
+      if (slot.dataset.emblem) {
+        const draw = window.Emblems?.[slot.dataset.emblem];
+        if (draw) ids[name] = field.add({ kind: "box", slot, ...PField.drawnShape(N, draw) });
+        return;
+      }
       if (slot.dataset.image) {
         const img = $(slot.dataset.image);
         if (img && img.naturalWidth) ids[name] = field.add({ kind: "box", slot, ...imageShape(N, img) });
@@ -91,6 +96,20 @@
     field.start();
   }
   const shapeFor = (name) => (ids[name] != null ? ids[name] : ids.dust);
+  // Each project panel gets its emblem, drawn the first time it is needed.
+  function emblemOf(panel) {
+    const slug = panel.dataset.emblem, key = "emblem:" + slug, draw = window.Emblems?.[slug], box = $(".glyph", panel);
+    if (!field || !draw || !box) return null;
+    if (ids[key] == null) ids[key] = field.add({ kind: "box", slot: box, ...PField.drawnShape(field.N, draw) });
+    return key;
+  }
+  let livePanel = null;
+  function setLive(panel) {
+    if (panel === livePanel) return;
+    livePanel?.classList.remove("is-live");
+    livePanel = panel;
+    panel?.classList.add("is-live");
+  }
   // Sections record the shape they want; nothing moves until the intro has played.
   function showShape(name, spread) {
     activeShape = name;
@@ -273,17 +292,37 @@
       const work = $(".work"), track = $(".work-track");
       if (work && track) {
         work.classList.add("hscroll");
-        const counter = $("[data-work-index]"), panels = $$(".panel[data-glyph]", work).length;
+        const counter = $("[data-work-index]"), panelEls = $$(".panel[data-glyph]", work), panels = panelEls.length;
         const dist = () => track.scrollWidth - innerWidth;
+        // The particles travel with the gallery, drawing the emblem of the project in the middle of the screen.
+        const follow = (st) => {
+          if (!st.isActive || glyphActive) return;
+          let best = null, bd = innerWidth * 0.28;
+          panelEls.forEach((p) => { const r = p.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - innerWidth * 0.55); if (d < bd) { bd = d; best = p; } });
+          setLive(best);
+          const key = best && emblemOf(best);
+          if ((key || work.dataset.shape) !== activeShape) showShape(key || work.dataset.shape, 600);
+        };
         gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: work, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (st) => {
           gsap.set(".work-progress i", { scaleX: st.progress });
           if (counter) counter.textContent = String(Math.round(st.progress * (panels - 1)) + 1).padStart(2, "0");
-        } } });
+          follow(st);
+        }, onToggle: (st) => !st.isActive && setLive(null) } });
       }
       return () => { dots.forEach((d) => d.remove()); work?.classList.remove("hscroll"); };
     });
     mm.add("(max-width: 760px)", () => {
       $$(".stage").forEach((s) => ScrollTrigger.create({ trigger: s, start: "top 80%", onEnter: () => s.classList.add("on") }));
+      // Phones: each project's emblem forms as its card reaches the middle of the screen.
+      const work = $(".work");
+      $$(".panel[data-emblem]").forEach((panel) => ScrollTrigger.create({
+        trigger: panel, start: "top 62%", end: "bottom 38%",
+        onToggle: (st) => {
+          const key = emblemOf(panel);
+          if (st.isActive) { setLive(panel); if (key) showShape(key, 700); }
+          else if (livePanel === panel) { setLive(null); if (activeShape === key) showShape(work?.dataset.shape || "dust", 700); }
+        },
+      }));
     });
 
     // Created after the pins, so their positions include the pinned scroll distance.
@@ -340,17 +379,59 @@
       slot.addEventListener("click", () => denoise(!slot.classList.contains("denoised")));
     }
 
-    // Project panels: the particles gather into the project's number while hovered.
+    // Project panels: hovering one draws its emblem.
     if (field && finePointer) {
-      $$("[data-glyph]").forEach((panel) => {
-        const box = $(".glyph", panel), key = "glyph" + panel.dataset.glyph;
+      $$(".panel[data-emblem]").forEach((panel) => {
         panel.addEventListener("pointerenter", () => {
-          if (ids[key] == null) ids[key] = field.add({ kind: "box", slot: box, ...PField.textShape(field.N, panel.dataset.glyph, '800 260px "Anek Latin"', { stretch: "condensed", amber: 0.75 }) });
+          const key = emblemOf(panel);
+          if (!key) return;
           glyphActive = true;
+          setLive(panel);
           field.setShape(ids[key], 500);
         });
         panel.addEventListener("pointerleave", () => { glyphActive = false; field.setShape(shapeFor(activeShape), 700); });
       });
+      // Draw the rest of the emblems while the browser is idle, so scrolling never waits on them.
+      const idle = window.requestIdleCallback || ((f) => setTimeout(f, 200));
+      $$(".panel[data-emblem]").forEach((panel, i) => idle(() => emblemOf(panel), { timeout: 4000 + i * 300 }));
+    }
+
+    // Press and hold anywhere to pull the field into a well; let go to throw it back. A click sends a ripple.
+    if (field) {
+      const skip = "a, button, input, textarea, select, label, [data-href], .portrait-slot, .menu, .loader";
+      const hint = $("[data-hold-hint]"), ringEl = $(".ring");
+      let press = null;
+      const end = (e) => {
+        if (!press) return;
+        clearTimeout(press.timer);
+        if (press.held) {
+          field.release();
+          root.classList.remove("holding");
+          ringEl?.classList.remove("hold");
+          if (hint && !hint.classList.contains("done")) { hint.classList.add("done"); try { localStorage.setItem("held", "1"); } catch {} }
+        } else if (e.type === "pointerup" && Math.hypot(e.clientX - press.x, e.clientY - press.y) < 10) {
+          field.pulse(e.clientX, e.clientY, 0.8);
+        }
+        press = null;
+      };
+      document.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || e.target.closest(skip) || (menu && !menu.hidden)) return;
+        press = { x: e.clientX, y: e.clientY, held: false };
+        if (e.pointerType !== "mouse") return;
+        press.timer = setTimeout(() => {
+          if (!press) return;
+          press.held = true;
+          field.hold();
+          root.classList.add("holding");
+          ringEl?.classList.add("hold");
+        }, 220);
+      });
+      document.addEventListener("pointermove", (e) => { if (press && !press.held && Math.hypot(e.clientX - press.x, e.clientY - press.y) > 12) { clearTimeout(press.timer); press = null; } }, { passive: true });
+      document.addEventListener("pointerup", end);
+      document.addEventListener("pointercancel", end);
+      addEventListener("blur", () => end({ type: "blur" }));
+      root.addEventListener("pointerleave", () => end({ type: "leave" }));
+      try { if (localStorage.getItem("held")) hint?.classList.add("done"); } catch {}
     }
     // Whole panel opens its case study; links inside keep their own targets.
     $$("[data-href]").forEach((panel) => panel.addEventListener("click", (e) => {
