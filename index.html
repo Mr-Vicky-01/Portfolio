@@ -2,24 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Pachaiappan - AI Engineer &amp; Developer</title>
     <meta
       name="description"
-      content="AI engineer and developer building intelligent applications, from generative AI and computer vision to production software."
+      content="AI/ML engineer building machine-learning systems for application security at AquilaX.AI. Based in Puducherry, India."
     />
-    <meta name="theme-color" content="#0b1020" />
+    <meta name="theme-color" content="#0c0c0b" />
     <link rel="canonical" href="https://mr-vicky-01.github.io/Portfolio/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pachaiappan" />
     <meta property="og:url" content="https://mr-vicky-01.github.io/Portfolio/" />
-    <meta
-      property="og:title"
-      content="Pachaiappan - AI Engineer &amp; Developer"
-    />
+    <meta property="og:title" content="Pachaiappan - AI Engineer &amp; Developer" />
     <meta
       property="og:description"
-      content="AI engineer and developer building intelligent applications, from generative AI and computer vision to production software."
+      content="AI/ML engineer building machine-learning systems for application security at AquilaX.AI. Based in Puducherry, India."
     />
     <meta property="og:image" content="https://mr-vicky-01.github.io/Portfolio/assets/img/og-card.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -42,9 +39,10 @@
         },
         "knowsAbout": [
           "Generative AI",
+          "Application security",
           "Computer Vision",
           "Machine Learning",
-          "Full-stack development"
+          "MLOps"
         ],
         "sameAs": [
           "https://github.com/Mr-Vicky-01",
@@ -57,19 +55,21 @@
     <link rel="icon" href="favicon-32.png?v=orbit-core-2" type="image/png" sizes="32x32" />
     <link rel="icon" href="favicon.svg?v=orbit-core-2" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png?v=orbit-core-2" sizes="180x180" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/scroll-background.css" />
-    <link rel="stylesheet" href="assets/css/explore.css" />
-    <link rel="stylesheet" href="assets/css/interactions.css" />
-    <link rel="stylesheet" href="assets/css/mobile.css" />
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/interactions.js" defer></script>
+    <link rel="preload" href="assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/martian-mono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="assets/css/site.css" />
+    <script>
+      (function (r) {
+        r.classList.add("js");
+        try {
+          if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          r.classList.add("motion");
+          var s = sessionStorage, pt = s.getItem("pt") === "1";
+          if (pt) r.classList.add("pt-in");
+          if (pt || s.getItem("visited") || location.hash) r.classList.add("skip-loader");
+        } catch (e) {}
+      })(document.documentElement);
+    </script>
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -83,7 +83,7 @@
       })(window, document, "script", "dataLayer", "GTM-5BB8W2X");
     </script>
   </head>
-  <body class="film-site">
+  <body data-page="home">
     <noscript
       ><iframe
         title="Google Tag Manager"
@@ -91,774 +91,319 @@
         height="0"
         width="0"
         style="display: none; visibility: hidden"
-      ></iframe></noscript
-    ><a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="nav-shell">
-        <a class="wordmark" href="#header" aria-label="Pachaiappan home"
-          ><span>Pachaiappan<span class="brand-period">.</span></span
-          ><span class="brand-role">AI Engineer &amp; Developer</span></a
-        ><button
-          class="menu-toggle"
-          aria-expanded="false"
-          aria-controls="main-nav"
-          hidden
-        >
-          Menu <span aria-hidden="true">☰</span>
-        </button>
-        <nav id="main-nav" aria-label="Main navigation">
-          <a href="#portfolio">Work</a><a href="#experience">Experience</a
-          ><a href="#about">About</a
-          ><a
-            href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Resume <span aria-hidden="true">↗</span></a
-          ><a class="nav-contact" href="#contacts"
-            >Let’s talk <span aria-hidden="true">↗</span></a
-          >
-        </nav>
-      </div>
-    </header>
-    <main id="main">
-      <section class="hero" id="header" aria-labelledby="hero-title">
-        <div class="container hero-pin">
-    <div class="film-backdrop" aria-hidden="true">
-      <div class="film-media">
-        <picture><source media="(max-width: 760px)" srcset="assets/img/sequence/mobile/000.webp?v=3" />
-          <img src="assets/img/sequence/desktop/000.webp?v=3" width="1920" height="1080" alt="" fetchpriority="high" />
-        </picture>
-        <canvas id="scroll-scene"></canvas>
+      ></iframe
+    ></noscript>
+    <a class="skip" href="#main">Skip to content</a>
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"><span></span></div>
+    <div class="progress" aria-hidden="true"><i></i></div>
+    <div class="curtain" aria-hidden="true"><span class="mono muted">Pachaiappan</span><span class="curtain-title"></span></div>
+    <div class="loader" aria-hidden="true">
+      <div class="loader-row mono muted"><span>Pachaiappan · Portfolio</span><span>Loading weights</span></div>
+      <div>
+        <div class="count">000</div>
+        <div class="bar"><i></i></div>
       </div>
     </div>
 
-          <div class="hero-topline">
-            <p class="eyebrow">
-              <span class="status-dot"></span> PACHAIAPPAN / AI ENGINEER &amp;
-              DEVELOPER
-            </p>
-            <span class="eyebrow hero-edition"
-              >BASED IN PUDUCHERRY, INDIA</span
-            >
+    <header class="hdr mono">
+      <a class="brand" href="#top"><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
+      <nav aria-label="Main">
+        <a href="#work" data-scramble>Work</a><a href="#about" data-scramble>About</a><a href="#contact" data-scramble>Contact</a><a
+          href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-scramble
+          >Resume ↗</a
+        >
+      </nav>
+      <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" data-hero data-shape="name" aria-labelledby="hero-name">
+        <span id="header" aria-hidden="true"></span>
+        <div class="name-slot" data-particles="name" data-text="PACHAIAPPAN" data-text-small="PACHAI|APPAN" aria-hidden="true"></div>
+        <h1 class="hero-name" id="hero-name">Pachaiappan</h1>
+        <div class="hero-foot">
+          <div class="hero-meta mono muted" data-hero-fade>
+            <span><b>AI / ML Engineer</b></span>
+            <span>AquilaX.AI, London</span>
+            <span>Based in Puducherry, India</span>
           </div>
-          <div class="hero-layout">
-            <div class="hero-copy" data-hero-card="0">
-              <h1 id="hero-title">
-                Hi, I’m<br /><span>Pachaiappan.</span><br />AI engineer.
-              </h1>
-              <p class="hero-description">
-                I build AI systems people can actually use. Currently an
-                AI&nbsp;/&nbsp;ML Engineer at AquilaX.AI, working on AI-powered
-                application security from model to production.
-              </p>
-              <div class="hero-actions">
-                <a class="button button-primary" href="#about"
-                  >About me <span aria-hidden="true">↗</span></a
-                ><a class="button button-outline" href="#portfolio"
-                  >View my work</a
-                >
-              </div>
-            </div>
-            <div class="hero-unfold" data-hero-card="1" aria-hidden="true" inert>
-              <span class="eyebrow">WHAT I DO</span>
-              <h2>From research<br /><span>to real products.</span></h2>
-              <p>Machine learning, generative AI, and full-stack engineering.<br />I take ideas from the first experiment all the way to production.</p>
-            </div>
-            <div class="hero-finish" data-hero-card="2" aria-hidden="true" inert>
-              <span class="eyebrow">HOW I WORK</span>
-              <h2>Curious by nature.<br /><span>Reliable by habit.</span></h2>
-              <p>I understand the problem before I build, ship work that holds up in the real world, and keep learning along the way.</p>
-              <a class="button button-primary" href="#portfolio">See what I’ve built <span aria-hidden="true">&#8599;</span></a>
-            </div>
-          </div>
-          <div class="hero-bottom">
-            <a class="scroll-cue" href="#portfolio"><span aria-hidden="true">&#8595;</span> Skip to work</a>
-            <button class="hero-next" id="hero-next" type="button" hidden>Next chapter <span aria-hidden="true">&#8595;</span></button>
-            <div class="hero-chapter" aria-hidden="true">
-              <span id="hero-chapter-label">01 / WHO I AM</span>
-              <span class="hero-chapter-track"><i></i></span>
-              <span class="hero-chapter-next">THREE CHAPTERS. ONE PERSON.</span>
-            </div>
-            <button class="film-motion" id="background-motion" type="button" aria-pressed="false" hidden>Enable background motion</button>
+          <div>
+            <p class="tagline" data-hero-reveal>Teaching machines to tell real vulnerabilities from <em>noise.</em></p>
+            <div class="scroll-cue mono muted" data-hero-fade><i></i>Scroll</div>
           </div>
         </div>
       </section>
-      <div class="expertise-strip">
-        <div class="container">
-          <span>GENERATIVE AI</span><i aria-hidden="true">✳</i
-          ><span>COMPUTER VISION</span><i aria-hidden="true">✳</i
-          ><span>FULL-STACK DEVELOPMENT</span><i aria-hidden="true">✳</i
-          ><span>MACHINE LEARNING</span>
+
+      <section class="statement" data-shape="wave" aria-labelledby="statement-title">
+        <div class="sticky">
+          <h2 class="mono muted" id="statement-title">What I do</h2>
+          <p data-words>
+            I build machine-learning systems for <em>application security.</em> At AquilaX.AI I combine eight
+            static-analysis scanners with custom Qwen3 and LLaMA models, so developers see the
+            <em>vulnerabilities that matter</em> and fewer false alarms.
+          </p>
+        </div>
+      </section>
+
+      <section class="numbers" data-shape="dust" aria-label="SecuriTron AI in numbers">
+        <div class="num" data-rise><b data-count="96" data-suffix="%">96%</b><span class="mono muted">Report accuracy</span></div>
+        <div class="num" data-rise><b data-count="20" data-prefix="−" data-suffix="%">−20%</b><span class="mono muted">False positives</span></div>
+        <div class="num" data-rise><b data-count="100" data-prefix="&lt;" data-suffix="ms">&lt;100ms</b><span class="mono muted">Triage inference</span></div>
+        <div class="num" data-rise><b data-count="300" data-suffix="M+">300M+</b><span class="mono muted">Open-source projects</span></div>
+      </section>
+
+      <section class="st" id="securitron" data-shape="dust" aria-labelledby="st-title">
+        <div class="st-inner">
+          <div class="st-head">
+            <div>
+              <span class="mono muted">Featured · AquilaX.AI · 2024–now</span>
+              <h2 class="big-title" id="st-title" data-reveal>SecuriTron AI</h2>
+            </div>
+            <div>
+              <p>
+                An AI layer over static application security testing. It learns from more than 300 million open-source
+                projects, reads the output of eight SAST scanners, and uses fine-tuned models to triage each finding
+                before it reaches a developer.
+              </p>
+              <ul class="chips mono muted" aria-label="Technology">
+                <li>Qwen3</li><li>LLaMA</li><li>FastAPI</li><li>MLflow</li><li>W&amp;B</li><li>Docker</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pipe" data-flow>
+            <div class="lane" aria-hidden="true"><div class="rail"><i></i></div></div>
+            <ol class="stages" aria-label="How SecuriTron works">
+              <li class="stage"><span class="mono muted">01 · Learn</span><b>300M+ open-source projects</b></li>
+              <li class="stage"><span class="mono muted">02 · Scan</span><b>8 SAST scanners</b></li>
+              <li class="stage"><span class="mono muted">03 · Triage</span><b>Qwen3 + LLaMA models</b></li>
+              <li class="stage"><span class="mono muted">04 · Report</span><b>96% accurate, 20% fewer false positives</b></li>
+            </ol>
+            <span class="pipe-note mono muted">False positives filtered out</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="work" id="work" data-shape="dust" aria-labelledby="work-title">
+        <span id="portfolio" aria-hidden="true"></span>
+        <div class="work-track">
+          <div class="panel intro">
+            <span class="mono muted">Selected work · 09 projects</span>
+            <h2 class="big-title" id="work-title" data-reveal>Things I built to learn.</h2>
+            <span class="mono muted h-hint">Scroll sideways →</span>
+          </div>
+          <!-- projects:start -->
+          <article class="panel" data-glyph="01" data-href="projects/creta.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">01 / 09 · Conversational AI</div>
+            <div>
+              <h3><a href="projects/creta.html" data-case data-title="CRETA">CRETA</a></h3>
+              <p>An AI assistant for questions and everyday exploration, built on Google&#x27;s generative models.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">Python · Streamlit · Google GenAI · LangChain</div>
+              <div class="links mono"><a href="projects/creta.html" data-title="CRETA" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/CRETA" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="02" data-href="projects/genxai.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">02 / 09 · Developer tools</div>
+            <div>
+              <h3><a href="projects/genxai.html" data-case data-title="GenXAi">GenXAi</a></h3>
+              <p>A coding companion that answers programming questions with Gemini through LangChain.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">Python · Google GenAI · Streamlit · LangChain</div>
+              <div class="links mono"><a href="projects/genxai.html" data-title="GenXAi" data-scramble>Case study →</a><a href="https://huggingface.co/spaces/Mr-Vicky-01/Code_Assistant" target="_blank" rel="noopener noreferrer" data-scramble>Live demo ↗</a><a href="https://github.com/Mr-Vicky-01/Code-Assistant" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="03" data-href="projects/rag.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">03 / 09 · Retrieval-augmented generation</div>
+            <div>
+              <h3><a href="projects/rag.html" data-case data-title="Chat With PDF">Chat With PDF</a></h3>
+              <p>Ask questions across several PDFs and get answers grounded in the retrieved passages.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">LlamaIndex · FAISS · ChromaDB · LangChain</div>
+              <div class="links mono"><a href="projects/rag.html" data-title="Chat With PDF" data-scramble>Case study →</a><a href="https://huggingface.co/spaces/Mr-Vicky-01/chat-with-PDF" target="_blank" rel="noopener noreferrer" data-scramble>Live demo ↗</a><a href="https://github.com/Mr-Vicky-01/Chat-with-PDF" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="04" data-href="projects/english_teacher.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">04 / 09 · Language AI</div>
+            <div>
+              <h3><a href="projects/english_teacher.html" data-case data-title="English Teacher">English Teacher</a></h3>
+              <p>Turns Tamil or Tanglish into correct English, then reads it aloud.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">Transformers · Google GenAI · LangChain · Keras</div>
+              <div class="links mono"><a href="projects/english_teacher.html" data-title="English Teacher" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/English-Teaching-AI" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="05" data-href="projects/sign-detection.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">05 / 09 · Computer vision</div>
+            <div>
+              <h3><a href="projects/sign-detection.html" data-case data-title="Hand Sign Detection">Hand Sign Detection</a></h3>
+              <p>Real-time hand sign recognition from a webcam, for left and right hands.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">OpenCV · MediaPipe · TensorFlow · Keras</div>
+              <div class="links mono"><a href="projects/sign-detection.html" data-title="Hand Sign Detection" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/hand-sign-detection" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="06" data-href="projects/story-teller.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">06 / 09 · Multimodal AI</div>
+            <div>
+              <h3><a href="projects/story-teller.html" data-case data-title="Story Teller">Story Teller</a></h3>
+              <p>Captions an image, writes a short story from it, and narrates the story.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">Transformers · LangChain · Hugging Face API · gTTS</div>
+              <div class="links mono"><a href="projects/story-teller.html" data-title="Story Teller" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/Story-Teller" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="07" data-href="projects/screenshot_html.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">07 / 09 · Generative developer tools</div>
+            <div>
+              <h3><a href="projects/screenshot_html.html" data-case data-title="ScreenShot-HTML">ScreenShot-HTML</a></h3>
+              <p>Generates HTML and CSS from a screenshot of a web page.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">Google GenAI · LangChain · Transformers · Streamlit</div>
+              <div class="links mono"><a href="projects/screenshot_html.html" data-title="ScreenShot-HTML" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/Screenshot-HTML" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="08" data-href="projects/web-app.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">08 / 09 · Computer vision</div>
+            <div>
+              <h3><a href="projects/web-app.html" data-case data-title="Deep Learning Web-App">Deep Learning Web-App</a></h3>
+              <p>Image classification with a convolutional network, served through FastAPI.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">TensorFlow · Keras · FastAPI · Uvicorn</div>
+              <div class="links mono"><a href="projects/web-app.html" data-title="Deep Learning Web-App" data-scramble>Case study →</a><a href="https://huggingface.co/spaces/Mr-Vicky-01/Web-App" target="_blank" rel="noopener noreferrer" data-scramble>Live demo ↗</a><a href="https://github.com/Mr-Vicky-01/Deep-learining-App" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>
+          <article class="panel" data-glyph="09" data-href="projects/rps.html" data-cursor="Open">
+            <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="mono muted">09 / 09 · Vision and play</div>
+            <div>
+              <h3><a href="projects/rps.html" data-case data-title="Rock Paper Scissor">Rock Paper Scissor</a></h3>
+              <p>Play Rock Paper Scissors against the computer with hand gestures.</p>
+            </div>
+            <div>
+              <div class="mono muted" style="margin-bottom: 18px">TensorFlow · Keras · OpenCV · MediaPipe</div>
+              <div class="links mono"><a href="projects/rps.html" data-title="Rock Paper Scissor" data-scramble>Case study →</a><a href="https://github.com/Mr-Vicky-01/Stone-Paper-Scissor" target="_blank" rel="noopener noreferrer" data-scramble>Source ↗</a></div>
+            </div>
+          </article>          <!-- projects:end -->
+        </div>
+        <div class="work-progress" aria-hidden="true"><i></i></div>
+      </section>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="mq-row">
+          <span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>LangChain</span><span>Qwen3</span><span>LLaMA</span><span>FastAPI</span><span>Docker</span><span>MLflow</span><span>OpenCV</span><span>LlamaIndex</span><span>Weights &amp; Biases</span>
+          <span>Python</span><span>PyTorch</span><span>TensorFlow</span><span>LangChain</span><span>Qwen3</span><span>LLaMA</span><span>FastAPI</span><span>Docker</span><span>MLflow</span><span>OpenCV</span><span>LlamaIndex</span><span>Weights &amp; Biases</span>
         </div>
       </div>
-      <section
-        class="section container work-section"
-        id="portfolio"
-        aria-labelledby="work-title"
-      >
-        <div class="section-heading reveal">
-          <div>
-            <p class="eyebrow">01 / SELECTED WORK</p>
-            <h2 id="work-title">
-              Less theory. <br /><span class="accent">More possibility.</span>
-            </h2>
-          </div>
+
+      <section class="exp" id="experience" data-shape="dust" aria-labelledby="exp-title">
+        <div class="section-label mono muted"><h2 id="exp-title" class="mono">Experience</h2><span>2020 — now</span></div>
+        <article class="row" data-rise>
+          <span class="mono muted">Jul 2024 — now</span>
+          <h3>AI / ML Engineer</h3>
           <p>
-            A selection of AI applications <br />built to make complex things <br />a
-            little more useful.
+            AquilaX.AI, London. SecuriTron AI, an Apache 2.0 triage model with sub-100 ms inference, FastAPI services
+            for 100+ concurrent users, and CI/CD that cut release cycles by 30%.
           </p>
-        </div>
-        <div class="project-sequence">
-          <div class="project-stage" aria-hidden="true">
-            <div class="stage-art">
-              <div class="stage-slide is-active" data-slide="creta">
-                <figure class="project-visual visual-creta">
-                  <picture
-                    ><source
-                      media="(max-width: 760px)"
-                      srcset="assets/img/projects/creta-mobile.svg" />
-                    <img
-                      src="assets/img/projects/creta.svg"
-                      width="1000"
-                      height="800"
-                      loading="lazy"
-                      alt="CRETA - conceptual project illustration"
-                  /></picture>
-                  <figcaption>
-                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                  </figcaption>
-                </figure>
-              </div>
-              <div class="stage-slide" data-slide="genxai">
-                <figure class="project-visual visual-genxai">
-                  <picture
-                    ><source
-                      media="(max-width: 760px)"
-                      srcset="assets/img/projects/genxai-mobile.svg" />
-                    <img
-                      src="assets/img/projects/genxai.svg"
-                      width="1000"
-                      height="800"
-                      loading="lazy"
-                      alt="GenXAi - conceptual project illustration"
-                  /></picture>
-                  <figcaption>
-                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                  </figcaption>
-                </figure>
-              </div>
-              <div class="stage-slide" data-slide="rag">
-                <figure class="project-visual visual-rag">
-                  <picture
-                    ><source
-                      media="(max-width: 760px)"
-                      srcset="assets/img/projects/rag-mobile.svg" />
-                    <img
-                      src="assets/img/projects/rag.svg"
-                      width="1000"
-                      height="800"
-                      loading="lazy"
-                      alt="Chat With PDF - conceptual project illustration"
-                  /></picture>
-                  <figcaption>
-                    CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-            <div class="stage-index">
-              <span>CONCEPT VISUAL</span
-              ><span class="stage-dots"
-                ><i class="is-active"></i><i></i><i></i></span
-              ><span id="stage-counter">01 / 03</span>
-            </div>
-          </div>
-          <div class="project-stories">
-            <article
-              class="featured-project"
-              id="work-creta"
-              data-project="creta"
-            >
-              <figure class="project-visual visual-creta">
-                <picture
-                  ><source
-                    media="(max-width: 760px)"
-                    srcset="assets/img/projects/creta-mobile.svg" />
-                  <img
-                    src="assets/img/projects/creta.svg"
-                    width="1000"
-                    height="800"
-                    loading="lazy"
-                    alt="CRETA - conceptual project illustration"
-                /></picture>
-                <figcaption>
-                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                </figcaption>
-              </figure>
-              <div class="project-story reveal">
-                <p class="eyebrow"><span>01 /</span> Conversational AI</p>
-                <h3>CRETA</h3>
-                <h4>A little curiosity. A whole conversation.</h4>
-                <p>
-                  An approachable AI assistant for questions, information, and
-                  everyday exploration. Built with generative models and a
-                  simple Streamlit interface.
-                </p>
-                <div class="tags">
-                  <span>Python</span><span>Google GenAI</span
-                  ><span>LangChain</span>
-                </div>
-                <a class="case-link" href="projects/creta.html"
-                  >Explore project <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </article>
-            <article
-              class="featured-project"
-              id="work-genxai"
-              data-project="genxai"
-            >
-              <figure class="project-visual visual-genxai">
-                <picture
-                  ><source
-                    media="(max-width: 760px)"
-                    srcset="assets/img/projects/genxai-mobile.svg" />
-                  <img
-                    src="assets/img/projects/genxai.svg"
-                    width="1000"
-                    height="800"
-                    loading="lazy"
-                    alt="GenXAi - conceptual project illustration"
-                /></picture>
-                <figcaption>
-                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                </figcaption>
-              </figure>
-              <div class="project-story reveal">
-                <p class="eyebrow"><span>02 /</span> Developer tools</p>
-                <h3>GenXAi</h3>
-                <h4>From a coding question to a clearer direction.</h4>
-                <p>
-                  A generative AI coding companion that brings Gemini and
-                  LangChain together to help developers explore programming
-                  problems.
-                </p>
-                <div class="tags">
-                  <span>Gemini</span><span>LangChain</span
-                  ><span>Streamlit</span>
-                </div>
-                <a class="case-link" href="projects/genxai.html"
-                  >Explore project <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </article>
-            <article class="featured-project" id="work-rag" data-project="rag">
-              <figure class="project-visual visual-rag">
-                <picture
-                  ><source
-                    media="(max-width: 760px)"
-                    srcset="assets/img/projects/rag-mobile.svg" />
-                  <img
-                    src="assets/img/projects/rag.svg"
-                    width="1000"
-                    height="800"
-                    loading="lazy"
-                    alt="Chat With PDF - conceptual project illustration"
-                /></picture>
-                <figcaption>
-                  CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-                </figcaption>
-              </figure>
-              <div class="project-story reveal">
-                <p class="eyebrow"><span>03 /</span> Document intelligence</p>
-                <h3>Chat With PDF</h3>
-                <h4>Your documents have answers. Ask them.</h4>
-                <p>
-                  Upload multiple PDFs and explore their contents through
-                  conversation. Document retrieval, embeddings, and Llama
-                  connect questions to relevant information.
-                </p>
-                <div class="tags">
-                  <span>LlamaIndex</span><span>FAISS</span><span>Python</span>
-                </div>
-                <a class="case-link" href="projects/rag.html"
-                  >Explore project <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </article>
-          </div>
-        </div>
-        <div class="more-work-heading reveal">
-          <h3>More to explore<span class="accent">.</span></h3>
-          <span class="eyebrow">EXPERIMENTS &amp; EXPLORATIONS / 06</span>
-        </div>
-        <div class="more-work-grid">
-          <a class="compact-project reveal" href="projects/web-app.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/web-app.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Computer vision</span>
-              <h3>Deep Learning Web-App</h3>
-              <p>From image upload to intelligent classification.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          ><a class="compact-project reveal" href="projects/sign-detection.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/sign-detection.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Computer vision</span>
-              <h3>Hand Sign Detection</h3>
-              <p>Turning hand movements into meaningful signals.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          ><a class="compact-project reveal" href="projects/story-teller.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/story-teller.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Multimodal AI</span>
-              <h3>Story Teller</h3>
-              <p>Every image has a story to tell.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          ><a
-            class="compact-project reveal"
-            href="projects/screenshot_html.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/screenshot_html.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Developer tools</span>
-              <h3>ScreenShot-HTML</h3>
-              <p>From visual reference to working markup.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          ><a
-            class="compact-project reveal"
-            href="projects/english_teacher.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/english_teacher.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Language AI</span>
-              <h3>English Teacher</h3>
-              <p>A bridge from Tamil to confident English.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          ><a class="compact-project reveal" href="projects/rps.html"
-            ><div class="compact-preview">
-              <img src="assets/img/projects/explore/rps.svg" width="600" height="360" loading="lazy" alt="" />
-            </div>
-            <div>
-              <span class="eyebrow">Computer vision</span>
-              <h3>Rock Paper Scissor</h3>
-              <p>A familiar game. A computer vision twist.</p>
-            </div>
-            <span class="compact-arrow" aria-hidden="true">↗</span></a
-          >
-        </div>
+        </article>
+        <article class="row" data-rise>
+          <span class="mono muted">Mar 2024</span>
+          <h3>Data Science Intern</h3>
+          <p>Code Clause. A crop disease classifier for major crops, trained on PlantVillage, rice and wheat disease datasets.</p>
+        </article>
+        <article class="row" data-rise>
+          <span class="mono muted">2020 — 2023</span>
+          <h3>B.Com, Computer Applications</h3>
+          <p>E.S. Arts and Science College.</p>
+        </article>
       </section>
-      <section
-        class="section experience-section"
-        id="experience"
-        aria-labelledby="experience-title"
-      >
-        <div class="container experience-layout">
-          <div class="section-heading reveal">
-            <div>
-              <p class="eyebrow">
-                <span class="section-index">02</span> THE JOURNEY
-              </p>
-              <h2 id="experience-title">
-                Ideas meet <br /><span class="accent">the real world.</span>
-              </h2>
-              <p>
-                Building, learning, and bringing <br />intelligent systems into
-                the real world.
-              </p>
-            </div>
-          </div>
-          <div class="timeline">
-            <article class="experience-item reveal">
-              <div class="job-topline">
-                <span class="eyebrow">JUL 2024 - PRESENT</span
-                ><span class="job-status">CURRENT</span>
-              </div>
-              <h3>AI / ML Engineer</h3>
-              <a
-                href="https://www.linkedin.com/company/aquilax-ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="company-link"
-                >AquilaX.AI · London<span aria-hidden="true">↗</span></a
-              >
-              <p>
-                Building AI-powered application security tools, from model
-                development to production delivery.
-              </p>
-              <ul>
-                <li>
-                  Engineered SecuriTron AI using 300M+ open-source projects,
-                  eight SAST scanners, and custom Qwen3 and LLaMA models: 96%
-                  report accuracy and 20% fewer false positives.
-                </li>
-                <li>
-                  Released an Apache 2.0 ML model with sub-100 ms inference for
-                  real-time vulnerability triage.
-                </li>
-                <li>
-                  Built FastAPI services and Streamlit/React interfaces
-                  supporting 100+ concurrent users.
-                </li>
-                <li>
-                  Integrated GitHub Actions, Docker Compose, MLflow, and Weights
-                  &amp; Biases, accelerating release cycles by 30%.
-                </li>
-              </ul>
-              <div class="tags">
-                <span>LLMs</span><span>FastAPI</span><span>React</span
-                ><span>MLOps</span>
-              </div>
-            </article>
-            <article class="experience-item reveal">
-              <div class="job-topline">
-                <span class="eyebrow">MAR 2024</span
-                ><span class="muted eyebrow">INTERNSHIP</span>
-              </div>
-              <h3>Data Science Intern</h3>
-              <a
-                href="https://drive.google.com/file/d/1mebdAqG88EftkpfQyxbEJRnmyYRwOo-B/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="company-link"
-                >Code Clause<span aria-hidden="true">↗</span></a
-              >
-              <p>
-                Developed a crop disease classifier for major crops in
-                Bangladesh, using PlantVillage, Rice Disease, and Wheat Disease
-                datasets to support early disease detection.
-              </p>
-              <div class="tags">
-                <span>Python</span><span>Image classification</span
-                ><span>Deep learning</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section
-        class="section container"
-        id="skills"
-        aria-labelledby="skills-title"
-      >
-        <div class="section-heading reveal">
-          <div>
-            <p class="eyebrow">
-              <span class="section-index">03</span> MY TOOLKIT
+
+      <section class="about" id="about" data-shape="portrait" aria-labelledby="about-title">
+        <div>
+          <span class="mono muted">About</span>
+          <h2 id="about-title" data-reveal>From commerce to machine learning.</h2>
+          <div class="body">
+            <p>
+              I studied commerce with computer applications, then moved into machine learning through courses and a
+              long list of projects: chatbots, retrieval systems, computer vision, and a Tamil-to-English tutor.
             </p>
-            <h2 id="skills-title">
-              From model <br />to <span class="accent">production.</span>
-            </h2>
+            <p>
+              Since July 2024 I have worked on SecuriTron AI at AquilaX.AI, building the models, the APIs around them,
+              and the pipelines that ship them.
+            </p>
           </div>
-          <p>
-            From the first line of Python <br />to a model running in production.
-          </p>
-        </div>
-        <div class="skill-grid">
-          <article class="skill-group reveal">
-            <span class="skill-icon" aria-hidden="true">✳</span>
-            <h3>AI & machine learning</h3>
-            <div class="skill-list">
-              <span>Python</span><span>TensorFlow</span><span>PyTorch</span
-              ><span>Scikit-learn</span><span>OpenCV</span><span>LangChain</span
-              ><span>LLMs</span>
-            </div>
-          </article>
-          <article class="skill-group reveal">
-            <span class="skill-icon" aria-hidden="true">〈/〉</span>
-            <h3>Application development</h3>
-            <div class="skill-list">
-              <span>FastAPI</span><span>Flask</span><span>Django</span
-              ><span>React</span><span>Node.js</span><span>Java</span
-              ><span>HTML / CSS</span><span>Bootstrap</span>
-            </div>
-          </article>
-          <article class="skill-group reveal">
-            <span class="skill-icon" aria-hidden="true">⌘</span>
-            <h3>Data & delivery</h3>
-            <div class="skill-list">
-              <span>MySQL</span><span>Git</span><span>Docker</span
-              ><span>GitHub Actions</span><span>Google Cloud</span
-              ><span>Heroku</span><span>MLflow</span
-              ><span>Weights & Biases</span><span>Jupyter</span>
-            </div>
-          </article>
-        </div>
-      </section>
-      <section
-        class="section about-section"
-        id="about"
-        aria-labelledby="about-title"
-      >
-        <div class="container">
-          <div class="about-studio reveal">
-            <div class="studio-copy">
-              <p class="eyebrow">04 / THE PERSON BEHIND THE CODE</p>
-              <h2 id="about-title">
-                A curious mind. <br />A <span>builder</span> <br />at heart.
-              </h2>
-              <p>
-                I’m Pachaiappan, an AI engineer and developer. I connect machine
-                learning with software engineering to turn complex problems into
-                things people can actually use.
-              </p>
-              <div class="studio-actions" id="links">
-                <a
-                  class="button button-primary"
-                  href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Explore my resume <span aria-hidden="true">↗</span></a
-                ><a class="studio-work-link" href="#portfolio"
-                  >See what I build <span aria-hidden="true">↗</span></a
-                >
-              </div>
-            </div>
-            <div class="portrait-studio">
-              <div class="portrait-orbits" aria-hidden="true">
-                <i></i><i></i><i></i><span>✳</span>
-              </div>
-              <img
-                src="assets/img/portrait-balanced.webp"
-                width="1122"
-                height="1402"
-                loading="lazy"
-                alt="Pachaiappan, AI engineer and developer"
-              />
-              <a
-                class="portrait-link"
-                href="https://github.com/Mr-Vicky-01"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span>Find me on GitHub</span
-                ><span aria-hidden="true">↗</span></a
-              >
-            </div>
-            <div class="studio-identity">
-              <div>
-                <span class="eyebrow">CURRENTLY BUILDING AT</span
-                ><a
-                  href="https://www.linkedin.com/company/aquilax-ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >AquilaX.AI <span aria-hidden="true">↗</span></a
-                ><span>AI / ML Engineer</span>
-              </div>
-              <div>
-                <span class="eyebrow">CALLING HOME</span
-                ><strong>Puducherry, India</strong
-                ><span>Working in IST (UTC+5:30)</span>
-              </div>
-              <div class="studio-signature">
-                <span>Pachaiappan<span>.</span></span
-                ><span>Always a learner.</span>
-              </div>
-            </div>
-          </div>
-          <div class="approach-heading reveal">
-            <h3>Behind every build<span class="accent">.</span></h3>
-            <p>A problem to understand. An idea to explore.</p>
-          </div>
-          <div class="approach-grid">
-            <details class="approach-item reveal" name="approach">
-              <summary>
-                <span class="approach-number">01</span
-                ><span>Understand first.</span
-                ><span class="approach-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="approach-content">
-                <p>
-                  I start by understanding the problem and what would make a
-                  solution useful. The goal is software that solves practical
-                  problems.
-                </p>
-              </div>
-            </details>
-            <details class="approach-item reveal" name="approach">
-              <summary>
-                <span class="approach-number">02</span><span>Stay curious.</span
-                ><span class="approach-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="approach-content">
-                <p>
-                  My interests span generative AI, computer vision, natural
-                  language processing, algorithms, and visualization.
-                  Experimenting with a model is part of the process.
-                </p>
-              </div>
-            </details>
-            <details class="approach-item reveal" name="approach">
-              <summary>
-                <span class="approach-number">03</span
-                ><span>Make it useful.</span
-                ><span class="approach-toggle" aria-hidden="true">+</span>
-              </summary>
-              <div class="approach-content">
-                <p>
-                  I enjoy shaping experiments into something people can use -
-                  connecting machine learning, application development, and
-                  production delivery.
-                </p>
-              </div>
-            </details>
-          </div>
-        </div>
-        <div class="container education-layout" id="education">
-          <article class="education-card reveal">
-            <p class="eyebrow">FOUNDATIONS</p>
-            <div class="education-title">
-              <img
-                src="assets/img/education/logo.png"
-                width="60"
-                height="60"
-                loading="lazy"
-                alt="College emblem"
-              />
-              <h3>
-                Bachelor of Commerce <br /><span class="muted"
-                  >with Computer Applications</span
-                >
-              </h3>
-            </div>
-            <p class="eyebrow">SEPT 2020 - MAY 2023</p>
-            <p>Relevant coursework: Tally Software and Advanced Excel.</p>
-            <a
-              href="https://www.esasc.in/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-link"
-              >Visit institution<span aria-hidden="true">↗</span></a
-            >
-          </article>
-          <div class="certifications reveal">
-            <p class="eyebrow">CONTINUOUS LEARNING</p>
-            <h3>Certifications &amp; courses</h3>
-            <a
-              href="https://www.coursera.org/account/accomplishments/verify/LDRT9CFGTRYP"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >Data Analytics Capstone<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://drive.google.com/file/d/14KhoCqIarPNyjIYKRozhf_Ws38c34AlS/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >Data Structures + Algorithms<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://www.coursera.org/account/accomplishments/verify/6W47N9ACATXP"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >Python for Data Science, AI and Development<span
-                aria-hidden="true"
-                >↗</span
-              ></a
-            ><a
-              href="https://drive.google.com/file/d/1mphhV2-AQ6MeMkzsp-nhM6TRNhPjoZYc/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >ML &amp; DS Bootcamp<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://www.coursera.org/account/accomplishments/verify/LPTKJFDBZR3L"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >Data Pre-Processing<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://drive.google.com/file/d/1TtLs982mgDkxNnhuK6Nkl6msq03p1yFx/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="certification-link"
-              >Python pro Bootcamp<span aria-hidden="true">↗</span></a
-            >
-          </div>
-        </div>
-      </section>
-      <section
-        class="contact-section"
-        id="contacts"
-        aria-labelledby="contact-title"
-      >
-        <div class="container">
-          <div class="contact-topline reveal">
-            <p class="eyebrow">05 / NEXT, TOGETHER</p>
-            <span class="contact-star" aria-hidden="true">✳</span>
-          </div>
-          <h2 id="contact-title" class="reveal">
-            Good things start <br />with <span>a conversation.</span>
-          </h2>
-          <div class="contact-bottom reveal">
+          <dl class="facts mono muted">
+            <div><dt>Based in</dt><dd><b>Puducherry, India</b></dd></div>
+            <div><dt>Time zone</dt><dd><b>IST, UTC+5:30</b></dd></div>
+            <div><dt>Focus</dt><dd><b>LLMs, AppSec, MLOps</b></dd></div>
             <div>
-              <p>
-                Have an idea, a challenge, or a hello? <br />I’d love to hear
-                from you.
-              </p>
-              <a class="contact-email" href="mailto:pachaiappan.dev@gmail.com"
-                >pachaiappan.dev@gmail.com <span aria-hidden="true">↗</span></a
-              >
+              <dt>Elsewhere</dt>
+              <dd><b><a class="ulink" href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">Hugging Face ↗</a></b></dd>
             </div>
-            <div class="contact-details">
-              <a
-                href="https://www.linkedin.com/in/pachaiappan"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Message me on LinkedIn <span aria-hidden="true">↗</span></a
-              >
-              <p>Puducherry, India</p>
-            </div>
-          </div>
-          <div class="contact-socials">
-            <a
-              href="https://github.com/Mr-Vicky-01"
-              target="_blank"
-              rel="noopener noreferrer"
-              class=""
-              >GitHub<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://www.linkedin.com/in/pachaiappan"
-              target="_blank"
-              rel="noopener noreferrer"
-              class=""
-              >LinkedIn<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://huggingface.co/Mr-Vicky-01"
-              target="_blank"
-              rel="noopener noreferrer"
-              class=""
-              >Hugging Face<span aria-hidden="true">↗</span></a
-            ><a
-              href="https://leetcode.com/u/vicky_1102/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class=""
-              >LeetCode<span aria-hidden="true">↗</span></a
-            >
+          </dl>
+        </div>
+        <div class="portrait-slot" data-particles="portrait" data-image="#portrait" data-cursor="Denoise">
+          <img id="portrait" src="assets/img/portrait-balanced.webp" width="1122" height="1402" alt="Portrait of Pachaiappan" />
+          <span class="hint mono muted">Hover to denoise</span>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" data-shape="hello" aria-labelledby="contact-title">
+        <span id="contacts" aria-hidden="true"></span>
+        <div>
+          <div class="hello-slot" data-particles="hello" data-font="tamil" data-text="வணக்கம்" data-amber="0.8" aria-hidden="true"></div>
+          <p class="hello-word" lang="ta" aria-hidden="true">வணக்கம்</p>
+          <p class="mono muted"><span lang="ta">வணக்கம்</span> · vanakkam · hello, in Tamil</p>
+        </div>
+        <div>
+          <h2 id="contact-title" class="mono muted">Contact</h2>
+          <a class="mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a>
+          <div class="actions">
+            <button class="pill primary" type="button" data-copy="pachaiappan.dev@gmail.com" data-magnetic>Copy email</button>
+            <a class="pill" href="https://github.com/Mr-Vicky-01" target="_blank" rel="noopener noreferrer" data-magnetic data-scramble>GitHub ↗</a>
+            <a class="pill" href="https://www.linkedin.com/in/pachaiappan" target="_blank" rel="noopener noreferrer" data-magnetic data-scramble>LinkedIn ↗</a>
+            <a class="pill" href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer" data-magnetic data-scramble>Hugging Face ↗</a>
+            <a class="pill" href="https://leetcode.com/u/vicky_1102/" target="_blank" rel="noopener noreferrer" data-magnetic data-scramble>LeetCode ↗</a>
           </div>
         </div>
       </section>
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="footer-name" href="#header">Pachaiappan.</a>
-        <p>Thoughtful code. Useful intelligence.</p>
-        <a href="#header">Back to top ↑</a>
+
+    <footer>
+      <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
+      <div class="foot-row mono muted">
+        <span>© 2026 Pachaiappan</span>
+        <span>Puducherry, India</span>
+        <span><span data-clock>--:--:--</span> IST</span>
+        <a href="#top" data-scramble>Back to top ↑</a>
       </div>
     </footer>
 
-    <script type="module" src="assets/js/scroll-background.js"></script>
+    <script src="assets/js/vendor/gsap.min.js" defer></script>
+    <script src="assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="assets/js/vendor/lenis.min.js" defer></script>
+    <script src="assets/js/field.js" defer></script>
+    <script src="assets/js/site.js" defer></script>
   </body>
 </html>

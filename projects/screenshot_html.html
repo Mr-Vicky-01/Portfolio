@@ -2,22 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>ScreenShot-HTML - Pachaiappan</title>
-    <meta
-      name="description"
-      content="An application that generates HTML and CSS from webpage screenshots. Google’s generative AI models interpret the image and recreate its structure and visual styling."
-    />
-    <meta name="theme-color" content="#0b1020" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="ScreenShot-HTML - Pachaiappan" />
-    <meta
-      property="og:description"
-      content="An application that generates HTML and CSS from webpage screenshots. Google’s generative AI models interpret the image and recreate its structure and visual styling."
-    />
+    <meta name="description" content="An application that generates HTML and CSS from webpage screenshots. Google&#x27;s generative AI models interpret the image and recreate its structure and visual styling." />
+    <meta name="theme-color" content="#0c0c0b" />
     <link rel="canonical" href="https://mr-vicky-01.github.io/Portfolio/projects/screenshot_html.html" />
+    <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pachaiappan" />
     <meta property="og:url" content="https://mr-vicky-01.github.io/Portfolio/projects/screenshot_html.html" />
+    <meta property="og:title" content="ScreenShot-HTML - Pachaiappan" />
+    <meta property="og:description" content="An application that generates HTML and CSS from webpage screenshots. Google&#x27;s generative AI models interpret the image and recreate its structure and visual styling." />
     <meta property="og:image" content="https://mr-vicky-01.github.io/Portfolio/assets/img/og-card.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -26,133 +20,99 @@
     <link rel="icon" href="../favicon-32.png?v=orbit-core-2" type="image/png" sizes="32x32" />
     <link rel="icon" href="../favicon.svg?v=orbit-core-2" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=orbit-core-2" sizes="180x180" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-
-    <script src="../assets/js/main.js" defer></script>
+    <link rel="preload" href="../assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="../assets/fonts/martian-mono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/css/site.css" />
+    <script>
+      (function (r) {
+        r.classList.add("js");
+        try {
+          if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          r.classList.add("motion");
+          if (sessionStorage.getItem("pt") === "1") r.classList.add("pt-in");
+        } catch (e) {}
+      })(document.documentElement);
+    </script>
   </head>
-  <body class="detail-page" id="header">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="nav-shell">
-        <a
-          class="wordmark"
-          href="../index.html#header"
-          aria-label="Pachaiappan home"
-          ><span>Pachaiappan<span class="brand-period">.</span></span
-          ><span class="brand-role">AI Engineer &amp; Developer</span></a
-        ><button
-          class="menu-toggle"
-          aria-expanded="false"
-          aria-controls="main-nav"
-          hidden
+  <body data-page="project">
+    <a class="skip" href="#main">Skip to content</a>
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"><span></span></div>
+    <div class="progress" aria-hidden="true"><i></i></div>
+    <div class="curtain" aria-hidden="true"><span class="mono muted">Pachaiappan</span><span class="curtain-title"></span></div>
+    <header class="hdr mono">
+      <a class="brand" href="../index.html" data-title="Pachaiappan"><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
+      <nav aria-label="Main">
+        <a href="../index.html#work" data-title="Work" data-scramble>Work</a><a href="../index.html#about" data-title="About" data-scramble>About</a><a href="../index.html#contact" data-title="Contact" data-scramble>Contact</a><a
+          href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-scramble
+          >Resume ↗</a
         >
-          Menu <span aria-hidden="true">☰</span>
-        </button>
-        <nav id="main-nav" aria-label="Main navigation">
-          <a href="../index.html#portfolio">Work</a
-          ><a href="../index.html#experience">Experience</a
-          ><a href="../index.html#about">About</a
-          ><a
-            href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Resume <span aria-hidden="true">↗</span></a
-          ><a class="nav-contact" href="../index.html#contacts"
-            >Let’s talk <span aria-hidden="true">↗</span></a
-          >
-        </nav>
-      </div>
+      </nav>
+      <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
     </header>
-    <main id="main" class="container detail-main">
-      <a class="back-link" href="../index.html#portfolio"
-        >← Back to selected work</a
-      >
-      <div class="detail-heading">
-        <div>
-          <p class="eyebrow">PROJECT 07 / Developer tools</p>
-          <h1>ScreenShot-HTML<span class="cyan">.</span></h1>
-          <p class="detail-tagline">From visual reference to working markup.</p>
-        </div>
-        <div class="detail-actions">
-          <a
-            href="https://github.com/Mr-Vicky-01/Screenshot-HTML"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button-primary"
-            >View source<span aria-hidden="true">↗</span></a
-          >
-        </div>
-      </div>
-      <figure class="project-visual visual-screenshot_html">
-        <picture
-          ><source
-            media="(max-width: 760px)"
-            srcset="../assets/img/projects/screenshot_html-mobile.svg" />
-          <img
-            src="../assets/img/projects/screenshot_html.svg"
-            width="1000"
-            height="800"
-            loading="lazy"
-            alt="screenshot html - conceptual project illustration"
-        /></picture>
-        <figcaption>
-          CONCEPT VISUAL <span>DESIGNED TO EXPLAIN THE PROJECT</span>
-        </figcaption>
-      </figure>
-      <div class="detail-body">
-        <article class="project-overview">
-          <p class="eyebrow">THE IDEA</p>
-          <h2>Project overview</h2>
-          <p>
-            An application that generates HTML and CSS from webpage screenshots.
-            Google’s generative AI models interpret the image and recreate its
-            structure and visual styling.
-          </p>
-          <h3>What it does</h3>
-          <ul class="feature-list">
-            <li>Upload a screenshot of a webpage.</li>
-            <li>Generate HTML and CSS from the visual reference.</li>
-            <li>Inspect the generated code and recreate the layout.</li>
-          </ul>
-        </article>
-        <aside class="project-stack">
-          <p class="eyebrow">UNDER THE HOOD</p>
-          <h2>Technology stack</h2>
-          <div class="tags">
-            <span>Streamlit</span><span>Python</span><span>Google-GenAi</span
-            ><span>HTML</span><span>CSS</span><span>Transformers</span
-            ><span>langchain</span>
+
+    <main id="main">
+      <section class="hero p-hero" id="top" data-hero data-shape="name" aria-labelledby="p-title">
+        <div class="name-slot" data-particles="name" data-text="SCREENSHOT-|HTML" data-text-small="SCREENSHOT-|HTML" aria-hidden="true"></div>
+        <h1 class="hero-name" id="p-title">ScreenShot-HTML</h1>
+        <div class="p-foot">
+          <div class="hero-meta mono muted" data-hero-fade>
+            <span><b>Project 07 / 09</b></span>
+            <span>Generative developer tools</span>
+            <a class="ulink" href="../index.html#work" data-title="Selected work">← All projects</a>
           </div>
-          <p>Explore the implementation and the original project resources.</p>
-          <a
-            href="https://github.com/Mr-Vicky-01/Screenshot-HTML"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="resource-link"
-            >View source<span aria-hidden="true">↗</span></a
-          >
-        </aside>
-      </div>
-      <a class="next-project" href="english_teacher.html"
-        ><div>
-          <span class="eyebrow">NEXT PROJECT</span>
-          <h2>English Teacher</h2>
+          <p class="tagline" data-hero-reveal>Generates HTML and CSS from a screenshot of a web page.</p>
+          <div class="actions" data-hero-fade><a class="pill primary" href="https://github.com/Mr-Vicky-01/Screenshot-HTML" target="_blank" rel="noopener noreferrer" data-magnetic data-scramble>Source ↗</a></div>
         </div>
-        <span aria-hidden="true">↗</span></a
-      >
+      </section>
+
+      <section class="p-section" data-shape="dust" aria-labelledby="overview-title">
+        <h2 class="mono muted" id="overview-title">Overview</h2>
+        <p class="lead" data-reveal>An application that generates HTML and CSS from webpage screenshots. Google&#x27;s generative AI models interpret the image and recreate its structure and visual styling.</p>
+      </section>
+
+      <section class="p-section" data-shape="dust" aria-labelledby="how-title">
+        <h2 class="mono muted" id="how-title">How it works</h2>
+        <div class="steps">
+          <div class="lane" aria-hidden="true"><div class="rail"><i></i></div></div>
+          <ol class="stages">
+              <li class="stage"><span class="mono muted">01</span><b>Upload a screenshot of a webpage.</b></li>
+              <li class="stage"><span class="mono muted">02</span><b>Generate HTML and CSS from the visual reference.</b></li>
+              <li class="stage"><span class="mono muted">03</span><b>Inspect the generated code and recreate the layout.</b></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="p-section" data-shape="dust" aria-labelledby="stack-title">
+        <h2 class="mono muted" id="stack-title">Stack</h2>
+        <ul class="stack" data-rise><li>Google GenAI</li><li>LangChain</li><li>Transformers</li><li>Streamlit</li><li>HTML</li><li>CSS</li><li>Python</li></ul>
+      </section>
+
+      <a class="next" href="web-app.html" data-title="Deep Learning Web-App" data-shape="dust" data-cursor="Next">
+        <span class="mono muted">Next project · 08 / 09</span>
+        <span class="big-title">Deep Learning Web-App</span>
+      </a>
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="footer-name" href="../index.html#header">Pachaiappan.</a>
-        <p>Thoughtful code. Useful intelligence.</p>
-        <a href="#header">Back to top ↑</a>
+
+    <footer>
+      <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
+      <div class="foot-row mono muted">
+        <span>© 2026 Pachaiappan</span>
+        <span>Puducherry, India</span>
+        <span><span data-clock>--:--:--</span> IST</span>
+        <a href="#top" data-scramble>Back to top ↑</a>
       </div>
     </footer>
+
+    <script src="../assets/js/vendor/gsap.min.js" defer></script>
+    <script src="../assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="../assets/js/vendor/lenis.min.js" defer></script>
+    <script src="../assets/js/field.js" defer></script>
+    <script src="../assets/js/site.js" defer></script>
   </body>
 </html>

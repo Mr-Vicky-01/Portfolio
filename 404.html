@@ -2,91 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Page not found - Pachaiappan</title>
     <meta name="robots" content="noindex" />
-    <meta name="theme-color" content="#0b1020" />
+    <meta name="theme-color" content="#0c0c0b" />
     <!-- GitHub Pages serves this page at any missing URL, so paths are root-absolute. -->
     <link rel="icon" href="/Portfolio/favicon-32.png?v=orbit-core-2" type="image/png" sizes="32x32" />
     <link rel="icon" href="/Portfolio/favicon.svg?v=orbit-core-2" type="image/svg+xml" sizes="any" />
     <link rel="apple-touch-icon" href="/Portfolio/apple-touch-icon.png?v=orbit-core-2" sizes="180x180" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/Portfolio/assets/css/style.css" />
-    <style>
-      /* Keep the footer at the bottom of this short page. */
-      body {
-        min-height: 100vh;
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-      }
-      main {
-        flex: 1;
-      }
-    </style>
-
-    <script src="/Portfolio/assets/js/main.js" defer></script>
+    <link rel="preload" href="/Portfolio/assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/Portfolio/assets/css/site.css" />
+    <script>
+      (function (r) {
+        r.classList.add("js");
+        try {
+          if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          r.classList.add("motion");
+          if (sessionStorage.getItem("pt") === "1") r.classList.add("pt-in");
+        } catch (e) {}
+      })(document.documentElement);
+    </script>
   </head>
-  <body class="detail-page" id="header">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-      <div class="nav-shell">
-        <a class="wordmark" href="/Portfolio/" aria-label="Pachaiappan home"
-          ><span>Pachaiappan<span class="brand-period">.</span></span
-          ><span class="brand-role">AI Engineer &amp; Developer</span></a
-        ><button
-          class="menu-toggle"
-          aria-expanded="false"
-          aria-controls="main-nav"
-          hidden
-        >
-          Menu <span aria-hidden="true">☰</span>
-        </button>
-        <nav id="main-nav" aria-label="Main navigation">
-          <a href="/Portfolio/#portfolio">Work</a
-          ><a href="/Portfolio/#experience">Experience</a
-          ><a href="/Portfolio/#about">About</a
-          ><a
-            href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Resume <span aria-hidden="true">↗</span></a
-          ><a class="nav-contact" href="/Portfolio/#contacts"
-            >Let’s talk <span aria-hidden="true">↗</span></a
-          >
-        </nav>
-      </div>
+  <body data-page="notfound">
+    <a class="skip" href="#main">Skip to content</a>
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="ring" aria-hidden="true"><span></span></div>
+    <div class="progress" aria-hidden="true"><i></i></div>
+    <div class="curtain" aria-hidden="true"><span class="mono muted">Pachaiappan</span><span class="curtain-title"></span></div>
+
+    <header class="hdr mono">
+      <a class="brand" href="/Portfolio/" data-title="Pachaiappan"><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
+      <nav aria-label="Main">
+        <a href="/Portfolio/index.html#work" data-title="Work" data-scramble>Work</a><a href="/Portfolio/index.html#about" data-title="About" data-scramble>About</a><a href="/Portfolio/index.html#contact" data-title="Contact" data-scramble>Contact</a>
+      </nav>
+      <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
     </header>
-    <main id="main" class="container detail-main">
-      <div class="detail-heading">
-        <div>
-          <p class="eyebrow">404 / PAGE NOT FOUND</p>
-          <h1>Nothing here<span class="cyan">.</span></h1>
-          <p class="detail-tagline">
-            This page may have moved or never existed. The work is still one
-            click away.
-          </p>
+
+    <main id="main">
+      <section class="hero" id="top" data-hero data-shape="name" aria-labelledby="nf-title">
+        <div class="name-slot" data-particles="name" data-text="404" data-amber="0.3" aria-hidden="true"></div>
+        <h1 class="hero-name" id="nf-title">404</h1>
+        <div class="hero-foot">
+          <div class="hero-meta mono muted" data-hero-fade>
+            <span><b>Page not found</b></span>
+            <span>This address has no page.</span>
+          </div>
+          <div>
+            <p class="tagline" data-hero-reveal>This page is <em>noise.</em> The work is one click away.</p>
+            <div class="actions" data-hero-fade>
+              <a class="pill primary" href="/Portfolio/" data-title="Pachaiappan" data-magnetic>Back to home</a>
+              <a class="pill" href="/Portfolio/index.html#work" data-title="Work" data-magnetic>Selected work</a>
+            </div>
+          </div>
         </div>
-        <div class="detail-actions">
-          <a class="button button-primary" href="/Portfolio/"
-            >Back to home <span aria-hidden="true">↗</span></a
-          ><a class="button button-secondary" href="/Portfolio/#portfolio"
-            >See selected work</a
-          >
-        </div>
-      </div>
+      </section>
     </main>
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <a class="footer-name" href="/Portfolio/">Pachaiappan.</a>
-        <p>Thoughtful code. Useful intelligence.</p>
-        <a href="#header">Back to top ↑</a>
-      </div>
-    </footer>
+
+    <script src="/Portfolio/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/Portfolio/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/Portfolio/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/Portfolio/assets/js/field.js" defer></script>
+    <script src="/Portfolio/assets/js/site.js" defer></script>
   </body>
 </html>
