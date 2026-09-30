@@ -96,13 +96,16 @@
     ></noscript>
     <a class="skip" href="#main">Skip to content</a>
     <canvas id="field" aria-hidden="true"></canvas>
+    <div class="atmos" aria-hidden="true"><i></i><i></i></div>
+    <div class="guides" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="grain" aria-hidden="true"></div>
+    <div class="coords mono" aria-hidden="true">X 0000 · Y 0000</div>
     <div class="cursor" aria-hidden="true"></div>
     <div class="ring" aria-hidden="true"><span></span></div>
     <div class="progress" aria-hidden="true"><i></i></div>
     <div class="curtain" aria-hidden="true"><span class="mono muted">Pachaiappan</span><span class="curtain-title"></span></div>
     <div class="loader" aria-hidden="true">
-      <div class="loader-row mono muted"><span>Pachaiappan · Portfolio</span><span>Loading weights</span></div>
+      <div class="loader-row mono muted"><svg class="mark" viewBox="0 0 50 70" aria-hidden="true"><circle cx="5" cy="5" r="3.6" fill="currentColor"/><circle cx="15" cy="5" r="3.6" fill="currentColor"/><circle cx="25" cy="5" r="3.6" fill="currentColor"/><circle cx="35" cy="5" r="3.6" fill="currentColor"/><circle cx="45" cy="5" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="15" r="3.6" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="15" r="3.6" fill="#ffb547"/><circle cx="5" cy="25" r="3.6" fill="currentColor"/><circle cx="15" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="25" r="3.6" fill="currentColor"/><circle cx="5" cy="35" r="3.6" fill="currentColor"/><circle cx="15" cy="35" r="3.6" fill="currentColor"/><circle cx="25" cy="35" r="3.6" fill="currentColor"/><circle cx="35" cy="35" r="3.6" fill="currentColor"/><circle cx="45" cy="35" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="45" r="3.6" fill="currentColor"/><circle cx="15" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="55" r="3.6" fill="currentColor"/><circle cx="15" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="65" r="3.6" fill="currentColor"/><circle cx="15" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="65" r="1.4" fill="currentColor" opacity=".28"/></svg><span>Loading weights</span></div>
       <div>
         <div class="count">000</div>
         <div class="bar"><i></i></div>
@@ -110,7 +113,7 @@
     </div>
 
     <header class="hdr mono">
-      <a class="brand" href="#top"><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
+      <a class="brand" href="#top"><svg class="mark" viewBox="0 0 50 70" aria-hidden="true"><circle cx="5" cy="5" r="3.6" fill="currentColor"/><circle cx="15" cy="5" r="3.6" fill="currentColor"/><circle cx="25" cy="5" r="3.6" fill="currentColor"/><circle cx="35" cy="5" r="3.6" fill="currentColor"/><circle cx="45" cy="5" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="15" r="3.6" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="15" r="3.6" fill="#ffb547"/><circle cx="5" cy="25" r="3.6" fill="currentColor"/><circle cx="15" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="25" r="3.6" fill="currentColor"/><circle cx="5" cy="35" r="3.6" fill="currentColor"/><circle cx="15" cy="35" r="3.6" fill="currentColor"/><circle cx="25" cy="35" r="3.6" fill="currentColor"/><circle cx="35" cy="35" r="3.6" fill="currentColor"/><circle cx="45" cy="35" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="45" r="3.6" fill="currentColor"/><circle cx="15" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="55" r="3.6" fill="currentColor"/><circle cx="15" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="65" r="3.6" fill="currentColor"/><circle cx="15" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="65" r="1.4" fill="currentColor" opacity=".28"/></svg><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
       <nav aria-label="Main">
         <a href="#work" data-scramble>Work</a><a href="#about" data-scramble>About</a><a href="#contact" data-scramble>Contact</a><a
           href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
@@ -163,6 +166,7 @@
       </section>
 
       <section class="numbers" data-shape="dust" aria-label="SecuriTron AI in numbers">
+        <div class="numbers-cap mono"><span>SecuriTron AI, in numbers</span><span>AquilaX.AI · 2024–now</span></div>
         <div class="num" data-rise><b data-count="96" data-suffix="%">96%</b><span class="mono muted">Report accuracy</span></div>
         <div class="num" data-rise><b data-count="20" data-prefix="−" data-suffix="%">−20%</b><span class="mono muted">False positives</span></div>
         <div class="num" data-rise><b data-count="100" data-prefix="&lt;" data-suffix="ms">&lt;100ms</b><span class="mono muted">Triage inference</span></div>
@@ -205,12 +209,13 @@
         <div class="work-track">
           <div class="panel intro">
             <span class="mono muted">Selected work · 09 projects</span>
-            <h2 class="big-title" id="work-title" data-reveal>Things I built to learn.</h2>
+            <h2 class="big-title" id="work-title" data-reveal>Things I built to <em>learn.</em></h2>
             <span class="mono muted h-hint">Scroll sideways → · <a href="#experience">Skip projects</a></span>
           </div>
           <!-- projects:start -->
           <article class="panel" data-glyph="01" data-href="projects/creta.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #ffb547" aria-hidden="true"><canvas data-cover data-seed="7919" data-hue="#ffb547"></canvas><span class="cover-n mono">01</span></div>
             <div class="mono muted">01 / 09 · Conversational AI</div>
             <div>
               <h3><a href="projects/creta.html" data-case data-title="CRETA">CRETA</a></h3>
@@ -223,6 +228,7 @@
           </article>
           <article class="panel" data-glyph="02" data-href="projects/genxai.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #7aa2ff" aria-hidden="true"><canvas data-cover data-seed="15838" data-hue="#7aa2ff"></canvas><span class="cover-n mono">02</span></div>
             <div class="mono muted">02 / 09 · Developer tools</div>
             <div>
               <h3><a href="projects/genxai.html" data-case data-title="GenXAi">GenXAi</a></h3>
@@ -235,6 +241,7 @@
           </article>
           <article class="panel" data-glyph="03" data-href="projects/rag.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #ff7a59" aria-hidden="true"><canvas data-cover data-seed="23757" data-hue="#ff7a59"></canvas><span class="cover-n mono">03</span></div>
             <div class="mono muted">03 / 09 · Retrieval-augmented generation</div>
             <div>
               <h3><a href="projects/rag.html" data-case data-title="Chat With PDF">Chat With PDF</a></h3>
@@ -247,6 +254,7 @@
           </article>
           <article class="panel" data-glyph="04" data-href="projects/english_teacher.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #c792ea" aria-hidden="true"><canvas data-cover data-seed="31676" data-hue="#c792ea"></canvas><span class="cover-n mono">04</span></div>
             <div class="mono muted">04 / 09 · Language AI</div>
             <div>
               <h3><a href="projects/english_teacher.html" data-case data-title="English Teacher">English Teacher</a></h3>
@@ -259,6 +267,7 @@
           </article>
           <article class="panel" data-glyph="05" data-href="projects/sign-detection.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #5eead4" aria-hidden="true"><canvas data-cover data-seed="39595" data-hue="#5eead4"></canvas><span class="cover-n mono">05</span></div>
             <div class="mono muted">05 / 09 · Computer vision</div>
             <div>
               <h3><a href="projects/sign-detection.html" data-case data-title="Hand Sign Detection">Hand Sign Detection</a></h3>
@@ -271,6 +280,7 @@
           </article>
           <article class="panel" data-glyph="06" data-href="projects/story-teller.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #f59ec2" aria-hidden="true"><canvas data-cover data-seed="47514" data-hue="#f59ec2"></canvas><span class="cover-n mono">06</span></div>
             <div class="mono muted">06 / 09 · Multimodal AI</div>
             <div>
               <h3><a href="projects/story-teller.html" data-case data-title="Story Teller">Story Teller</a></h3>
@@ -283,6 +293,7 @@
           </article>
           <article class="panel" data-glyph="07" data-href="projects/screenshot_html.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #a3e635" aria-hidden="true"><canvas data-cover data-seed="55433" data-hue="#a3e635"></canvas><span class="cover-n mono">07</span></div>
             <div class="mono muted">07 / 09 · Generative developer tools</div>
             <div>
               <h3><a href="projects/screenshot_html.html" data-case data-title="ScreenShot-HTML">ScreenShot-HTML</a></h3>
@@ -295,6 +306,7 @@
           </article>
           <article class="panel" data-glyph="08" data-href="projects/web-app.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #38bdf8" aria-hidden="true"><canvas data-cover data-seed="63352" data-hue="#38bdf8"></canvas><span class="cover-n mono">08</span></div>
             <div class="mono muted">08 / 09 · Computer vision</div>
             <div>
               <h3><a href="projects/web-app.html" data-case data-title="Deep Learning Web-App">Deep Learning Web-App</a></h3>
@@ -307,6 +319,7 @@
           </article>
           <article class="panel" data-glyph="09" data-href="projects/rps.html" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
+            <div class="cover" style="--hue: #fcd34d" aria-hidden="true"><canvas data-cover data-seed="71271" data-hue="#fcd34d"></canvas><span class="cover-n mono">09</span></div>
             <div class="mono muted">09 / 09 · Vision and play</div>
             <div>
               <h3><a href="projects/rps.html" data-case data-title="Rock Paper Scissor">Rock Paper Scissor</a></h3>
@@ -330,7 +343,8 @@
       </div>
 
       <section class="exp" id="experience" data-shape="dust" aria-labelledby="exp-title">
-        <div class="section-label mono muted"><h2 id="exp-title" class="mono">Experience</h2><span>2020 — now</span></div>
+        <div class="section-label mono muted"><span>Experience &amp; education</span><span>2020 — now</span></div>
+        <h2 class="exp-title" id="exp-title" data-reveal>The path <em>so far.</em></h2>
         <article class="row" data-rise>
           <span class="mono muted">Jul 2024 — now</span>
           <h3>AI / ML Engineer</h3>
@@ -354,7 +368,7 @@
       <section class="about" id="about" data-shape="portrait" aria-labelledby="about-title">
         <div>
           <span class="mono muted">About</span>
-          <h2 id="about-title" data-reveal>From commerce to machine learning.</h2>
+          <h2 id="about-title" data-reveal>From commerce to <em>machine learning.</em></h2>
           <div class="body">
             <p>
               I studied commerce with computer applications, then moved into machine learning through courses and a
@@ -390,6 +404,7 @@
         </div>
         <div>
           <h2 id="contact-title" class="mono muted">Contact</h2>
+          <p class="contact-line" data-reveal>Let’s build something <em>useful.</em></p>
           <a class="mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a>
           <div class="actions">
             <button class="pill primary" type="button" data-copy="pachaiappan.dev@gmail.com" data-magnetic>Copy email</button>
@@ -405,7 +420,7 @@
     <footer>
       <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
       <div class="foot-grid">
-        <div><h2 class="mono muted">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
+        <div><p class="foot-brand"><svg class="mark" viewBox="0 0 50 70" aria-hidden="true"><circle cx="5" cy="5" r="3.6" fill="currentColor"/><circle cx="15" cy="5" r="3.6" fill="currentColor"/><circle cx="25" cy="5" r="3.6" fill="currentColor"/><circle cx="35" cy="5" r="3.6" fill="currentColor"/><circle cx="45" cy="5" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="15" r="3.6" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="15" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="15" r="3.6" fill="#ffb547"/><circle cx="5" cy="25" r="3.6" fill="currentColor"/><circle cx="15" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="25" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="25" r="3.6" fill="currentColor"/><circle cx="5" cy="35" r="3.6" fill="currentColor"/><circle cx="15" cy="35" r="3.6" fill="currentColor"/><circle cx="25" cy="35" r="3.6" fill="currentColor"/><circle cx="35" cy="35" r="3.6" fill="currentColor"/><circle cx="45" cy="35" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="45" r="3.6" fill="currentColor"/><circle cx="15" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="45" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="55" r="3.6" fill="currentColor"/><circle cx="15" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="55" r="1.4" fill="currentColor" opacity=".28"/><circle cx="5" cy="65" r="3.6" fill="currentColor"/><circle cx="15" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="25" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="35" cy="65" r="1.4" fill="currentColor" opacity=".28"/><circle cx="45" cy="65" r="1.4" fill="currentColor" opacity=".28"/></svg><b>Pachaiappan</b></p><h2 class="mono muted" style="margin-top: 28px">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
         <div><h2 class="mono muted">Navigate</h2><ul><li><a href="#work" data-title="Work">Work</a></li><li><a href="#about" data-title="About">About</a></li><li><a href="#contact" data-title="Contact">Contact</a></li><li><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume ↗</a></li></ul></div>
         <div><h2 class="mono muted">Elsewhere</h2><ul><li><a href="https://github.com/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li><li><a href="https://www.linkedin.com/in/pachaiappan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li><li><a href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">Hugging Face ↗</a></li><li><a href="https://leetcode.com/u/vicky_1102/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a></li></ul></div>
       </div>
