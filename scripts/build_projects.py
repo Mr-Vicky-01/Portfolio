@@ -112,6 +112,7 @@ HEAD_SCRIPT = """    <script>
         r.classList.add("js");
         try {
           if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          if (localStorage.getItem("motion") === "off") return r.classList.add("motion-off");
           r.classList.add("motion");
           if (sessionStorage.getItem("pt") === "1") r.classList.add("pt-in");
         } catch (e) {}
@@ -132,7 +133,26 @@ def header(prefix):
         >
       </nav>
       <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
-    </header>"""
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+    </header>
+    <div class="menu" id="menu" hidden>
+      <nav aria-label="Menu"><a href="{prefix}index.html#work" data-title="Work">Work</a><a href="{prefix}index.html#about" data-title="About">About</a><a href="{prefix}index.html#contact" data-title="Contact">Contact</a><a href="{RESUME}" target="_blank" rel="noopener noreferrer">Resume ↗</a></nav>
+      <a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a>
+      <div class="menu-links mono">{social_pills()}</div>
+    </div>"""
+
+
+SOCIAL = [
+    ("GitHub", "https://github.com/Mr-Vicky-01"),
+    ("LinkedIn", "https://www.linkedin.com/in/pachaiappan"),
+    ("Hugging Face", "https://huggingface.co/Mr-Vicky-01"),
+    ("LeetCode", "https://leetcode.com/u/vicky_1102/"),
+]
+EXT = 'target="_blank" rel="noopener noreferrer"'
+
+
+def social_pills():
+    return "".join(f'<a class="pill" href="{h}" {EXT}>{n} ↗</a>' for n, h in SOCIAL)
 
 
 def layers():
@@ -146,12 +166,20 @@ def layers():
 
 
 def footer(prefix, top_href):
+    nav = "".join(f'<li><a href="{prefix}index.html#{i}" data-title="{n}">{n}</a></li>' for n, i in (("Work", "work"), ("About", "about"), ("Contact", "contact")))
+    nav += f'<li><a href="{RESUME}" {EXT}>Resume ↗</a></li>'
+    soc = "".join(f'<li><a href="{h}" {EXT}>{n} ↗</a></li>' for n, h in SOCIAL)
     return f"""    <footer>
       <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
+      <div class="foot-grid">
+        <div><h2 class="mono muted">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
+        <div><h2 class="mono muted">Navigate</h2><ul>{nav}</ul></div>
+        <div><h2 class="mono muted">Elsewhere</h2><ul>{soc}</ul></div>
+      </div>
       <div class="foot-row mono muted">
-        <span>© 2026 Pachaiappan</span>
-        <span>Puducherry, India</span>
+        <span>© 2026 Pachaiappan · Puducherry, India</span>
         <span><span data-clock>--:--:--</span> IST</span>
+        <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true">Motion: on</button>
         <a href="{top_href}" data-scramble>Back to top ↑</a>
       </div>
     </footer>
@@ -170,7 +198,7 @@ def link_pills(links):
     )
 
 
-def project_page(p, index, nxt):
+def project_page(p, index, prev, nxt):
     n, total = f"{index + 1:02d}", f"{len(PROJECTS):02d}"
     name, desc = escape(p["name"]), escape(p["overview"])
     url = f"{SITE}projects/{p['slug']}.html"
@@ -224,6 +252,15 @@ def project_page(p, index, nxt):
         </div>
       </section>
 
+      <section class="p-section" data-shape="dust" aria-labelledby="glance-title">
+        <h2 class="mono muted" id="glance-title">At a glance</h2>
+        <dl class="glance">
+          <div><dt class="mono muted">Type</dt><dd>{escape(p["type"])}</dd></div>
+          <div><dt class="mono muted">Key tools</dt><dd>{", ".join(escape(t) for t in p["stack"][:3])}</dd></div>
+          <div><dt class="mono muted">Try it</dt><dd>{" · ".join(f'<a href="{escape(h)}" {EXT}>{escape(l)} ↗</a>' for l, h in p["links"])}</dd></div>
+        </dl>
+      </section>
+
       <section class="p-section" data-shape="dust" aria-labelledby="overview-title">
         <h2 class="mono muted" id="overview-title">Overview</h2>
         <p class="lead" data-reveal>{desc}</p>
@@ -244,10 +281,16 @@ def project_page(p, index, nxt):
         <ul class="stack" data-rise>{stack}</ul>
       </section>
 
-      <a class="next" href="{nxt["slug"]}.html" data-title="{escape(nxt["name"])}" data-shape="dust" data-cursor="Next">
-        <span class="mono muted">Next project · {(index + 1) % len(PROJECTS) + 1:02d} / {total}</span>
-        <span class="big-title">{escape(nxt["name"])}</span>
-      </a>
+      <nav class="pn" aria-label="More projects">
+        <a class="next" href="{prev["slug"]}.html" data-title="{escape(prev["name"])}" data-shape="dust" data-cursor="Previous">
+          <span class="mono muted">← Previous · {(index - 1) % len(PROJECTS) + 1:02d} / {total}</span>
+          <span class="big-title">{escape(prev["name"])}</span>
+        </a>
+        <a class="next" href="{nxt["slug"]}.html" data-title="{escape(nxt["name"])}" data-shape="dust" data-cursor="Next">
+          <span class="mono muted">Next · {(index + 1) % len(PROJECTS) + 1:02d} / {total} →</span>
+          <span class="big-title">{escape(nxt["name"])}</span>
+        </a>
+      </nav>
     </main>
 
 {footer("../", "#top")}
@@ -279,8 +322,8 @@ def gallery_panel(p, index):
 
 def main():
     for i, p in enumerate(PROJECTS):
-        nxt = PROJECTS[(i + 1) % len(PROJECTS)]
-        (ROOT / "projects" / f"{p['slug']}.html").write_text(project_page(p, i, nxt), encoding="utf-8")
+        prev, nxt = PROJECTS[i - 1], PROJECTS[(i + 1) % len(PROJECTS)]
+        (ROOT / "projects" / f"{p['slug']}.html").write_text(project_page(p, i, prev, nxt), encoding="utf-8")
     index = ROOT / "index.html"
     html = index.read_text(encoding="utf-8")
     panels = "\n".join(gallery_panel(p, i) for i, p in enumerate(PROJECTS))

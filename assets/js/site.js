@@ -3,7 +3,8 @@
 (() => {
   const root = document.documentElement;
   const page = document.body.dataset.page || "home";
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const systemReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduced = systemReduced || root.classList.contains("motion-off");
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const small = matchMedia("(max-width: 760px)").matches;
   const $ = (s, el = document) => el.querySelector(s);
@@ -27,6 +28,34 @@
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => done("Copied"), () => done(text));
     else done(text);
   }));
+
+  // Motion switch in the footer; the system setting always wins.
+  $$("[data-motion-toggle]").forEach((btn) => {
+    if (systemReduced) { btn.hidden = true; return; }
+    const off = root.classList.contains("motion-off");
+    btn.textContent = off ? "Motion: off" : "Motion: on";
+    btn.setAttribute("aria-pressed", String(!off));
+    btn.addEventListener("click", () => {
+      try { localStorage.setItem("motion", off ? "on" : "off"); } catch {}
+      location.reload();
+    });
+  });
+
+  // Phone menu.
+  let lenis = null;
+  const menu = $("#menu"), menuBtn = $("[data-menu]");
+  function setMenu(open) {
+    if (!menu || !menuBtn) return;
+    menu.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.textContent = open ? "Close" : "Menu";
+    document.body.style.overflow = open ? "hidden" : "";
+    if (lenis) open ? lenis.stop() : lenis.start();
+    if (open) $("a", menu)?.focus();
+  }
+  menuBtn?.addEventListener("click", () => setMenu(menu.hidden));
+  menu?.addEventListener("click", (e) => { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
 
   if (!motion) {
     root.classList.add("no-gl");
@@ -74,11 +103,14 @@
 
   /* ---------- Scroll ---------- */
   gsap.registerPlugin(ScrollTrigger);
-  const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  const hdr = $(".hdr");
   lenis.on("scroll", (e) => {
     ScrollTrigger.update();
     const v = Math.abs(e.velocity);
     if (field && v > 10) field.kick((v - 10) / 70);
+    // Header steps aside while reading down the page and returns on the way up.
+    if (hdr && menu?.hidden !== false) hdr.classList.toggle("is-hidden", e.direction === 1 && e.scroll > 240);
   });
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
@@ -180,7 +212,9 @@
     document.fonts.load('400 12px "Martian Mono"'),
     $("[data-font='tamil']") ? document.fonts.load('700 200px "Anek Tamil"', "வணக்கம்") : null,
   ]).catch(() => {});
-  const minTime = new Promise((r) => setTimeout(r, useLoader ? 1300 : 0));
+  let skipWait;
+  const minTime = new Promise((r) => { skipWait = r; setTimeout(r, useLoader ? 900 : 0); });
+  if (useLoader) { loader.addEventListener("click", () => skipWait()); addEventListener("keydown", () => skipWait(), { once: true }); }
 
   Promise.all([fonts, minTime, ...images]).then(() => {
     if (field) buildShapes();
@@ -218,7 +252,7 @@
         const jit = dots.map(() => [(Math.random() - 0.5) * 90, (Math.random() - 0.5) * 70]);
         const on = (i) => () => stages[i].classList.toggle("on", tl.scrollTrigger.direction > 0);
         gsap.set(dots, { x: (i) => cx(0) + jit[i][0], y: (i) => cy() + jit[i][1] });
-        const tl = gsap.timeline({ scrollTrigger: { trigger: pipe.closest("section"), start: "top top", end: "+=260%", pin: true, scrub: 1, invalidateOnRefresh: true } });
+        const tl = gsap.timeline({ scrollTrigger: { trigger: pipe.closest("section"), start: "top top", end: "+=180%", pin: true, scrub: 1, invalidateOnRefresh: true } });
         tl.add(on(0), 0.05)
           .to(dots, { opacity: 1, duration: 0.4, stagger: 0.01 }, 0)
           .to($(".rail i", pipe), { scaleX: 0.34, duration: 1, ease: "none" }, 0.3)
@@ -239,8 +273,12 @@
       const work = $(".work"), track = $(".work-track");
       if (work && track) {
         work.classList.add("hscroll");
+        const counter = $("[data-work-index]"), panels = $$(".panel[data-glyph]", work).length;
         const dist = () => track.scrollWidth - innerWidth;
-        gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: work, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (st) => gsap.set(".work-progress i", { scaleX: st.progress }) } });
+        gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: work, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (st) => {
+          gsap.set(".work-progress i", { scaleX: st.progress });
+          if (counter) counter.textContent = String(Math.round(st.progress * (panels - 1)) + 1).padStart(2, "0");
+        } } });
       }
       return () => { dots.forEach((d) => d.remove()); work?.classList.remove("hscroll"); };
     });
@@ -273,6 +311,14 @@
       const tl = gsap.timeline({ scrollTrigger: { trigger: steps, start: "top 75%" } });
       tl.to($(".rail i", steps), { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, 0);
       items.forEach((s, i) => tl.add(() => s.classList.add("on"), 0.2 + i * 0.45));
+    });
+
+    // Header nav marks the section in view.
+    $$(".hdr nav a[href^='#']").forEach((a) => {
+      let sec = $(a.getAttribute("href"));
+      // A pinned section's wrapper spans its whole pinned scroll distance.
+      if (sec?.parentElement?.classList.contains("pin-spacer")) sec = sec.parentElement;
+      if (sec) ScrollTrigger.create({ trigger: sec, start: "top 50%", end: "bottom 50%", onToggle: (st) => (st.isActive ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current")) });
     });
 
     // Header progress line.

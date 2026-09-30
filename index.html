@@ -63,6 +63,7 @@
         r.classList.add("js");
         try {
           if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          if (localStorage.getItem("motion") === "off") return r.classList.add("motion-off");
           r.classList.add("motion");
           var s = sessionStorage, pt = s.getItem("pt") === "1";
           if (pt) r.classList.add("pt-in");
@@ -120,7 +121,13 @@
         >
       </nav>
       <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
     </header>
+    <div class="menu" id="menu" hidden>
+      <nav aria-label="Menu"><a href="#work" data-title="Work">Work</a><a href="#about" data-title="About">About</a><a href="#contact" data-title="Contact">Contact</a><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume ↗</a></nav>
+      <a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a>
+      <div class="menu-links mono"><a class="pill" href="https://github.com/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="pill" href="https://www.linkedin.com/in/pachaiappan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="pill" href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">Hugging Face ↗</a><a class="pill" href="https://leetcode.com/u/vicky_1102/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a></div>
+    </div>
 
     <main id="main">
       <section class="hero" id="top" data-hero data-shape="name" aria-labelledby="hero-name">
@@ -135,7 +142,11 @@
           </div>
           <div>
             <p class="tagline" data-hero-reveal>Teaching machines to tell real vulnerabilities from <em>noise.</em></p>
-            <div class="scroll-cue mono muted" data-hero-fade><i></i>Scroll</div>
+            <div class="actions" data-hero-fade>
+              <a class="pill primary" href="#work" data-magnetic>Selected work ↓</a>
+              <a class="pill" href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer" data-magnetic>Resume ↗</a>
+              <a class="pill" href="#contact" data-magnetic>Get in touch</a>
+            </div>
           </div>
         </div>
       </section>
@@ -195,7 +206,7 @@
           <div class="panel intro">
             <span class="mono muted">Selected work · 09 projects</span>
             <h2 class="big-title" id="work-title" data-reveal>Things I built to learn.</h2>
-            <span class="mono muted h-hint">Scroll sideways →</span>
+            <span class="mono muted h-hint">Scroll sideways → · <a href="#experience">Skip projects</a></span>
           </div>
           <!-- projects:start -->
           <article class="panel" data-glyph="01" data-href="projects/creta.html" data-cursor="Open">
@@ -308,6 +319,7 @@
           </article>          <!-- projects:end -->
         </div>
         <div class="work-progress" aria-hidden="true"><i></i></div>
+        <div class="work-count mono muted" aria-hidden="true"><span data-work-index>01</span> / 09</div>
       </section>
 
       <div class="marquee" aria-hidden="true">
@@ -392,10 +404,15 @@
 
     <footer>
       <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
+      <div class="foot-grid">
+        <div><h2 class="mono muted">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
+        <div><h2 class="mono muted">Navigate</h2><ul><li><a href="#work" data-title="Work">Work</a></li><li><a href="#about" data-title="About">About</a></li><li><a href="#contact" data-title="Contact">Contact</a></li><li><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume ↗</a></li></ul></div>
+        <div><h2 class="mono muted">Elsewhere</h2><ul><li><a href="https://github.com/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li><li><a href="https://www.linkedin.com/in/pachaiappan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li><li><a href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">Hugging Face ↗</a></li><li><a href="https://leetcode.com/u/vicky_1102/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a></li></ul></div>
+      </div>
       <div class="foot-row mono muted">
-        <span>© 2026 Pachaiappan</span>
-        <span>Puducherry, India</span>
+        <span>© 2026 Pachaiappan · Puducherry, India</span>
         <span><span data-clock>--:--:--</span> IST</span>
+        <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="true">Motion: on</button>
         <a href="#top" data-scramble>Back to top ↑</a>
       </div>
     </footer>

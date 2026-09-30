@@ -17,6 +17,7 @@
         r.classList.add("js");
         try {
           if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+          if (localStorage.getItem("motion") === "off") return r.classList.add("motion-off");
           r.classList.add("motion");
           if (sessionStorage.getItem("pt") === "1") r.classList.add("pt-in");
         } catch (e) {}
@@ -38,7 +39,13 @@
         <a href="/Portfolio/index.html#work" data-title="Work" data-scramble>Work</a><a href="/Portfolio/index.html#about" data-title="About" data-scramble>About</a><a href="/Portfolio/index.html#contact" data-title="Contact" data-scramble>Contact</a>
       </nav>
       <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
     </header>
+    <div class="menu" id="menu" hidden>
+      <nav aria-label="Menu"><a href="/Portfolio/index.html#work" data-title="Work">Work</a><a href="/Portfolio/index.html#about" data-title="About">About</a><a href="/Portfolio/index.html#contact" data-title="Contact">Contact</a><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume ↗</a></nav>
+      <a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a>
+      <div class="menu-links mono"><a class="pill" href="https://github.com/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="pill" href="https://www.linkedin.com/in/pachaiappan" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a class="pill" href="https://huggingface.co/Mr-Vicky-01" target="_blank" rel="noopener noreferrer">Hugging Face ↗</a><a class="pill" href="https://leetcode.com/u/vicky_1102/" target="_blank" rel="noopener noreferrer">LeetCode ↗</a></div>
+    </div>
 
     <main id="main">
       <section class="hero" id="top" data-hero data-shape="name" aria-labelledby="nf-title">
