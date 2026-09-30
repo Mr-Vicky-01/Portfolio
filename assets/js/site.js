@@ -29,64 +29,6 @@
     else done(text);
   }));
 
-  /* ---------- Generated project covers ----------
-     A seeded flow field in the project's colour: faint noise lines, with one bright signal line through them. */
-  function drawCover(c) {
-    const box = c.getBoundingClientRect();
-    if (box.width < 2 || box.height < 2) return;
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = Math.round(box.width * dpr), h = Math.round(box.height * dpr);
-    if (c.width === w && c.height === h && c.dataset.drawn) return;
-    c.width = w;
-    c.height = h;
-    c.dataset.drawn = "1";
-    const ctx = c.getContext("2d");
-    let seed = +c.dataset.seed || 1;
-    const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
-    const hue = c.dataset.hue || "#ffb547";
-    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hue.slice(i, i + 2), 16));
-    const f1 = 1.2 + rand() * 2.4, f2 = 1.2 + rand() * 2.4, ph = rand() * 10;
-    const angle = (x, y) => (Math.sin(x * f1 + ph) + Math.cos(y * f2 - ph) + Math.sin((x + y) * 1.7 + ph * 0.5)) * 1.25;
-    const trace = (x, y, steps, len) => {
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      for (let k = 0; k < steps; k++) {
-        const a = angle((x / w) * 3, (y / h) * 3);
-        x += Math.cos(a) * len;
-        y += Math.sin(a) * len;
-        ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    };
-    ctx.clearRect(0, 0, w, h);
-    ctx.lineCap = "round";
-    const lines = Math.round((w * h) / 1400);
-    for (let i = 0; i < lines; i++) {
-      const t = rand();
-      ctx.strokeStyle = t < 0.75 ? `rgba(${r},${g},${b},${0.08 + rand() * 0.28})` : `rgba(237,234,227,${0.05 + rand() * 0.12})`;
-      ctx.lineWidth = (0.5 + rand() * 1.1) * dpr;
-      trace(rand() * w, rand() * h, 24 + ((rand() * 30) | 0), 2.6 * dpr);
-    }
-    for (let i = 0; i < lines / 3; i++) {
-      ctx.fillStyle = `rgba(${r},${g},${b},${0.25 + rand() * 0.5})`;
-      ctx.beginPath();
-      ctx.arc(rand() * w, rand() * h, (0.6 + rand() * 1.4) * dpr, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.shadowColor = `rgba(${r},${g},${b},0.9)`;
-    ctx.shadowBlur = 18 * dpr;
-    ctx.strokeStyle = "rgba(255,248,235,0.9)";
-    ctx.lineWidth = 1.6 * dpr;
-    trace(w * 0.08, h * (0.3 + rand() * 0.4), 260, 3.4 * dpr);
-    ctx.shadowBlur = 0;
-  }
-  const covers = $$("canvas[data-cover]");
-  if (covers.length) {
-    const io = "IntersectionObserver" in window ? new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && drawCover(e.target)), { rootMargin: "400px 900px" }) : null;
-    covers.forEach((c) => (io ? io.observe(c) : drawCover(c)));
-    let resizeTimer;
-    addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => covers.forEach((c) => { if (c.dataset.drawn) drawCover(c); }), 250); });
-  }
-
   // Motion switch in the footer; the system setting always wins.
   $$("[data-motion-toggle]").forEach((btn) => {
     if (systemReduced) { btn.hidden = true; return; }
@@ -440,13 +382,7 @@
       const dot = $(".cursor"), ring = $(".ring"), label = $(".ring span");
       const qx = gsap.quickTo(dot, "x", { duration: 0.08 }), qy = gsap.quickTo(dot, "y", { duration: 0.08 });
       const rx = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" }), ry = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
-      const coords = $(".coords"), pad = (n) => String(Math.max(0, Math.round(n))).padStart(4, "0");
-      let coordFrame = 0, cx = 0, cy = 0;
-      addEventListener("pointermove", (e) => {
-        qx(e.clientX); qy(e.clientY); rx(e.clientX); ry(e.clientY);
-        cx = e.clientX; cy = e.clientY + scrollY;
-        if (coords && !coordFrame) coordFrame = requestAnimationFrame(() => { coords.textContent = `X ${pad(cx)} · Y ${pad(cy)}`; coordFrame = 0; });
-      }, { passive: true });
+      addEventListener("pointermove", (e) => { qx(e.clientX); qy(e.clientY); rx(e.clientX); ry(e.clientY); }, { passive: true });
       document.addEventListener("pointerover", (e) => {
         const tagged = e.target.closest("[data-cursor]"), link = e.target.closest("a, button");
         const view = !!tagged && !link && tagged.dataset.cursor !== "none";

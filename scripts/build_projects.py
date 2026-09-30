@@ -8,8 +8,6 @@ from itertools import combinations
 from pathlib import Path
 import re
 
-from brand_mark import inline as brand_mark
-
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://mr-vicky-01.github.io/Portfolio/"
 RESUME = "https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
@@ -19,7 +17,7 @@ HF = "https://huggingface.co/spaces/Mr-Vicky-01/"
 # Order here is the order on the homepage and the "Next project" chain.
 PROJECTS = [
     dict(
-        slug="creta", hue="#ffb547", name="CRETA", type="Conversational AI",
+        slug="creta", name="CRETA", type="Conversational AI",
         short="An AI assistant for questions and everyday exploration, built on Google's generative models.",
         overview="A conversational AI assistant for questions, information, and everyday exploration. Built with Streamlit and generative models to make complex technology feel approachable.",
         steps=["Ask questions through an interactive conversational interface.", "Generate responses with Google's generative AI models.", "Connect the experience with Python, LangChain, and Streamlit."],
@@ -27,7 +25,7 @@ PROJECTS = [
         links=[("Source", GH + "CRETA")],
     ),
     dict(
-        slug="genxai", hue="#7aa2ff", name="GenXAi", type="Developer tools",
+        slug="genxai", name="GenXAi", type="Developer tools",
         short="A coding companion that answers programming questions with Gemini through LangChain.",
         overview="GenXAi (Generative eXpert AI) helps developers explore coding questions and problems. Gemini and LangChain power a conversational interface that turns technical queries into useful responses.",
         steps=["Enter a coding question or describe a programming problem.", "Process the request with Gemini through LangChain.", "Explore the generated response in a Streamlit interface."],
@@ -35,7 +33,7 @@ PROJECTS = [
         links=[("Live demo", HF + "Code_Assistant"), ("Source", GH + "Code-Assistant")],
     ),
     dict(
-        slug="rag", hue="#ff7a59", name="Chat With PDF", type="Retrieval-augmented generation",
+        slug="rag", name="Chat With PDF", type="Retrieval-augmented generation",
         short="Ask questions across several PDFs and get answers grounded in the retrieved passages.",
         overview="A document question-answering application that lets users chat with multiple PDFs. It combines document extraction, BAAI embeddings, and a Llama model to answer questions using relevant document content.",
         steps=["Extract content from uploaded PDF documents.", "Embed and retrieve relevant passages using vector search.", "Generate answers grounded in the retrieved document context."],
@@ -43,7 +41,7 @@ PROJECTS = [
         links=[("Live demo", HF + "chat-with-PDF"), ("Source", GH + "Chat-with-PDF")],
     ),
     dict(
-        slug="english_teacher", hue="#c792ea", name="English Teacher", type="Language AI",
+        slug="english_teacher", name="English Teacher", type="Language AI",
         short="Turns Tamil or Tanglish into correct English, then reads it aloud.",
         overview="An AI language assistant that turns Tamil or Tanglish queries into grammatically correct English. Google's generative AI and Hugging Face models support translation and spoken output.",
         steps=["Enter a query in Tamil or Tanglish.", "Generate a grammatically correct English sentence.", "Listen to the translated sentence with text-to-speech."],
@@ -51,7 +49,7 @@ PROJECTS = [
         links=[("Source", GH + "English-Teaching-AI")],
     ),
     dict(
-        slug="sign-detection", hue="#5eead4", name="Hand Sign Detection", type="Computer vision",
+        slug="sign-detection", name="Hand Sign Detection", type="Computer vision",
         short="Real-time hand sign recognition from a webcam, for left and right hands.",
         overview="A real-time hand sign recognition system built with OpenCV, MediaPipe, and a convolutional neural network. It identifies left and right hands and updates recognized signs as the camera feed changes.",
         steps=["Track hand landmarks with MediaPipe.", "Process camera frames with OpenCV.", "Recognize signs and display live visual feedback."],
@@ -59,7 +57,7 @@ PROJECTS = [
         links=[("Source", GH + "hand-sign-detection")],
     ),
     dict(
-        slug="story-teller", hue="#f59ec2", name="Story Teller", type="Multimodal AI",
+        slug="story-teller", name="Story Teller", type="Multimodal AI",
         short="Captions an image, writes a short story from it, and narrates the story.",
         overview="An image-to-story pipeline that combines image captioning, language generation, and text-to-speech. Hugging Face Transformers and LangChain turn visual input into short stories that can also be heard.",
         steps=["Generate a caption from an input image.", "Expand the caption into a short story.", "Convert the generated story into audio."],
@@ -67,7 +65,7 @@ PROJECTS = [
         links=[("Source", GH + "Story-Teller")],
     ),
     dict(
-        slug="screenshot_html", hue="#a3e635", name="ScreenShot-HTML", type="Generative developer tools",
+        slug="screenshot_html", name="ScreenShot-HTML", type="Generative developer tools",
         short="Generates HTML and CSS from a screenshot of a web page.",
         overview="An application that generates HTML and CSS from webpage screenshots. Google's generative AI models interpret the image and recreate its structure and visual styling.",
         steps=["Upload a screenshot of a webpage.", "Generate HTML and CSS from the visual reference.", "Inspect the generated code and recreate the layout."],
@@ -75,7 +73,7 @@ PROJECTS = [
         links=[("Source", GH + "Screenshot-HTML")],
     ),
     dict(
-        slug="web-app", hue="#38bdf8", name="Deep Learning Web-App", type="Computer vision",
+        slug="web-app", name="Deep Learning Web-App", type="Computer vision",
         short="Image classification with a convolutional network, served through FastAPI.",
         overview="An image classification application that brings deep learning models to the browser. A FastAPI backend connects image processing and inference to a straightforward web interface.",
         steps=["Upload images through a web interface.", "Classify images with convolutional neural networks.", "Serve predictions with FastAPI and Uvicorn."],
@@ -83,7 +81,7 @@ PROJECTS = [
         links=[("Live demo", HF + "Web-App"), ("Source", GH + "Deep-learining-App")],
     ),
     dict(
-        slug="rps", hue="#fcd34d", name="Rock Paper Scissor", type="Vision and play",
+        slug="rps", name="Rock Paper Scissor", type="Vision and play",
         short="Play Rock Paper Scissors against the computer with hand gestures.",
         overview="A real-time Rock Paper Scissor game against an AI opponent. Python, TensorFlow, OpenCV, and MediaPipe connect hand gesture recognition with a Tkinter desktop interface.",
         steps=["Recognize hand gestures from a live camera feed.", "Play against an AI-powered opponent.", "Keep the game modular with an object-oriented architecture."],
@@ -124,7 +122,7 @@ HEAD_SCRIPT = """    <script>
 
 def header(prefix):
     return f"""    <header class="hdr mono">
-      <a class="brand" href="{prefix}index.html" data-title="Pachaiappan">{brand_mark()}<b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
+      <a class="brand" href="{prefix}index.html" data-title="Pachaiappan"><b>Pachaiappan</b><span lang="ta">பச்சையப்பன்</span></a>
       <nav aria-label="Main">
         <a href="{prefix}index.html#work" data-title="Work" data-scramble>Work</a><a href="{prefix}index.html#about" data-title="About" data-scramble>About</a><a href="{prefix}index.html#contact" data-title="Contact" data-scramble>Contact</a><a
           href="{RESUME}"
@@ -160,10 +158,7 @@ def social_pills():
 def layers():
     return """    <a class="skip" href="#main">Skip to content</a>
     <canvas id="field" aria-hidden="true"></canvas>
-    <div class="atmos" aria-hidden="true"><i></i><i></i></div>
-    <div class="guides" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div class="grain" aria-hidden="true"></div>
-    <div class="coords mono" aria-hidden="true">X 0000 · Y 0000</div>
     <div class="cursor" aria-hidden="true"></div>
     <div class="ring" aria-hidden="true"><span></span></div>
     <div class="progress" aria-hidden="true"><i></i></div>
@@ -177,7 +172,7 @@ def footer(prefix, top_href):
     return f"""    <footer>
       <span class="big-name" aria-hidden="true">PACHAIAPPAN</span>
       <div class="foot-grid">
-        <div><p class="foot-brand">{brand_mark()}<b>Pachaiappan</b></p><h2 class="mono muted" style="margin-top: 28px">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
+        <div><h2 class="mono muted">Say hello</h2><a class="foot-mail" href="mailto:pachaiappan.dev@gmail.com">pachaiappan.dev@gmail.com</a></div>
         <div><h2 class="mono muted">Navigate</h2><ul>{nav}</ul></div>
         <div><h2 class="mono muted">Elsewhere</h2><ul>{soc}</ul></div>
       </div>
@@ -257,8 +252,6 @@ def project_page(p, index, prev, nxt):
         </div>
       </section>
 
-      <div class="p-cover" data-shape="dust">{cover(p, n)}</div>
-
       <section class="p-section" data-shape="dust" aria-labelledby="glance-title">
         <h2 class="mono muted" id="glance-title">At a glance</h2>
         <dl class="glance">
@@ -306,13 +299,6 @@ def project_page(p, index, prev, nxt):
 """
 
 
-def cover(p, n, cls=""):
-    return (
-        f'<div class="cover{cls}" style="--hue: {p["hue"]}" aria-hidden="true">'
-        f'<canvas data-cover data-seed="{int(n) * 7919}" data-hue="{p["hue"]}"></canvas><span class="cover-n mono">{n}</span></div>'
-    )
-
-
 def gallery_panel(p, index):
     n, total = f"{index + 1:02d}", f"{len(PROJECTS):02d}"
     page = f"projects/{p['slug']}.html"
@@ -322,7 +308,6 @@ def gallery_panel(p, index):
     )
     return f"""          <article class="panel" data-glyph="{n}" data-href="{page}" data-cursor="Open">
             <div class="glyph" data-align="center" aria-hidden="true"></div>
-            {cover(p, n)}
             <div class="mono muted">{n} / {total} · {escape(p["type"])}</div>
             <div>
               <h3><a href="{page}" data-case data-title="{name}">{name}</a></h3>

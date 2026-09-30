@@ -12,7 +12,7 @@ with TemporaryDirectory(prefix='portfolio-brand-') as directory:
         image = source.convert('RGBA')
         for name, size in [('favicon-32.png', 32), ('favicon.png', 128), ('icon-192.png', 192), ('icon-512.png', 512)]:
             image.resize((size, size), Image.Resampling.LANCZOS).save(ROOT / name)
-        touch = Image.new('RGBA', image.size, '#0c0c0b')
+        touch = Image.new('RGBA', image.size, '#101a36')
         touch.alpha_composite(image)
         touch.convert('RGB').resize((180, 180), Image.Resampling.LANCZOS).save(ROOT / 'apple-touch-icon.png')
         image.resize((256, 256), Image.Resampling.LANCZOS).save(
