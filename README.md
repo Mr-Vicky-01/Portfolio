@@ -55,7 +55,7 @@ Each project has a case-study page in `projects/`: overview, how it works, stack
 | Pages | Static HTML and CSS |
 | Particles | WebGL 1, written by hand in `assets/js/field.js` |
 | Scroll and motion | [GSAP](https://gsap.com) with ScrollTrigger, and [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling, served from `assets/js/vendor/` |
-| Type | Anek Latin and Anek Tamil (Ek Type), Martian Mono, Instrument Serif italic for accents, self-hosted from `assets/fonts/` |
+| Type | Anek Latin and Anek Tamil (Ek Type), Martian Mono, self-hosted from `assets/fonts/` |
 | Hosting | GitHub Pages or any static HTTP server |
 
 ## Getting started
@@ -84,7 +84,7 @@ Portfolio/
 │   │   ├── field.js            # Particle engine (WebGL)
 │   │   ├── site.js             # Scrolling, sections, cursor, transitions
 │   │   └── vendor/             # GSAP, ScrollTrigger, Lenis
-│   ├── fonts/                  # Anek Latin, Anek Tamil (subset), Martian Mono, Instrument Serif
+│   ├── fonts/                  # Anek Latin, Anek Tamil (subset), Martian Mono
 │   └── img/
 │       ├── portrait-balanced.webp
 │       └── og-card.jpg         # 1200×630 link-preview image
