@@ -230,9 +230,9 @@ def project_page(p, index, prev, nxt):
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Pachaiappan, AI Engineer &amp; Developer" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="../favicon-32.png?v=orbit-core-2" type="image/png" sizes="32x32" />
-    <link rel="icon" href="../favicon.svg?v=orbit-core-2" type="image/svg+xml" sizes="any" />
-    <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=orbit-core-2" sizes="180x180" />
+    <link rel="icon" href="../favicon-32.png?v=p-signal-1" type="image/png" sizes="32x32" />
+    <link rel="icon" href="../favicon.svg?v=p-signal-1" type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=p-signal-1" sizes="180x180" />
     <link rel="preload" href="../assets/fonts/anek-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="../assets/fonts/martian-mono.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="../assets/css/site.css" />
