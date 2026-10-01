@@ -158,9 +158,9 @@
     addEventListener("resize", resize);
 
     const shapes = [];
-    let current = -1, turbulence = 0, hold = 0, holdTarget = 0, light = 0, motes = 0;
+    let current = -1, turbulence = 0, hold = 0, holdTarget = 0, light = 0, motes = 0, depth = 1;
     const pulses = [];
-    const mouse = { x: -1e4, y: -1e4 }, tilt = { x: 0, y: 0 }, TILT = small ? 16 : 38, GLOW = 1.3;
+    const mouse = { x: -1e4, y: -1e4 }, aim = { x: 0, y: 0 }, tilt = { x: 0, y: 0 }, TILT = small ? 16 : 38, GLOW = 1.3;
     const away = () => { mouse.x = mouse.y = -1e4; };
     const point = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
     addEventListener("pointermove", point, { passive: true });
@@ -170,7 +170,8 @@
     addEventListener("pointercancel", (e) => e.pointerType !== "mouse" && away(), { passive: true });
     document.documentElement.addEventListener("pointerleave", away);
 
-    // A shape can set motes: 1 to float a few large, out-of-focus points in front of it (the noise and the wave do).
+    // A shape can set motes: 1 to float a few large, out-of-focus points in front of it (the noise and the wave do),
+    // links: false to keep the pointer from drawing links over it, and flat: true to hold still instead of tilting.
     function add(shape) {
       shape.alpha = 1;
       shape.alphaTarget = 1;
@@ -194,6 +195,80 @@
       return { x, y: r.top + (r.height - h) / 2, w, h };
     }
 
+    /* The featured case study, told in four chapters (stage 0 to 3) inside its slot:
+       0 a grid of repositories, 1 eight scanner streams, 2 the streams pass a model gate where false positives
+       fall away and real findings carry on in amber, 3 the real findings form the result and the rest settle below. */
+    const PA = new Float32Array(7), PB = new Float32Array(7), PC = new Float32Array(4);
+    const FLOW = 0.045, GATE = 0.56, REAL = 0.3, RESULT = small ? 0.38 : 0.5;
+    function pipeBox(s) {
+      const r = s.slot.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) return null;
+      const b = { x: r.left, y: r.top, w: r.width, h: r.height };
+      b.cols = small ? 40 : 64;
+      b.rows = Math.max(1, Math.round((b.cols * b.h) / b.w));
+      const th = Math.min(b.h * 0.56, (b.w * 0.8) / s.textAspect);
+      b.tw = th * s.textAspect;
+      b.th = th;
+      return b;
+    }
+    const frac = (x) => x - Math.floor(x);
+    function pipeAt(s, k, i, u, v, sd, t, out) {
+      const b = s.box, real = sd < REAL, cy = b.y + b.h * 0.5;
+      // The result needs more points than the real findings alone to read clearly.
+      let x, y, c = FG, a, jump = 0;
+      if (k === 0) {
+        const cell = i % (b.cols * b.rows);
+        x = b.x + ((cell % b.cols) + 0.5) / b.cols * b.w;
+        y = b.y + (((cell / b.cols) | 0) + 0.5) / b.rows * b.h;
+        if (i % 29 === 0) c = AMBER;
+        a = i % 29 === 0 ? 0.7 : 0.36;
+      } else if (k === 3) {
+        if (sd < RESULT) {
+          x = b.x + (b.w - b.tw) / 2 + s.text[i * 2] * b.tw;
+          y = cy - b.th / 2 + s.text[i * 2 + 1] * b.th;
+          c = sd < RESULT * 0.8 ? AMBER : FG;
+          a = 1;
+        } else {
+          x = b.x + u * b.w;
+          y = b.y + b.h - v * v * b.h * 0.07;
+          a = 0.08;
+        }
+      } else {
+        const lane = i & 7, ly = b.y + b.h * (0.1 + (0.8 * (lane + 0.5)) / 8);
+        const sp = FLOW * (0.75 + 0.5 * v), f = frac(u + t * sp);
+        jump = f < sp * 0.05 ? 1 : 0;
+        const fade = Math.min(1, f / 0.05, (1 - f) / 0.05);
+        if (k === 1) {
+          x = b.x + f * b.w;
+          y = ly + (v - 0.5) * 5;
+          a = 0.55 * fade;
+        } else if (i % 41 === 0) {
+          // The gate itself: a still, bright line where the models sit.
+          x = b.x + GATE * b.w + (v - 0.5) * 3;
+          y = b.y + b.h * (0.18 + 0.64 * u);
+          a = 0.85;
+          jump = 0;
+        } else if (f < GATE) {
+          let m = Math.max(0, Math.min(1, (f - 0.1) / (GATE - 0.1)));
+          m = m * m * (3 - 2 * m);
+          x = b.x + f * b.w;
+          y = ly + (cy - ly) * m + (v - 0.5) * 5 * (1 - m);
+          a = 0.55 * fade;
+        } else if (real) {
+          x = b.x + f * b.w;
+          y = cy + (v - 0.5) * 9;
+          c = AMBER;
+          a = 0.95 * fade;
+        } else {
+          const d = (f - GATE) / (1 - GATE);
+          x = b.x + (GATE + (f - GATE) * 0.55) * b.w;
+          y = cy + d * d * b.h * 0.46 + (v - 0.5) * 26 * d;
+          a = (0.45 * (1 - d) + 0.04) * Math.min(1, f / 0.05);
+        }
+      }
+      out[0] = x; out[1] = y; out[2] = c[0]; out[3] = c[1]; out[4] = c[2]; out[5] = a; out[6] = jump;
+    }
+
     let last = performance.now(), running = true;
     function frame(now) {
       if (!running) return;
@@ -201,14 +276,17 @@
       last = now;
       const t = now / 1000;
       for (const s of shapes) {
-        s.box = s.slot ? fit(s.slot, s.aspect) : null;
+        s.box = s.kind === "pipeline" ? pipeBox(s) : s.slot ? fit(s.slot, s.aspect) : null;
         s.alpha += (s.alphaTarget - s.alpha) * 0.06 * dt;
       }
       // Tilt toward the pointer; without one (phones, or the pointer off the page) the field drifts slowly on its own.
       const here = mouse.x > -1e3 && !small;
       const tx0 = here ? (mouse.x / W - 0.5) * 2 : Math.sin(t * 0.21) * 0.6, ty0 = here ? (mouse.y / H - 0.5) * 2 : Math.cos(t * 0.17) * 0.45;
-      tilt.x += (tx0 * TILT - tilt.x) * 0.05 * dt;
-      tilt.y += (ty0 * TILT - tilt.y) * 0.05 * dt;
+      aim.x += (tx0 * TILT - aim.x) * 0.05 * dt;
+      aim.y += (ty0 * TILT - aim.y) * 0.05 * dt;
+      depth += ((shapes[current]?.flat ? 0 : 1) - depth) * 0.04 * dt;
+      tilt.x = aim.x * depth;
+      tilt.y = aim.y * depth;
       light += ((here ? 1 : 0) - light) * 0.06 * dt;
       motes += ((shapes[current]?.motes || 0) - motes) * 0.03 * dt;
       const k = 0.032 * dt, damp = Math.pow(0.86, dt), R = small ? 70 : 130, R2 = R * R;
@@ -217,7 +295,7 @@
       hold += (holdTarget - hold) * (holdTarget ? 0.045 : 0.25) * dt;
       if (hold < 0.002) hold = 0;
       const G = small ? 280 : 460, G2 = G * G, pull = hold > 0, repel = hold < 0.25;
-      const LR = R + 90, LR2 = LR * LR, linking = links && mouse.x > -1e3;
+      const LR = R + 90, LR2 = LR * LR, linking = links && mouse.x > -1e3 && shapes[current]?.links !== false;
       let nNodes = 0;
       for (let p = pulses.length - 1; p >= 0; p--) {
         const q = pulses[p];
@@ -229,8 +307,21 @@
         if (pending[i] !== shapeOf[i] && now >= switchAt[i]) shapeOf[i] = pending[i];
         const s = shapes[shapeOf[i]];
         const i2 = i * 2, i4 = i * 4, u = s.pts[i2], v = s.pts[i2 + 1], sd = seed[i];
-        let tx, ty;
-        if (s.kind === "box" && s.box) {
+        let tx, ty, pc = null;
+        if (s.kind === "pipeline" && s.box) {
+          // Blend this point between the chapter before and after the current scroll stage, a little staggered.
+          const p = Math.max(0, Math.min(3, s.stage || 0)), k = Math.min(2, Math.floor(p));
+          let q = Math.max(0, Math.min(1, (p - k - 0.3) / 0.55 - (sd - 0.5) * 0.35));
+          q = q * q * (3 - 2 * q);
+          pipeAt(s, k, i, u, v, sd, t, PA);
+          pipeAt(s, k + 1, i, u, v, sd, t, PB);
+          tx = PA[0] + (PB[0] - PA[0]) * q;
+          ty = PA[1] + (PB[1] - PA[1]) * q;
+          for (let c = 0; c < 4; c++) PC[c] = PA[2 + c] + (PB[2 + c] - PA[2 + c]) * q;
+          pc = PC;
+          // A point that wrapped round its stream jumps straight back to the start instead of flying across.
+          if ((q < 0.02 && PA[6]) || (q > 0.98 && PB[6])) { pos[i2] = tx; pos[i2 + 1] = ty; vel[i2] = vel[i2 + 1] = 0; }
+        } else if (s.kind === "box" && s.box) {
           tx = s.box.x + u * s.box.w + Math.sin(t * 1.6 + sd * 40) * 0.7;
           ty = s.box.y + v * s.box.h + Math.cos(t * 1.3 + sd * 30) * 0.7;
         } else if (s.kind === "wave") {
@@ -273,11 +364,19 @@
         vel[i2 + 1] = vy;
         pos[i2] = x + vx * dt;
         pos[i2 + 1] = y + vy * dt;
-        const c = s.cols, a = c[i4 + 3] * s.alpha, e = 0.07 * dt;
-        col[i4] += (c[i4] - col[i4]) * e;
-        col[i4 + 1] += (c[i4 + 1] - col[i4 + 1]) * e;
-        col[i4 + 2] += (c[i4 + 2] - col[i4 + 2]) * e;
-        col[i4 + 3] += (a - col[i4 + 3]) * e;
+        const e = 0.07 * dt;
+        if (pc) {
+          col[i4] += (pc[0] - col[i4]) * e;
+          col[i4 + 1] += (pc[1] - col[i4 + 1]) * e;
+          col[i4 + 2] += (pc[2] - col[i4 + 2]) * e;
+          col[i4 + 3] += (pc[3] * s.alpha - col[i4 + 3]) * e;
+        } else {
+          const c = s.cols, a = c[i4 + 3] * s.alpha;
+          col[i4] += (c[i4] - col[i4]) * e;
+          col[i4 + 1] += (c[i4 + 1] - col[i4 + 1]) * e;
+          col[i4 + 2] += (c[i4 + 2] - col[i4 + 2]) * e;
+          col[i4 + 3] += (a - col[i4 + 3]) * e;
+        }
       }
       // Link nearby points around the pointer, brightest close to it.
       let nl = 0;
@@ -468,6 +567,14 @@
     }, false);
   }
 
+  // The case-study scene: random points for the streams, plus the result drawn as text for the last chapter.
+  function pipelineShape(N, result, font) {
+    const pts = new Float32Array(N * 2), cols = new Float32Array(N * 4);
+    for (let i = 0; i < N * 2; i++) pts[i] = Math.random();
+    const t = textShape(N, result, font, { stretch: "condensed", amber: 0 });
+    return { kind: "pipeline", pts, cols, aspect: 1, text: t.pts, textAspect: t.aspect, stage: 0, links: false, flat: true };
+  }
+
   function drawnShape(N, draw, size = 480) {
     return sample(N, size, size, draw, (d, k) => (d[k + 3] > 120 ? 1 : 0), (d, k, out, j) => tint(out, j, d[k + 2] < 150 || Math.random() < 0.04 ? AMBER : FG, 1));
   }
@@ -478,5 +585,5 @@
     return { pts, cols, aspect: 1 };
   }
 
-  window.PField = { create, textShape, imageShape, drawnShape, scatter, tint, FG, AMBER };
+  window.PField = { create, textShape, imageShape, drawnShape, pipelineShape, scatter, tint, FG, AMBER };
 })();

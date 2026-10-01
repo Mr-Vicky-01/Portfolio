@@ -76,6 +76,8 @@
     const { textShape, imageShape, scatter, tint, FG, AMBER } = PField, N = field.N;
     ids.dust = field.add({ kind: "dust", motes: 1, ...scatter(N, (c, j, i) => (i % 31 === 0 ? tint(c, j, AMBER, 0.55) : tint(c, j, FG, 0.16))) });
     ids.wave = field.add({ kind: "wave", motes: 1, ...scatter(N, (c, j) => { const a = Math.random(); tint(c, j, a < 0.6 ? AMBER : FG, 0.25 + a * 0.5); }) });
+    const scene = $("[data-pipeline] .st-visual");
+    if (scene) ids.pipeline = field.add({ ...PField.pipelineShape(N, "96%", '800 260px "Anek Latin"'), slot: scene });
     $$("[data-particles]").forEach((slot) => {
       const name = slot.dataset.particles;
       if (slot.dataset.emblem) {
@@ -259,35 +261,29 @@
     intro.to(heroWords, { yPercent: 0, duration: 1.1, ease: "expo.out", stagger: 0.035 }, "-=0.2")
       .from("[data-hero-fade]", { opacity: 0, y: 14, duration: 0.8, stagger: 0.06, ease: "power3.out" }, "<0.1");
 
+    // Featured case study: scrolling through the scene plays its four chapters, which the particles draw.
+    const story = $("[data-pipeline]");
+    if (story && ids.pipeline != null) {
+      const chapters = $$(".chapter", story), steps = $$(".st-steps i", story), visual = $(".st-visual", story), scene = field.shape(ids.pipeline);
+      let shown = -1;
+      const show = (n) => {
+        if (n === shown) return;
+        shown = n;
+        chapters.forEach((c, i) => c.classList.toggle("on", i === n));
+        steps.forEach((el, i) => el.classList.toggle("on", i <= n));
+        visual.dataset.stage = n;
+      };
+      show(0);
+      // The last tenth of the scroll holds the result; text changes midway through each particle transition.
+      ScrollTrigger.create({ trigger: story, start: "top top", end: "bottom bottom", onUpdate: (st) => {
+        const p = Math.min(3, st.progress * 3.3);
+        scene.stage = p;
+        show(Math.min(3, Math.floor(p + 0.45)));
+      } });
+    }
+
     const mm = gsap.matchMedia();
     mm.add("(min-width: 761px)", () => {
-      // Featured case study: findings flow through the pipeline and false positives drop out.
-      const pipe = $(".pipe[data-flow]");
-      let dots = [];
-      if (pipe) {
-        const stages = $$(".stage", pipe), lane = $(".lane", pipe), fp = new Set([2, 7, 11, 16, 21]);
-        for (let i = 0; i < 26; i++) { const d = document.createElement("span"); d.className = "dot"; pipe.appendChild(d); dots.push(d); }
-        const cx = (i) => stages[i].offsetLeft + stages[i].offsetWidth / 2, cy = () => lane.offsetHeight / 2;
-        const jit = dots.map(() => [(Math.random() - 0.5) * 90, (Math.random() - 0.5) * 70]);
-        const on = (i) => () => stages[i].classList.toggle("on", tl.scrollTrigger.direction > 0);
-        gsap.set(dots, { x: (i) => cx(0) + jit[i][0], y: (i) => cy() + jit[i][1] });
-        const tl = gsap.timeline({ scrollTrigger: { trigger: pipe.closest("section"), start: "top top", end: "+=180%", pin: true, scrub: 1, invalidateOnRefresh: true } });
-        tl.add(on(0), 0.05)
-          .to(dots, { opacity: 1, duration: 0.4, stagger: 0.01 }, 0)
-          .to($(".rail i", pipe), { scaleX: 0.34, duration: 1, ease: "none" }, 0.3)
-          .to(dots, { x: (i) => cx(1) + jit[i][0] * 0.6, y: (i) => cy() + jit[i][1] * 0.8, duration: 1, stagger: 0.012, ease: "power1.inOut" }, 0.3)
-          .add(on(1), 1.1)
-          .to($(".rail i", pipe), { scaleX: 0.67, duration: 1, ease: "none" }, 1.4)
-          .to(dots, { x: (i) => cx(2) + jit[i][0] * 0.35, y: (i) => cy() + jit[i][1] * 0.5, duration: 1, stagger: 0.012, ease: "power1.inOut" }, 1.4)
-          .add(on(2), 2.2)
-          .to(dots.filter((_, i) => fp.has(i)), { y: () => cy() - 90, opacity: 0.12, backgroundColor: "#55534e", duration: 0.8, ease: "power2.in" }, 2.5)
-          .to($(".pipe-note", pipe), { opacity: 1, duration: 0.4 }, 2.7)
-          .to($(".rail i", pipe), { scaleX: 1, duration: 1, ease: "none" }, 3.1)
-          .to(dots.filter((_, i) => !fp.has(i)), { x: () => cx(3) + (Math.random() - 0.5) * 70, y: () => cy() + (Math.random() - 0.5) * 36, backgroundColor: "#ffb547", duration: 1, stagger: 0.012, ease: "power1.inOut" }, 3.1)
-          .add(on(3), 3.9)
-          .to({}, { duration: 0.6 });
-        stages.forEach((s) => s.classList.remove("on"));
-      }
       // Selected work: a horizontal gallery driven by vertical scroll.
       const work = $(".work"), track = $(".work-track");
       if (work && track) {
@@ -309,7 +305,7 @@
           follow(st);
         }, onToggle: (st) => !st.isActive && setLive(null) } });
       }
-      return () => { dots.forEach((d) => d.remove()); work?.classList.remove("hscroll"); };
+      return () => work?.classList.remove("hscroll");
     });
     mm.add("(max-width: 760px)", () => {
       $$(".stage").forEach((s) => ScrollTrigger.create({ trigger: s, start: "top 80%", onEnter: () => s.classList.add("on") }));

@@ -170,33 +170,41 @@
         <div class="num" data-rise><b data-count="300" data-suffix="M+">300M+</b><span class="mono muted">Open-source projects</span></div>
       </section>
 
-      <section class="st" id="securitron" data-shape="dust" aria-labelledby="st-title">
-        <div class="st-inner">
-          <div class="st-head">
-            <div>
-              <span class="mono muted">Featured · AquilaX.AI · 2024–now</span>
-              <h2 class="big-title" id="st-title" data-reveal>SecuriTron AI</h2>
-            </div>
-            <div>
-              <p>
-                An AI layer over static application security testing. It learns from more than 300 million open-source
-                projects, reads the output of eight SAST scanners, and uses fine-tuned models to triage each finding
-                before it reaches a developer.
-              </p>
-              <ul class="chips mono muted" aria-label="Technology">
-                <li>Qwen3</li><li>LLaMA</li><li>FastAPI</li><li>MLflow</li><li>W&amp;B</li><li>Docker</li>
-              </ul>
-            </div>
+      <section class="st" id="securitron" data-shape="pipeline" aria-labelledby="st-title">
+        <div class="st-head">
+          <div>
+            <span class="mono muted">Featured · AquilaX.AI · 2024–now</span>
+            <h2 class="big-title" id="st-title" data-reveal>SecuriTron AI</h2>
           </div>
-          <div class="pipe" data-flow>
-            <div class="lane" aria-hidden="true"><div class="rail"><i></i></div></div>
-            <ol class="stages" aria-label="How SecuriTron works">
-              <li class="stage"><span class="mono muted">01 · Learn</span><b>300M+ open-source projects</b></li>
-              <li class="stage"><span class="mono muted">02 · Scan</span><b>8 SAST scanners</b></li>
-              <li class="stage"><span class="mono muted">03 · Triage</span><b>Qwen3 + LLaMA models</b></li>
-              <li class="stage"><span class="mono muted">04 · Report</span><b>96% accurate, 20% fewer false positives</b></li>
-            </ol>
-            <span class="pipe-note mono muted">False positives filtered out</span>
+          <div>
+            <p>
+              An AI layer over static application security testing. It learns from more than 300 million open-source
+              projects, reads the output of eight SAST scanners, and uses fine-tuned models to triage each finding
+              before it reaches a developer.
+            </p>
+            <ul class="chips mono muted" aria-label="Technology">
+              <li>Qwen3</li><li>LLaMA</li><li>FastAPI</li><li>MLflow</li><li>W&amp;B</li><li>Docker</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Scrolling through this block plays the four chapters; the particles draw each one in .st-visual. -->
+        <div class="st-scroll" data-pipeline>
+          <div class="st-scene">
+            <div class="st-copy">
+              <ol class="chapters" aria-label="How SecuriTron works">
+                <li class="chapter"><span class="mono">01 · Learn</span><b>300M+ open-source projects</b><p>The models learn what a real vulnerability looks like.</p></li>
+                <li class="chapter"><span class="mono">02 · Scan</span><b>8 SAST scanners</b><p>Every finding from every scanner flows in.</p></li>
+                <li class="chapter"><span class="mono">03 · Triage</span><b>Qwen3 + LLaMA models</b><p>Fine-tuned models judge each finding. False positives drop out.</p></li>
+                <li class="chapter"><span class="mono">04 · Report</span><b>96% accurate</b><p>And 20% fewer false positives reach developers.</p></li>
+              </ol>
+              <div class="st-steps" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="st-visual" aria-hidden="true">
+              <span class="st-label mono" data-at="2" style="--x: 56%; --y: 18%; --ax: -50%">Qwen3 + LLaMA</span>
+              <span class="st-label mono" data-at="2" style="--x: 100%; --y: 46%; --ax: -100%">Real findings</span>
+              <span class="st-label mono" data-at="2" style="--x: 100%; --y: 97%; --ax: -100%">False positives</span>
+              <span class="st-label mono" data-at="3" style="--x: 0%; --y: 91%; --ax: 0%">False positives, filtered out</span>
+            </div>
           </div>
         </div>
       </section>

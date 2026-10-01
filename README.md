@@ -27,7 +27,7 @@ It is plain HTML, CSS, and JavaScript with no build step or backend.
 
 - **Hero** - particles assemble the name after a short "loading weights" counter; they scatter from the cursor and shake loose when you scroll fast.
 - **Statement** - words light up as you read, over a moving signal wave.
-- **SecuriTron AI** - a pinned section where findings flow through the pipeline and false positives drop out before the report.
+- **SecuriTron AI** - a scroll-played story in four chapters drawn by the particles: a grid of open-source projects, eight scanner streams, a model gate where false positives fall away while real findings carry on in amber, and the 96% result.
 - **Selected work** - a horizontal gallery driven by vertical scroll. The particles travel with it and draw an emblem for the project in the middle of the screen: chat bubbles, `</>`, a searched document, hand landmarks, an open book, a network. Each case study shows its emblem again beside the overview.
 - **About** - the particles form my portrait; hovering "denoises" it into the photograph.
 - **Light and depth** - the particles add up as light, with a soft glow where they gather. Each one sits at its own depth, so the field tilts in 3D as the mouse moves, a warm light follows the cursor, and a few out-of-focus motes drift in front of the noise.

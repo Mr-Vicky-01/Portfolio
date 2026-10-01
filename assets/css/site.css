@@ -176,13 +176,11 @@ html:not(.js) .clock, html:not(.js) [data-clock] { visibility: hidden; }
 .num span { display: block; margin-top: 16px; }
 
 /* Featured case study */
-.st-inner { min-height: 100svh; display: grid; grid-template-rows: auto 1fr; gap: 6vh; padding: 14vh var(--gutter) 8vh; }
-.st-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; }
+.st-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: end; padding: 16vh var(--gutter) 6vh; }
 .big-title { font: 700 clamp(64px, 10vw, 180px)/0.8 var(--display); font-stretch: 75%; letter-spacing: -0.02em; }
 .st-head p { max-width: 46ch; color: var(--soft); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .chips li { border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; }
-.pipe { position: relative; display: grid; grid-template-rows: 140px auto; align-self: end; }
 .lane { position: relative; }
 .stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5vw; }
 .rail { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--line); }
@@ -194,9 +192,27 @@ html:not(.motion) .rail i { transform: none; }
 .stage.on { border-color: var(--amber); }
 .stage.on::before { background: var(--amber); }
 .stage.on .mono { color: var(--amber); }
-.dot { position: absolute; left: 0; top: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--fg); z-index: 3; opacity: 0; }
-.pipe-note { position: absolute; left: 52%; top: 0; opacity: 0; }
-html:not(.motion) .pipe-note { opacity: 1; }
+/* Its four chapters. Without motion or WebGL they read as a plain list; with them, scrolling plays one at a time
+   beside the particles while the scene stays in place. */
+.st-scene { padding: 6vh var(--gutter) 12vh; }
+.chapters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+.chapter { border-top: 1px solid var(--line); padding-top: 18px; }
+.chapter span { color: var(--amber); }
+.chapter b { display: block; margin-top: 14px; font: 700 clamp(32px, 3.4vw, 60px)/0.9 var(--display); font-stretch: 75%; letter-spacing: -0.02em; text-wrap: balance; }
+.chapter p { margin-top: 18px; max-width: 30ch; color: var(--soft); }
+.st-steps, .st-visual { display: none; }
+.motion:not(.no-gl) .st-scroll { height: 420vh; }
+.motion:not(.no-gl) .st-scene { position: sticky; top: 0; height: 100svh; padding-block: 12vh 10vh; display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr); gap: 5vw; align-items: center; }
+.motion:not(.no-gl) .chapters { grid-template-columns: 1fr; }
+.motion:not(.no-gl) .chapter { grid-area: 1 / 1; border: 0; padding: 0; opacity: 0; transform: translateY(28px); transition: opacity 0.45s, transform 0.8s var(--ease-out); }
+.motion:not(.no-gl) .chapter b { font-size: clamp(44px, 5.2vw, 96px); }
+.motion:not(.no-gl) .chapter.on { opacity: 1; transform: none; transition-delay: 0.12s; }
+.motion:not(.no-gl) .st-steps { display: flex; gap: 6px; margin-top: 44px; max-width: 220px; }
+.st-steps i { flex: 1; height: 2px; background: var(--line); transition: background 0.4s; }
+.st-steps i.on { background: var(--amber); }
+.motion:not(.no-gl) .st-visual { display: block; position: relative; height: 72svh; }
+.st-label { position: absolute; left: var(--x); top: var(--y); transform: translate(var(--ax), -100%); padding-bottom: 10px; white-space: nowrap; color: var(--soft); opacity: 0; transition: opacity 0.5s; }
+.st-visual[data-stage="2"] [data-at="2"], .st-visual[data-stage="3"] [data-at="3"] { opacity: 1; }
 
 /* Selected work */
 .work { position: relative; }
@@ -338,10 +354,18 @@ footer { border-top: 1px solid var(--line); margin-top: 10vh; overflow: hidden; 
   .hero-foot, .p-foot { grid-template-columns: 1fr; gap: 20px; }
   .motion .statement { height: 170vh; }
   .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
-  .st-head { grid-template-columns: 1fr; gap: 20px; }
-  .pipe, .steps { grid-template-rows: auto; }
+  .st-head { grid-template-columns: 1fr; gap: 20px; padding: 12vh var(--gutter) 4vh; }
+  .chapters { grid-template-columns: 1fr; }
+  .motion:not(.no-gl) .st-scene { grid-template-columns: 1fr; gap: 22px; }
+  .motion:not(.no-gl) .st-scroll { height: 340vh; }
+  .motion:not(.no-gl) .st-scene { grid-template-rows: auto minmax(0, 1fr); align-content: stretch; padding-block: 84px 28px; }
+  .motion:not(.no-gl) .st-steps { margin-top: 24px; }
+  .motion:not(.no-gl) .st-visual { height: 100%; }
+  .chapter b, .motion:not(.no-gl) .chapter b { font-size: clamp(40px, 12vw, 64px); margin-top: 10px; }
+  .chapter p { margin-top: 12px; }
+  .steps { grid-template-rows: auto; }
   .stages, .steps .stages { grid-template-columns: 1fr; gap: 12px; }
-  .lane, .dot, .pipe-note, .stage::before { display: none; }
+  .lane, .stage::before { display: none; }
   .stage { min-height: 0; }
   .panel .glyph { position: relative; right: auto; top: auto; width: 100%; height: 150px; margin-bottom: -8px; }
   html:not(.motion) .panel .glyph, .no-gl .panel .glyph { display: none; }
