@@ -32,7 +32,6 @@ It is plain HTML, CSS, and JavaScript with no build step or backend.
 - **About** - the particles form my portrait; hovering "denoises" it into the photograph.
 - **Light and depth** - the particles add up as light, with a soft glow where they gather. Each one sits at its own depth, so the field tilts in 3D as the mouse moves, a warm light follows the cursor, and a few out-of-focus motes drift in front of the noise.
 - **The pointer** - particles near the cursor link up like a small network. Press and hold anywhere to pull the field into a swirling well, then let go to throw it back; a click or tap sends a ripple.
-- **Sound** - off until you switch it on in the header (the choice is remembered). It is synthesised in the browser from clean tones, so there are no audio files and no noise: a soft pad that brightens with scroll speed, crystal glints as the cursor moves through the particles (pitch follows height, stereo follows position, density follows how many particles it stirs), a bell chord as each shape forms, a rising note per project, a cue for every SecuriTron chapter, and sounds for holding, releasing, tapping and page transitions. It only plays with motion on.
 - **Throughout** - smooth scrolling, page transitions between the homepage and case studies, a custom cursor, magnetic buttons, scrambled hover labels, a live Puducherry clock, and a footer name whose letters widen under the cursor.
 
 ## Projects
@@ -86,7 +85,6 @@ Portfolio/
 │   ├── js/
 │   │   ├── field.js            # Particle engine (WebGL)
 │   │   ├── emblems.js          # Project emblems the particles draw, keyed by project slug
-│   │   ├── sound.js            # Optional sound, synthesised with the Web Audio API
 │   │   ├── site.js             # Scrolling, sections, cursor, transitions
 │   │   └── vendor/             # GSAP, ScrollTrigger, Lenis
 │   ├── fonts/                  # Anek Latin, Anek Tamil (subset), Martian Mono
