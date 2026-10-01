@@ -132,8 +132,11 @@ def header(prefix):
           >Resume ↗</a
         >
       </nav>
-      <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+      <div class="hdr-end">
+        <button class="sound-btn" type="button" aria-pressed="false" data-sound hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sound-label">Sound</span></button>
+        <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+      </div>
     </header>
     <div class="menu" id="menu" hidden>
       <nav aria-label="Menu"><a href="{prefix}index.html#work" data-title="Work">Work</a><a href="{prefix}index.html#about" data-title="About">About</a><a href="{prefix}index.html#contact" data-title="Contact">Contact</a><a href="{RESUME}" target="_blank" rel="noopener noreferrer">Resume ↗</a></nav>
@@ -189,6 +192,7 @@ def footer(prefix, top_href):
     <script src="{prefix}assets/js/vendor/lenis.min.js" defer></script>
     <script src="{prefix}assets/js/field.js" defer></script>
     <script src="{prefix}assets/js/emblems.js" defer></script>
+    <script src="{prefix}assets/js/sound.js" defer></script>
     <script src="{prefix}assets/js/site.js" defer></script>"""
 
 

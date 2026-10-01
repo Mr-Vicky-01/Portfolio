@@ -38,8 +38,11 @@
       <nav aria-label="Main">
         <a href="/Portfolio/index.html#work" data-title="Work" data-scramble>Work</a><a href="/Portfolio/index.html#about" data-title="About" data-scramble>About</a><a href="/Portfolio/index.html#contact" data-title="Contact" data-scramble>Contact</a>
       </nav>
-      <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+      <div class="hdr-end">
+        <button class="sound-btn" type="button" aria-pressed="false" data-sound hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sound-label">Sound</span></button>
+        <span class="clock"><span class="hide-sm">Puducherry </span><span data-clock>--:--:--</span> IST</span>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-menu>Menu</button>
+      </div>
     </header>
     <div class="menu" id="menu" hidden>
       <nav aria-label="Menu"><a href="/Portfolio/index.html#work" data-title="Work">Work</a><a href="/Portfolio/index.html#about" data-title="About">About</a><a href="/Portfolio/index.html#contact" data-title="Contact">Contact</a><a href="https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume ↗</a></nav>
@@ -71,6 +74,7 @@
     <script src="/Portfolio/assets/js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="/Portfolio/assets/js/vendor/lenis.min.js" defer></script>
     <script src="/Portfolio/assets/js/field.js" defer></script>
+    <script src="/Portfolio/assets/js/sound.js" defer></script>
     <script src="/Portfolio/assets/js/site.js" defer></script>
   </body>
 </html>

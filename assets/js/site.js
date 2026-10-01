@@ -9,6 +9,8 @@
   const small = matchMedia("(max-width: 760px)").matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  // Sound cues (assets/js/sound.js); each does nothing while sound is off or missing.
+  const sfx = (cue, ...args) => window.Sound?.[cue]?.(...args);
   const store = { get: (k) => { try { return sessionStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} }, del: (k) => { try { sessionStorage.removeItem(k); } catch {} } };
 
   const hasGsap = !!(window.gsap && window.ScrollTrigger && window.Lenis);
@@ -64,6 +66,10 @@
     return;
   }
 
+  // Sound is part of the motion experience: the header switch appears only here.
+  sfx("init", $$("[data-sound]"));
+  if (finePointer) $$("a, button, [data-href]").forEach((el) => el.addEventListener("pointerenter", (e) => e.pointerType === "mouse" && sfx("tick")));
+
   /* ---------- Particle field ---------- */
   const cores = navigator.hardwareConcurrency || 8;
   let field = null;
@@ -112,10 +118,12 @@
     livePanel = panel;
     panel?.classList.add("is-live");
   }
-  // Sections record the shape they want; nothing moves until the intro has played.
-  function showShape(name, spread) {
+  // Sections record the shape they want; nothing moves until the intro has played. A new shape sounds its cue.
+  function showShape(name, spread, note) {
     activeShape = name;
-    if (field && introDone && !glyphActive) field.setShape(shapeFor(name), spread);
+    if (!field || !introDone || glyphActive) return;
+    if (shapeFor(name) !== field.current) sfx("form", name, note);
+    field.setShape(shapeFor(name), spread);
   }
   function startShapes(fallback, spread) {
     introDone = true;
@@ -130,6 +138,7 @@
     ScrollTrigger.update();
     const v = Math.abs(e.velocity);
     if (field && v > 10) field.kick((v - 10) / 70);
+    sfx("velocity", v);
     // Header steps aside while reading down the page and returns on the way up.
     if (hdr && menu?.hidden !== false) hdr.classList.toggle("is-hidden", e.direction === 1 && e.scroll > 240);
   });
@@ -161,6 +170,7 @@
   function navigate(href, title) {
     $(".curtain-title", curtain).textContent = title || "";
     store.set("pt", "1");
+    sfx("whoosh");
     gsap.fromTo(curtain, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.8, ease: "expo.inOut", onComplete: () => (location.href = href) });
     gsap.fromTo($(".curtain-title", curtain), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.8, ease: "expo.out", delay: 0.35 });
   }
@@ -268,6 +278,7 @@
       let shown = -1;
       const show = (n) => {
         if (n === shown) return;
+        if (shown >= 0) sfx("chapter", n);
         shown = n;
         chapters.forEach((c, i) => c.classList.toggle("on", i === n));
         steps.forEach((el, i) => el.classList.toggle("on", i <= n));
@@ -297,7 +308,7 @@
           panelEls.forEach((p) => { const r = p.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - innerWidth * 0.55); if (d < bd) { bd = d; best = p; } });
           setLive(best);
           const key = best && emblemOf(best);
-          if ((key || work.dataset.shape) !== activeShape) showShape(key || work.dataset.shape, 600);
+          if ((key || work.dataset.shape) !== activeShape) showShape(key || work.dataset.shape, 600, panelEls.indexOf(best));
         };
         gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: work, start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1, invalidateOnRefresh: true, onUpdate: (st) => {
           gsap.set(".work-progress i", { scaleX: st.progress });
@@ -311,11 +322,11 @@
       $$(".stage").forEach((s) => ScrollTrigger.create({ trigger: s, start: "top 80%", onEnter: () => s.classList.add("on") }));
       // Phones: each project's emblem forms as its card reaches the middle of the screen.
       const work = $(".work");
-      $$(".panel[data-emblem]").forEach((panel) => ScrollTrigger.create({
+      $$(".panel[data-emblem]").forEach((panel, i) => ScrollTrigger.create({
         trigger: panel, start: "top 62%", end: "bottom 38%",
         onToggle: (st) => {
           const key = emblemOf(panel);
-          if (st.isActive) { setLive(panel); if (key) showShape(key, 700); }
+          if (st.isActive) { setLive(panel); if (key) showShape(key, 700, i); }
           else if (livePanel === panel) { setLive(null); if (activeShape === key) showShape(work?.dataset.shape || "dust", 700); }
         },
       }));
@@ -369,7 +380,7 @@
     // Portrait: hover swaps the particles for the photograph.
     const slot = $(".portrait-slot");
     if (slot) {
-      const denoise = (on) => { slot.classList.toggle("denoised", on); if (field && ids.portrait != null) field.shape(ids.portrait).alphaTarget = on ? 0 : 1; };
+      const denoise = (on) => { if (on && !slot.classList.contains("denoised")) sfx("shimmer"); slot.classList.toggle("denoised", on); if (field && ids.portrait != null) field.shape(ids.portrait).alphaTarget = on ? 0 : 1; };
       slot.addEventListener("pointerenter", (e) => e.pointerType === "mouse" && denoise(true));
       slot.addEventListener("pointerleave", (e) => e.pointerType === "mouse" && denoise(false));
       slot.addEventListener("click", () => denoise(!slot.classList.contains("denoised")));
@@ -377,12 +388,13 @@
 
     // Project panels: hovering one draws its emblem.
     if (field && finePointer) {
-      $$(".panel[data-emblem]").forEach((panel) => {
+      $$(".panel[data-emblem]").forEach((panel, i) => {
         panel.addEventListener("pointerenter", () => {
           const key = emblemOf(panel);
           if (!key) return;
           glyphActive = true;
           setLive(panel);
+          if (ids[key] !== field.current) sfx("form", key, i);
           field.setShape(ids[key], 500);
         });
         panel.addEventListener("pointerleave", () => { glyphActive = false; field.setShape(shapeFor(activeShape), 700); });
@@ -402,11 +414,13 @@
         clearTimeout(press.timer);
         if (press.held) {
           field.release();
+          sfx("release");
           root.classList.remove("holding");
           ringEl?.classList.remove("hold");
           if (hint && !hint.classList.contains("done")) { hint.classList.add("done"); try { localStorage.setItem("held", "1"); } catch {} }
         } else if (e.type === "pointerup" && Math.hypot(e.clientX - press.x, e.clientY - press.y) < 10) {
           field.pulse(e.clientX, e.clientY, 0.8);
+          sfx("ripple");
         }
         press = null;
       };
@@ -418,6 +432,7 @@
           if (!press) return;
           press.held = true;
           field.hold();
+          sfx("hold");
           root.classList.add("holding");
           ringEl?.classList.add("hold");
         }, 220);
