@@ -158,7 +158,7 @@
     addEventListener("resize", resize);
 
     const shapes = [];
-    let current = -1, turbulence = 0, hold = 0, holdTarget = 0, light = 0, motes = 0, depth = 1;
+    let current = -1, turbulence = 0, hold = 0, holdTarget = 0, light = 0, motes = 0, depth = 1, stirred = 0;
     const pulses = [];
     const mouse = { x: -1e4, y: -1e4 }, aim = { x: 0, y: 0 }, tilt = { x: 0, y: 0 }, TILT = small ? 16 : 38, GLOW = 1.3;
     const away = () => { mouse.x = mouse.y = -1e4; };
@@ -296,7 +296,7 @@
       if (hold < 0.002) hold = 0;
       const G = small ? 280 : 460, G2 = G * G, pull = hold > 0, repel = hold < 0.25;
       const LR = R + 90, LR2 = LR * LR, linking = links && mouse.x > -1e3 && shapes[current]?.links !== false;
-      let nNodes = 0;
+      let nNodes = 0, pushed = 0;
       for (let p = pulses.length - 1; p >= 0; p--) {
         const q = pulses[p];
         q.age = (now - q.t0) / 1000;
@@ -345,6 +345,7 @@
           vy += (-dy / d) * f + (dx / d) * sw;
         } else if (repel && d2 < R2 && d2 > 0.01) {
           const d = Math.sqrt(d2), f = (1 - d / R) * 2.4 * dt;
+          if (col[i4 + 3] > 0.3) pushed++;
           vx += (dx / d) * f;
           vy += (dy / d) * f;
         }
@@ -378,6 +379,7 @@
           col[i4 + 3] += (a - col[i4 + 3]) * e;
         }
       }
+      stirred = pushed;
       // Link nearby points around the pointer, brightest close to it.
       let nl = 0;
       const LD = 64, LD2 = LD * LD;
@@ -500,6 +502,8 @@
       },
       pulse: (x, y, s = 1) => { if (pulses.length < 4) pulses.push({ x, y, t0: performance.now(), s, age: 0, r: 0 }); },
       get holding() { return hold; },
+      // How many visible points the pointer is pushing aside right now (the sound follows it).
+      get stirred() { return stirred; },
       get current() { return current; },
     };
   }

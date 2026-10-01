@@ -1,10 +1,13 @@
 /* Sound: a small synthesiser built on the Web Audio API, so the site ships no audio files.
    It stays off until the visitor turns it on (the choice is remembered), and browsers hold any sound back
-   until a tap, click or key press. Everything is tuned to A minor pentatonic over a low A drone, so cues
-   that overlap still sound together. The site calls the cues below; while sound is off they do nothing. */
+   until a tap, click or key press. Every voice is a clean tone (no noise), tuned to A minor pentatonic over
+   a soft A pad, so cues that overlap still sound together. The site calls the cues below; while sound is
+   off they do nothing. */
 (() => {
   const KEY = "sound";
-  let ctx = null, master, dry, fx, verb, droneLp, air, airGain, hum = null, restTimer = 0, lastTick = 0;
+  let ctx = null, master, dry, fx, verb, droneLp, sheen, hum = null, restTimer = 0, lastTick = 0;
+  // The pointer's glints: notes owed (a running total), when it last moved, and the last note played.
+  let owed = 0, lastTouch = 0, lastStep = -1;
   // Cues run through one bus, so their level against the quiet bed is set in one place.
   const FX = 3.4, BED_LP = 650;
   const lastForm = {};
@@ -16,11 +19,6 @@
   const PENTA = [0, 3, 5, 7, 10];
   const scale = (step) => hz(PENTA[((step % 5) + 5) % 5] + 12 * Math.floor(step / 5));
 
-  function noiseBuffer(seconds) {
-    const b = ctx.createBuffer(1, ctx.sampleRate * seconds, ctx.sampleRate), d = b.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    return b;
-  }
   // A generated hall: stereo noise that dies away, used as the reverb's impulse response.
   function hall(seconds) {
     const len = ctx.sampleRate * seconds, b = ctx.createBuffer(2, len, ctx.sampleRate);
@@ -57,7 +55,7 @@
     wet.connect(master);
 
     // The bed: a soft pad on A and E, pitched high enough for laptop and phone speakers, over a sub for headphones.
-    // Scrolling opens its filter (the pad brightens as the particles shake) and raises a breath of air.
+    // Scrolling opens its filter a little (the pad brightens as the particles shake) and swells the sheen below.
     droneLp = ctx.createBiquadFilter();
     droneLp.type = "lowpass";
     droneLp.frequency.value = BED_LP;
@@ -67,7 +65,7 @@
     droneLp.connect(dg);
     dg.connect(dry);
     dg.connect(verb);
-    [[110, -7, "sawtooth"], [110, 6, "sawtooth"], [164.81, 3, "sawtooth"], [220, -4, "triangle"], [329.63, 5, "sine"]].forEach(([f, cents, type]) => {
+    [[110, -7, "triangle"], [110, 6, "triangle"], [164.81, 3, "triangle"], [220, -4, "triangle"], [329.63, 5, "sine"]].forEach(([f, cents, type]) => {
       const o = ctx.createOscillator();
       o.type = type;
       o.frequency.value = f;
@@ -87,19 +85,32 @@
     lfo.connect(depth);
     depth.connect(droneLp.frequency);
     lfo.start();
-    const n = ctx.createBufferSource();
-    n.buffer = noiseBuffer(2);
-    n.loop = true;
-    air = ctx.createBiquadFilter();
-    air.type = "bandpass";
-    air.frequency.value = 700;
-    air.Q.value = 0.7;
-    airGain = ctx.createGain();
-    airGain.gain.value = 0;
-    n.connect(air);
-    air.connect(airGain);
-    airGain.connect(dry);
-    n.start();
+    // Sheen: a high, pure chord that swells with scroll speed, slowly breathing.
+    sheen = ctx.createGain();
+    sheen.gain.value = 0;
+    const breathe = ctx.createGain();
+    breathe.gain.value = 0.7;
+    const slow = ctx.createOscillator(), slowDepth = ctx.createGain();
+    slow.frequency.value = 0.35;
+    slowDepth.gain.value = 0.3;
+    slow.connect(slowDepth);
+    slowDepth.connect(breathe.gain);
+    slow.start();
+    [[880, 0, 0.5], [1318.51, 4, 0.32], [1760, -3, 0.2]].forEach(([f, cents, g]) => {
+      const o = ctx.createOscillator(), og = ctx.createGain();
+      o.frequency.value = f;
+      o.detune.value = cents;
+      og.gain.value = g;
+      o.connect(og);
+      og.connect(breathe);
+      o.start();
+    });
+    breathe.connect(sheen);
+    sheen.connect(dry);
+    const sv = ctx.createGain();
+    sv.gain.value = 0.8;
+    sheen.connect(sv);
+    sv.connect(verb);
     return true;
   }
 
@@ -150,22 +161,62 @@
     o.start(t);
     o.stop(t + decay + 0.05);
   }
-  // Filtered noise whose band moves from one frequency to another: whooshes and falls.
-  function sweep({ at = 0, from = 400, to = 3000, dur = 0.6, gain = 0.05, q = 1.2, verbAmt = 0.4 } = {}) {
-    const t = ctx.currentTime + at, s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
-    s.buffer = noiseBuffer(dur + 0.1);
-    f.type = "bandpass";
-    f.Q.value = q;
-    f.frequency.setValueAtTime(from, t);
-    f.frequency.exponentialRampToValueAtTime(to, t + dur);
+  // A pure tone and its fifth gliding from one pitch to another: falls and rises without any noise.
+  function glide({ at = 0, from = 880, to = 220, dur = 1, gain = 0.03 } = {}) {
+    const t = ctx.currentTime + at, g = ctx.createGain();
     g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(gain, t + dur * 0.35);
+    g.gain.exponentialRampToValueAtTime(gain, t + 0.06);
     g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    s.connect(f);
-    f.connect(g);
-    send(g, verbAmt);
-    s.start(t);
-    s.stop(t + dur + 0.05);
+    [1, 1.5].forEach((r, i) => {
+      const o = ctx.createOscillator();
+      o.type = i ? "sine" : "triangle";
+      o.frequency.setValueAtTime(from * r, t);
+      o.frequency.exponentialRampToValueAtTime(to * r, t + dur);
+      o.connect(g);
+      o.start(t);
+      o.stop(t + dur + 0.05);
+    });
+    send(g, 0.9);
+  }
+  // A reversed swell: a chord that grows and is cut at its peak, leaving the hall to ring. A clean whoosh.
+  function swell(semis, { at = 0, dur = 0.45, gain = 0.035 } = {}) {
+    const t = ctx.currentTime + at, g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + dur);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.12);
+    semis.forEach((sm) => {
+      const o = ctx.createOscillator();
+      o.type = "triangle";
+      o.frequency.value = hz(sm);
+      o.connect(g);
+      o.start(t);
+      o.stop(t + dur + 0.2);
+    });
+    send(g, 1.2);
+    return dur;
+  }
+  // A glint: a short glassy tone placed left or right, used for the pointer moving through the particles.
+  function glint(freq, pan, gain, decay) {
+    const t = ctx.currentTime, g = ctx.createGain(), o = ctx.createOscillator(), o2 = ctx.createOscillator(), g2 = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain, t + 0.004);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + decay);
+    o.frequency.value = freq;
+    o2.frequency.value = freq * 2;
+    g2.gain.setValueAtTime(0.18, t);
+    g2.gain.exponentialRampToValueAtTime(0.0001, t + decay * 0.4);
+    o.connect(g);
+    o2.connect(g2);
+    g2.connect(g);
+    let out = g;
+    if (ctx.createStereoPanner) {
+      const p = ctx.createStereoPanner();
+      p.pan.value = pan;
+      g.connect(p);
+      out = p;
+    }
+    send(out, 1.1);
+    [o, o2].forEach((x) => { x.start(t); x.stop(t + decay + 0.05); });
   }
   // A low thump: a sine dropping in pitch.
   function thump({ at = 0, gain = 0.2 } = {}) {
@@ -207,54 +258,75 @@
       if (!ready()) return;
       if (n === 0) SHAPES.pipeline();
       else if (n === 1) for (let i = 0; i < 8; i++) pluck(scale(5 + i), { at: i * 0.055, gain: 0.04 });
-      else if (n === 2) { sweep({ from: 2400, to: 160, dur: 1.1, gain: 0.045, q: 2 }); bell(hz(24), { at: 0.35, gain: 0.05, decay: 2.6 }); }
+      else if (n === 2) { glide({ from: 1320, to: 165, dur: 1.2, gain: 0.03 }); bell(hz(24), { at: 0.4, gain: 0.05, decay: 2.6 }); }
       else if (n === 3) chord([0, 7, 14, 16], { gain: 0.06, decay: 3.6 }, 0.06);
     },
-    // Scroll speed in pixels per frame.
+    // Scroll speed in pixels per frame: the pad brightens and the sheen swells, then both settle.
     velocity(v) {
       if (!ready()) return;
-      const s = Math.min(1, v / 60), t = ctx.currentTime;
-      airGain.gain.setTargetAtTime(s * 0.1, t, 0.08);
-      air.frequency.setTargetAtTime(600 + s * 2200, t, 0.1);
-      droneLp.frequency.setTargetAtTime(BED_LP + s * 1800, t, 0.15);
+      const s = Math.min(1, v / 50), t = ctx.currentTime;
+      sheen.gain.setTargetAtTime(s * 0.04, t, 0.12);
+      droneLp.frequency.setTargetAtTime(BED_LP + s * 900, t, 0.15);
       clearTimeout(restTimer);
       restTimer = setTimeout(() => {
         if (!ctx) return;
         const r = ctx.currentTime;
-        airGain.gain.setTargetAtTime(0, r, 0.35);
-        air.frequency.setTargetAtTime(700, r, 0.4);
+        sheen.gain.setTargetAtTime(0, r, 0.5);
         droneLp.frequency.setTargetAtTime(BED_LP, r, 0.6);
       }, 140);
     },
-    // Press and hold: a hum that rises while the well pulls; letting go throws it out with a whoosh and a thump.
+    // The pointer moving through the particles. stir: 0 to 1, how much of the field it is pushing aside;
+    // speed: pixels per millisecond. Faster, denser movement plays more glints; stillness plays none.
+    touch(x, y, stir, speed) {
+      if (!ready()) return;
+      const now = performance.now(), dt = Math.min(60, now - lastTouch) / 1000;
+      lastTouch = now;
+      if (stir < 0.02) { owed = 0; return; }
+      const rate = Math.min(16, speed * 7) * Math.pow(stir, 0.7);
+      owed = Math.min(2, owed + rate * dt);
+      if (owed < 1) return;
+      owed -= 1;
+      // Higher on the screen plays higher; the same note never repeats twice in a row.
+      let step = 6 + Math.round((1 - y / innerHeight) * 9 + (Math.random() - 0.5) * 2);
+      if (step === lastStep) step += Math.random() < 0.5 ? -1 : 1;
+      lastStep = step;
+      glint(scale(step), Math.max(-0.75, Math.min(0.75, (x / innerWidth) * 1.5 - 0.75)), (0.03 + 0.03 * stir) / (1 + rate / 16), 0.6 + Math.random() * 0.8);
+    },
+    // Press and hold: a clean hum (a root and its fifth) that rises while the well pulls;
+    // letting go cuts it, rings a bell and drops a soft low thump.
     hold() {
       if (!ready() || hum) return;
-      const t = ctx.currentTime, o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
-      o.type = "sawtooth";
-      o.frequency.setValueAtTime(55, t);
-      o.frequency.exponentialRampToValueAtTime(110, t + 2.5);
+      const t = ctx.currentTime, f = ctx.createBiquadFilter(), g = ctx.createGain();
       f.type = "lowpass";
-      f.Q.value = 6;
-      f.frequency.setValueAtTime(140, t);
-      f.frequency.exponentialRampToValueAtTime(1400, t + 2.5);
+      f.Q.value = 1.2;
+      f.frequency.setValueAtTime(300, t);
+      f.frequency.exponentialRampToValueAtTime(2400, t + 2.5);
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.05, t + 0.8);
-      o.connect(f);
+      g.gain.exponentialRampToValueAtTime(0.04, t + 0.8);
+      const os = [[110, 220], [164.81, 329.63]].map(([a, b]) => {
+        const o = ctx.createOscillator();
+        o.type = "triangle";
+        o.frequency.setValueAtTime(a, t);
+        o.frequency.exponentialRampToValueAtTime(b, t + 2.5);
+        o.connect(f);
+        o.start(t);
+        return o;
+      });
       f.connect(g);
-      send(g, 0.4);
-      o.start(t);
-      hum = { o, g };
+      send(g, 0.6);
+      hum = { os, g };
     },
     release() {
       if (!hum) return;
-      const { o, g } = hum, t = ctx.currentTime;
+      const { os, g } = hum, t = ctx.currentTime;
       hum = null;
       g.gain.cancelScheduledValues(t);
-      g.gain.setTargetAtTime(0.0001, t, 0.05);
-      o.stop(t + 0.4);
+      g.gain.setTargetAtTime(0.0001, t, 0.04);
+      os.forEach((o) => o.stop(t + 0.3));
       if (!ready()) return;
-      sweep({ from: 3000, to: 200, dur: 0.9, gain: 0.07, q: 0.8 });
-      thump({ gain: 0.18 });
+      thump({ gain: 0.16 });
+      chord([12, 19, 24], { gain: 0.04, decay: 2.4 }, 0.05);
+      glide({ from: 330, to: 1320, dur: 0.5, gain: 0.02 });
     },
     // A tap or click: a droplet.
     ripple() {
@@ -294,7 +366,7 @@
     // Page transitions.
     whoosh() {
       if (!ready()) return;
-      sweep({ from: 300, to: 3200, dur: 0.75, gain: 0.12, q: 0.9 });
+      swell([0, 7, 12, 19], { dur: 0.55, gain: 0.03 });
     },
   };
 

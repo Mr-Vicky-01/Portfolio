@@ -75,6 +75,17 @@
   let field = null;
   try { field = window.PField && PField.create($("#field"), { count: small ? 6500 : cores <= 4 ? 9000 : 14000, small, links: finePointer }); } catch { field = null; }
   if (!field) root.classList.add("no-gl");
+  // Moving the pointer through the particles plays glints (sound.js): how much of the field it stirs, and how fast.
+  if (field) {
+    let px = 0, py = 0, pt = 0;
+    addEventListener("pointermove", (e) => {
+      const dt = e.timeStamp - pt, speed = pt && dt > 0 && dt < 200 ? Math.hypot(e.clientX - px, e.clientY - py) / dt : 0;
+      px = e.clientX;
+      py = e.clientY;
+      pt = e.timeStamp;
+      sfx("touch", px, py, Math.min(1, field.stirred / (field.N * 0.08)), speed);
+    }, { passive: true });
+  }
   const ids = {};
   let activeShape = null, glyphActive = false, introDone = false;
 
