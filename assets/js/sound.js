@@ -6,7 +6,7 @@
   const KEY = "sound";
   let ctx = null, master, dry, fx, verb, droneLp, air, airGain, hum = null, restTimer = 0, lastTick = 0;
   // Cues run through one bus, so their level against the quiet bed is set in one place.
-  const FX = 2.5;
+  const FX = 3.4, BED_LP = 650;
   const lastForm = {};
   let on = false;
   try { on = localStorage.getItem(KEY) === "on"; } catch {}
@@ -34,6 +34,8 @@
   function build() {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return false;
+    // iPhone mutes web audio in silent mode unless the page plays as media; the visitor asked for sound.
+    try { if (navigator.audioSession) navigator.audioSession.type = "playback"; } catch {}
     ctx = new AC();
     const comp = ctx.createDynamicsCompressor();
     comp.threshold.value = -12;
@@ -54,16 +56,18 @@
     verb.connect(wet);
     wet.connect(master);
 
-    // The bed: a soft drone on A and E. Scrolling opens its filter and raises a breath of air.
+    // The bed: a soft pad on A and E, pitched high enough for laptop and phone speakers, over a sub for headphones.
+    // Scrolling opens its filter (the pad brightens as the particles shake) and raises a breath of air.
     droneLp = ctx.createBiquadFilter();
     droneLp.type = "lowpass";
-    droneLp.frequency.value = 300;
+    droneLp.frequency.value = BED_LP;
+    droneLp.Q.value = 0.6;
     const dg = ctx.createGain();
-    dg.gain.value = 0.018;
+    dg.gain.value = 0.022;
     droneLp.connect(dg);
     dg.connect(dry);
     dg.connect(verb);
-    [[55, 0, "triangle"], [82.41, 3, "sine"], [110, -6, "triangle"], [110, 7, "sine"]].forEach(([f, cents, type]) => {
+    [[110, -7, "sawtooth"], [110, 6, "sawtooth"], [164.81, 3, "sawtooth"], [220, -4, "triangle"], [329.63, 5, "sine"]].forEach(([f, cents, type]) => {
       const o = ctx.createOscillator();
       o.type = type;
       o.frequency.value = f;
@@ -71,9 +75,15 @@
       o.connect(droneLp);
       o.start();
     });
+    const sub = ctx.createOscillator(), sg = ctx.createGain();
+    sub.frequency.value = 55;
+    sg.gain.value = 0.03;
+    sub.connect(sg);
+    sg.connect(dry);
+    sub.start();
     const lfo = ctx.createOscillator(), depth = ctx.createGain();
     lfo.frequency.value = 0.06;
-    depth.gain.value = 80;
+    depth.gain.value = 160;
     lfo.connect(depth);
     depth.connect(droneLp.frequency);
     lfo.start();
@@ -206,14 +216,14 @@
       const s = Math.min(1, v / 60), t = ctx.currentTime;
       airGain.gain.setTargetAtTime(s * 0.1, t, 0.08);
       air.frequency.setTargetAtTime(600 + s * 2200, t, 0.1);
-      droneLp.frequency.setTargetAtTime(300 + s * 900, t, 0.15);
+      droneLp.frequency.setTargetAtTime(BED_LP + s * 1800, t, 0.15);
       clearTimeout(restTimer);
       restTimer = setTimeout(() => {
         if (!ctx) return;
         const r = ctx.currentTime;
         airGain.gain.setTargetAtTime(0, r, 0.35);
         air.frequency.setTargetAtTime(700, r, 0.4);
-        droneLp.frequency.setTargetAtTime(300, r, 0.6);
+        droneLp.frequency.setTargetAtTime(BED_LP, r, 0.6);
       }, 140);
     },
     // Press and hold: a hum that rises while the well pulls; letting go throws it out with a whoosh and a thump.
@@ -269,7 +279,7 @@
       const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
       o.frequency.value = 2640;
       g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(0.012, t + 0.003);
+      g.gain.exponentialRampToValueAtTime(0.02, t + 0.003);
       g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
       o.connect(g);
       g.connect(fx);
@@ -295,42 +305,61 @@
     master.gain.cancelScheduledValues(t);
     master.gain.setTargetAtTime(v, t, time / 3);
   }
+  let buttons = [];
+  // The bars only dance once audio is really playing, so the switch never claims sound the browser is holding back.
+  const live = () => buttons.forEach((b) => b.classList.toggle("is-live", !!(on && ctx && ctx.state === "running")));
   // Starting needs a user gesture; resume() quietly waits when the browser has not had one yet.
-  function start() {
+  // confirm: play a short chord as soon as sound is running, so switching it on is heard at once.
+  function start(confirm) {
     if (!ctx && !build()) return;
-    const go = () => fadeTo(0.9);
+    // iOS Safari unlocks audio for the page once something has played inside a gesture.
+    try { const b = ctx.createBufferSource(); b.buffer = ctx.createBuffer(1, 1, 22050); b.connect(ctx.destination); b.start(0); } catch {}
+    const go = () => {
+      live();
+      if (!on) return;
+      fadeTo(0.9, 0.5);
+      if (confirm) chord([-12, 0, 7, 12], { gain: 0.06, decay: 2.8 }, 0.07);
+    };
     if (ctx.state === "running") go();
-    else ctx.resume().then(go, () => {});
+    else {
+      const r = ctx.resume && ctx.resume();
+      if (r && r.then) r.then(go, () => {});
+      else setTimeout(go, 0);
+    }
   }
   function stop() {
+    live();
     if (!ctx) return;
     fadeTo(0, 0.3);
-    setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 450);
+    setTimeout(() => { if (!on && ctx) ctx.suspend().then(live, live); }, 450);
   }
-  function set(value, buttons) {
+  function set(value) {
     on = value;
     try { localStorage.setItem(KEY, on ? "on" : "off"); } catch {}
     buttons.forEach((b) => b.setAttribute("aria-pressed", String(on)));
-    if (on) start();
+    if (on) start(true);
     else stop();
   }
   // Wires the header switches. With sound already chosen on, the first gesture on the page starts it.
-  Sound.init = (buttons) => {
+  Sound.init = (list) => {
+    buttons = list;
     if (!buttons.length) return;
     buttons.forEach((b) => {
       b.hidden = false;
       b.setAttribute("aria-pressed", String(on));
-      b.addEventListener("click", () => set(!on, buttons));
+      b.addEventListener("click", () => set(!on));
     });
-    if (on) {
-      start();
-      const wake = () => { if (on) start(); ["pointerdown", "keydown", "touchend"].forEach((e) => removeEventListener(e, wake, true)); };
-      ["pointerdown", "keydown", "touchend"].forEach((e) => addEventListener(e, wake, true));
-    }
+    if (on) start();
+    // Until audio is running, every tap, click or key press tries again (browsers only allow it inside one).
+    const wake = (e) => {
+      if (!on || e.target.closest?.("[data-sound]")) return;
+      if (!ctx || ctx.state !== "running") start();
+    };
+    ["pointerdown", "keydown", "touchend"].forEach((e) => addEventListener(e, wake, true));
     document.addEventListener("visibilitychange", () => {
       if (!on || !ctx) return;
-      if (document.hidden) { fadeTo(0, 0.2); setTimeout(() => document.hidden && ctx.suspend(), 300); }
-      else ctx.resume().then(() => fadeTo(0.9), () => {});
+      if (document.hidden) { fadeTo(0, 0.2); setTimeout(() => document.hidden && ctx.suspend().then(live, live), 300); }
+      else start();
     });
   };
 
