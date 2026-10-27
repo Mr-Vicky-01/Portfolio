@@ -10,7 +10,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = "https://mr-vicky-01.github.io/Portfolio/"
-RESUME = "https://drive.google.com/file/d/1aYZn20vcKParU_rI19CHoCIzECzXAXwS/view?usp=sharing"
+RESUME = "https://drive.google.com/file/d/143sE5bZQTkdhSxU2UhJzmlOsenAyvp3I/view?usp=sharing"
 GH = "https://github.com/Mr-Vicky-01/"
 HF = "https://huggingface.co/spaces/Mr-Vicky-01/"
 
